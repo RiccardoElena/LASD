@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include "slide2.hpp"
 
 using namespace std;
 
@@ -72,7 +71,10 @@ void slide2()
   cout << "Unsigned integer variable: " << uivar << "; " << endl;
   uivar = *((uint *)vptr); // C-like cast
   // uivar = *(static_cast<uint*>(vptr)); // C++ static cast
-  uivar = *((uint *)cpcon); // C-like cast
-  // uivar = *(static_cast<uint *>(cpcon)); // C++ static cast //COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
+  // C-like cast
+  uivar = *((uint *)cpcon);
+  // C++ static cast
+  // uivar = *(static_cast<uint *>(cpcon));  //COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
+  //? Questions.md #5
   cout << "Unsigned integer variable: " << uivar << "; " << endl;
 }

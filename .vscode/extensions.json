@@ -1,0 +1,6 @@
+{
+  "recommendations": [
+    "ms-vscode.cpptools", // For C++ Development
+    "aaron-bond.better-comments" // Largly used for color coding commentss
+  ]
+}

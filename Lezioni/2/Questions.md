@@ -2,11 +2,11 @@
 
 ## 1. Tesing Librerie
 
-Per lo svolgimento degli esercizi immagino sarà fondamentale criterio l'efficienza e la correttezza del codice. Per questo motivo mi chiedevo se fornirà dei metodi, dei dummy data, dei programma o delle librerie di testing per verificare la correttezza e l'efficienza del codice.
+Per lo svolgimento degli esercizi immagino sarà fondamentale criterio l'efficienza e la correttezza del codice. Per questo motivo mi chiedevo se fornirà dei metodi, dei dummy data, dei programmi o delle librerie di testing per verificare la correttezza e l'efficienza del codice.
 
 ## 2. Valore di ritorno di una funzione assegnato a un tipo rifenziato
 
-Nell'esempio fatto è stato eseguito un codice simile a questo che non ha portato a errori di compilazione:
+Nell'esempio fatto (slide3.cpp\[21:22\]) è stato eseguito un codice simile a questo che non ha portato a errori di compilazione:
 
 ```cpp
 int f()
@@ -30,7 +30,7 @@ int main()
 
 Testandolo però come denotato nei commenti mi sono accorto che la riga `int &results = f();` non ha portato a errori di compilazione.
 
-Il valore di ritorno di `f()` è un rvalue, quindi non è un lvalue, quindi non può essere assegnato a un tipo riferenziato.
+Il valore di ritorno di `f()` è un rvalue, quindi non è un lvalue, quindi non può essere assegnato a un tipo referenziato.
 
 Perché non è stato segnalato un errore di compilazione? E in ogni caso, perché con una `string` invece si?
 
@@ -86,22 +86,27 @@ int main()
 
 ## 5. Casting C-style e static_cast
 
-Negli esempi da lei forniti sono presentati due casting diversi uno
+Negli esempi da lei forniti (slide2.cpp\[23:77\]) sono presentati due casting diversi uno
 vicino all'altro come analoghi, ma il secondo porta un errore di compilazione.
 
 ```cpp
-  void * cpcon;
-
+  23 | const char * cpcon;
+  24 |
   // Irrelevant code...
-
-  uint uivar = 25;
-
+  70 | uint uivar = 25;
   // Irrelevant code...
-
-  // C-like cast
-  uivar = *((uint *)cpcon); 
-  // C++ static cast 
-  uivar = *(static_cast<uint *>(cpcon)); //COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
+  74 | // C-like cast
+  75 | uivar = *((uint *)cpcon); 
+  76 | // C++ static cast
+  77 | uivar = *(static_cast<uint *>(cpcon));  //COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
 ```
 
 Come mai il secondo porta a un errore di compilazione? Come mai il primo no?
+
+## 6. Move a tempo costante
+
+Come avviene nel dettaglio move a tempo costane? Quando vado a spostare il puntatore del valore di ritorno di una funnzione su null come fa la prossima funzione a sapere qual è la cella di memoria su cui può scrivere il valore di ritorno?
+
+## 7. Move implicita
+
+Quando avviene la move implicita? È possibile forzare la move implicita? Se sì, come?
