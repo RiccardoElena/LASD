@@ -70,11 +70,11 @@ void slide2()
   uint uivar = 25;
   cout << "Unsigned integer variable: " << uivar << "; " << endl;
   uivar = *((uint *)vptr); // C-like cast
-  // uivar = *(static_cast<uint*>(vptr)); // C++ static cast
-  // C-like cast
+                           // uivar = *(static_cast<uint*>(vptr)); // C++ static cast
+                           // C-like cast
   uivar = *((uint *)cpcon);
   // C++ static cast
-  // uivar = *(static_cast<uint *>(cpcon));  //COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
+  // uivar = *(static_cast<uint *>(cpcon)); // COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
   //? Questions.md #5
   cout << "Unsigned integer variable: " << uivar << "; " << endl;
 }
