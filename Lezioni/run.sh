@@ -4,7 +4,7 @@ if [ -z "$1" ]; then
 
   read filename
 else
-  file=$1
+  file="$1.bin"
 fi
 
 ./"$file"
