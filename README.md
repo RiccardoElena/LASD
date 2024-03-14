@@ -6,7 +6,8 @@
 2. [Riassunto informazioni preliminari sul corso](#riassunto-informazioni-preliminari-sul-corso)
 3. [Appunti Lezioni](#appunti-lezioni)
     1. [Struttura della cartella Lezioni](#struttura-della-cartella-lezioni)
-    2. [Utilizzo degli script](#utilizzo-degli-script)
+    2. [Utilizzo appunti lezioni](#utilizzo-appunti-lezioni)
+    3. [Utilizzo degli script](#utilizzo-degli-script)
         1. [Compilazione dei sorgenti](#compilazione-dei-sorgenti)
         2. [Esecuzione degli eseguibili](#esecuzione-degli-eseguibili)
         3. [Compilazione e lancio degli eseguibili](#compilazione-e-lancio-degli-eseguibili)
@@ -54,6 +55,15 @@ Per le dettagli ulteriori, come **testi consigliati**, **orari di ricevimento** 
 - `compile.sh`: script bash per compilazione dei sorgenti
 - `run.sh`: script bash per lancio degli eseguibili
 
+### Utilizzo appunti lezioni
+
+Gli appunti delle lezioni consisteranno essenzialmente nel codice sorgente commentato
+nei punti salienti, come possibili istruzioni che portano a errori o sottigliezze d'implementazione non immediate, e nelle domande da sottoporre al docente.
+
+Per ogni lezione sarà presente una cartella con il numero della lezione e all'interno i file sorgenti e le domande.
+
+***Nota***: *I codici sorgenti sono stati scritti con l'IDE VSCode con installata l'estensione di miglioramento dei commenti presente in `.vscode/extensions.json`, che aiuta nella formattazione e nella visualizzazione di tali commenti. Sebbene sia possibile utilizzare questi appunti con qualsiasi IDE è consigliato, per un'esperienza completa, di utilizzare VSCode e di scaricare le estensioni raccomandate.*
+
 ### Utilizzo degli script
 
 Sono forniti vati script bash per semplificare il processo di compilazione e lancio degli eseguibili. È fornita una spiegazione di tutti gli script con dei **MWE**.
@@ -90,14 +100,5 @@ Per semplificare il processo di compilazione e lancio degli eseguibili è possib
 cd {{folder}}
 ../build.sh {{compiler}} {{filename}}
 ```
-
-### Utilizzo appunti lezioni
-
-Gli appunti delle lezioni consisteranno essenzialmente nel codice sorgente commentato
-nei punti salienti, come possibili istruzioni che portano a errori o sottigliezze di implementazione non immediate, e nelle domande da sottoporre al docente.
-
-Per ogni lezione sarà presente una cartella con il numero della lezione e all'interno i file sorgenti e le domande.
-
-***Nota***: *I codici sorgenti sono stati scritti con l'IDE VSCode con installata l'estensione di miglioramento dei commenti presente in `.vscode/extensions.json`, che aiuta nella formattazione e nella visualizzazione di tali commenti. Sebbene sia possibile utilizzare questi appunti con qualsiasi IDE è consigliato, per un'esperienza completa, di utilizzare VSCode e di scaricare le estensioni raccomandate.*
 
 ## Esercizi

@@ -4,7 +4,7 @@
 
 Per lo svolgimento degli esercizi immagino sarà fondamentale criterio l'efficienza e la correttezza del codice. Per questo motivo mi chiedevo se fornirà dei metodi, dei dummy data, dei programmi o delle librerie di testing per verificare la correttezza e l'efficienza del codice.
 
-## 2. Valore di ritorno di una funzione assegnato a un tipo rifenziato
+## 2. Valore di ritorno di una funzione assegnato a un tipo referenziato
 
 Nell'esempio fatto (slide3.cpp\[21:22\]) è stato eseguito un codice simile a questo che non ha portato a errori di compilazione:
 
@@ -18,11 +18,11 @@ int main()
 {
 
   // int &var = 0;  COMP_ERR: il valore iniziale del riferimento a non const deve essere un lvalue
-  const int &var = 0;
+  20 | const int &var = 0;
 
-  int result = f();   // Copia il valore di ritorno
+  21 | int result = f();   // Copia il valore di ritorno
 
-  int &results = f(); // COMP_ERR: l'indirizzo di ritorno di f() non è un lvalue
+  22 | int &results = f(); // COMP_ERR: l'indirizzo di ritorno di f() non è un lvalue
 
   return 0;
 }
@@ -105,7 +105,7 @@ Come mai il secondo porta a un errore di compilazione? Come mai il primo no?
 
 ## 6. Move a tempo costante
 
-Come avviene nel dettaglio move a tempo costane? Quando vado a spostare il puntatore del valore di ritorno di una funnzione su null come fa la prossima funzione a sapere qual è la cella di memoria su cui può scrivere il valore di ritorno?
+Come avviene nel dettaglio move a tempo costane? Quando vado a spostare il puntatore del valore di ritorno di una funzione su null come fa la prossima funzione a sapere qual è la cella di memoria su cui può scrivere il valore di ritorno?
 
 ## 7. Move implicita
 
