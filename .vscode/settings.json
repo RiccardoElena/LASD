@@ -19,6 +19,15 @@
       "italic": false
     },
     {
+      "tag": "RUNTIME_ERR",
+      "color": "#FF0000",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
       "tag": "LINK_ERR",
       "color": "#961B00",
       "strikethrough": false,
@@ -90,5 +99,8 @@
       "bold": false,
       "italic": false
     }
-]
+],
+"files.associations": {
+  "ostream": "cpp"
+}
 }
