@@ -79,7 +79,7 @@ In tutti gli esempi si suppone che la cartella corrente sia la cartella **Lezion
 Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh` nella cartella di cui si vuole compilare il codice. Lo script si occuperà di compilare tutti i file sorgenti presenti nella cartella e di generare un eseguibile con lo stesso nome della cartella.
 
 ```bash
-cd {{folder}}
+cd {{folderLezione}}
 ../compile.sh {{compiler}} {{executable}}
 ```
 
@@ -88,7 +88,7 @@ cd {{folder}}
 Per eseguire gli eseguibili è sufficiente eseguire lo script `run.sh` nella cartella di cui si vuole eseguire il codice. Lo script si occuperà di eseguire l'eseguibile generato dalla compilazione.
 
 ```bash
-cd {{folder}}
+cd {{folderLezione}}
 ../run.sh {{executable}}
 ```
 
@@ -97,7 +97,7 @@ cd {{folder}}
 Per semplificare il processo di compilazione e lancio degli eseguibili è possibile eseguire lo script `build.sh` nella cartella di cui si vuole eseguire il codice. Lo script si occuperà di eseguire la compilazione e l'esecuzione degli eseguibili.
 
 ```bash
-cd {{folder}}
+cd {{folderLezione}}
 ../build.sh {{compiler}} {{filename}}
 ```
 
