@@ -1,13 +1,13 @@
 # check if filename is given or is empty
 if [ -z "$1" ]; then
-  echo "Enter the name for the file to execute:"
+  echo "Enter the file to execute with the path:"
 
   read filename
 else
-  filename=$1
+  file=$1
 fi
 
-./"$filename"
+./"$file"
 # Check if there was an error
 if [ $? -ne 0 ]; then
     echo "Error occurred:"
