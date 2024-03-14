@@ -1,7 +1,4 @@
 # ignore compiled files
 
-# Ignora i file oggetto
-**/*.o
-
 # Ignora i file binari
-**/*
+**/*.bin
