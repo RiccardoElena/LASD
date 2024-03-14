@@ -18,7 +18,16 @@ else
   filename=$2
 fi
 
-command=$compiler 
+# check if filename is given or is empty
+if [ -z "$3" ]; then
+  echo "Enter the grade of optimization (0,1,2,3,s):"
+
+  read opt
+else
+  opt=$3
+fi
+
+command="$compiler -O$opt"
 
 for file in *.cpp; do
     command+=" $file"
