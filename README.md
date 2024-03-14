@@ -5,7 +5,7 @@
 1. [Informazioni generali](#informazioni-generali)
 2. [Riassunto informazioni preliminari sul corso](#riassunto-informazioni-preliminari-sul-corso)
 3. [Appunti Lezioni](#appunti-lezioni)
-    1. [Struttura della repository](#struttura-della-repository)
+    1. [Struttura della cartella Lezioni](#struttura-della-cartella-lezioni)
     2. [Utilizzo degli script](#utilizzo-degli-script)
         1. [Compilazione dei sorgenti](#compilazione-dei-sorgenti)
         2. [Esecuzione degli eseguibili](#esecuzione-degli-eseguibili)
