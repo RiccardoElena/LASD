@@ -1,4 +1,6 @@
-# ignore compiled files
-
-# Ignora i file binari
+# Ignore bin files
 **/*.bin
+
+# Ignore books
+
+**/books/*
