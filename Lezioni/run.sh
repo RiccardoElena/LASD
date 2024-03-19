@@ -1,11 +1,19 @@
-# check if filename is given or is empty
-if [ -z "$1" ]; then
-  echo "Enter the file to execute with the path:"
+#!/bin/bash
 
-  read filename
-else
-  file="$1.bin"
-fi
+# Default values
+file="a"
+
+while getopts f: option
+do
+  case "${option}"
+  in
+  f) file=${OPTARG};;
+  esac
+done
+
+echo -e "\nExecuting $file:\n"
+
+file+=".out"
 
 ./"$file"
 # Check if there was an error

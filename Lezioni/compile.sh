@@ -4,7 +4,7 @@
 compiler="g++"
 opt="0"
 path="."
-filename="program"
+filename="a"
 
 # Analizza le opzioni del comando
 while getopts c:o:p:f: option
@@ -39,7 +39,7 @@ for file in *.cpp; do
     command+=" $file"
 done
 
-command+=" -o $filename.bin"
+command+=" -o $filename.out -w all"
 
 echo -e "\nCompiling all files into $filename\n$command\n"
 eval_output=$(cd "$path" && eval "$command" 2>&1)

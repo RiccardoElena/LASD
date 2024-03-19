@@ -4,7 +4,7 @@
 compiler="g++"
 opt="0"
 path="."
-filename="program"
+filename="a"
 
 # Analizza le opzioni del comando
 while getopts c:o:p:f: option
@@ -46,8 +46,8 @@ fi
 
 echo "$eval_output"
 
-echo -e "\nCompilation complete\nExecuting $path/$filename.bin:\n"
-eval_output=$(eval "$script_dir/run.sh $path/$filename" 2>&1)
+echo -e "\nCompilation complete\nExecuting $path/$filename.out:\n"
+eval_output=$(eval "$script_dir/run.sh -f $path/$filename" 2>&1)
 
 # Check if there was an error
 if [ $? -ne 0 ]; then
