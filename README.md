@@ -85,7 +85,7 @@ In tutti gli esempi si suppone che la cartella corrente sia la cartella **Lezion
 
 Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh`.
 
-Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella cartella e di generare un eseguibile con **il nome fornito**.
+Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella cartella e di generare un eseguibile con **il nome fornito** e l'estensione `.out`.
 
 ##### MWE
 
@@ -100,9 +100,9 @@ Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella car
 | `-c` | Compilatore da utilizzare |       `g++`       |          ____           |
 | `-o` | Grado di ottimizzazione   |        `0`        | `0`, `1`, `2`, `3`, `s` |
 | `-p` | Path alla cartella        |     `./`          |          ____           |
-| `-f` | Nome dell'eseguibile      |       `program`     |          ____           |
+| `-f` | Nome dell'eseguibile      |       `a`     |          ____           |
 
-###### Full Flag MWE
+###### Full Flag MWE compile
 
 ```bash
 ./compile.sh -c {{compiler}} -o {{opt}} -p {{path/to/folder}} -f {{executableName}}
@@ -112,8 +112,22 @@ Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella car
 
 Per eseguire gli eseguibili è sufficiente eseguire lo script `run.sh` specificando il path relativo al file eseguibile in questione (**senza alcuna estensione**). Lo script si occuperà di eseguire l'eseguibile generato dalla compilazione.
 
+##### MWE
+
 ```bash
-./run.sh {{path/to/executable}}
+./run.sh
+```
+
+##### Flag opzionali run
+
+| Flag |        Descrizione        | Valore di default |   Opzioni disponibili   |
+|:----:|:-------------------------:|:-----------------:|:-----------------------:|
+| `-f` | Nome dell'eseguibile      |       `program`     |          ____         |
+
+###### Full Flag MWE run
+
+```bash
+./run.sh -f {{executableName}}
 ```
 
 #### Compilazione e lancio degli eseguibili
@@ -121,7 +135,7 @@ Per eseguire gli eseguibili è sufficiente eseguire lo script `run.sh` specifica
 Per semplificare il processo di compilazione e lancio degli eseguibili è possibile eseguire lo script `build.sh` nella cartella di cui si vuole eseguire il codice. Lo script si occuperà di eseguire la compilazione e l'esecuzione degli eseguibili.
 
 ```bash
-./build.sh {{executableName}}
+./build.sh
 ```
 
 ##### Flag opzionali build
