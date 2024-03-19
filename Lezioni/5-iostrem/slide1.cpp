@@ -23,18 +23,20 @@ ostream &operator<<(ostream &outstr, const Studente1 &stu)
 
   // COMP_ERR: Campo SecureNum dichiarato alla linea ... è iniaccessibile
   // ! Il campo era privato, è utilizzabile solo all'interno della struct!
-  // ? file://./Questions.md##4
+  // * devo dichiarre questo metodo come "amico" della mia struct
+  // * per fargli vedere anche i dettagli privati file://./slide3.hpp
   // outstr << "; Numero di sicurezza: " << stu.SecureNum;
   return outstr;
 }
 
-istream &operator>>(istream &instr, Studente &stu)
+istream &operator>>(istream &instr, Studente1 &stu)
 {
   instr >> stu.Id >> stu.Matricola >> stu.Cognome >> stu.Nome;
 
   // COMP_ERR: Campo SecureNum dichiarato alla linea ... è iniaccessibile
   // ! Il campo era privato, è utilizzabile solo all'interno della struct!
-  // ? file://./Questions.md##4
+  // * devo dichiarre questo metodo come "amico" della mia struct
+  // * per fargli vedere anche i dettagli privati file://./slide3.hpp
   // instr >> stu.SecureNum;
   return instr;
 }
@@ -65,20 +67,22 @@ void slide3()
   // Note: si consiglia di riguardare i contenuti del file file://./slide1.cpp
   slide1();
 
-  // cout << stu1 << endl;
-  // cout << stu2 << endl;
+  Studente1 stu1{1, "N86000001", "Alan", "Turing"};
+  Studente1 stu2{2, "N86000002", "Gödel", "Kurt"};
+  cout << stu1 << endl;
+  cout << stu2 << endl;
 
-  // Studente1 stu3;
-  // cin >> stu3;
-  // cout << stu3 << endl;
+  Studente1 stu3;
+  cin >> stu3;
+  cout << stu3 << endl;
 
-  // Studente1 stu;
-  // cout << stu << endl;
-  // cin >> stu;
-  // cout << stu << endl;
+  Studente1 stu;
+  cout << stu << endl;
+  cin >> stu;
+  cout << stu << endl;
 
-  // Color clr = Color::Bianco;
-  // cout << clr << endl;
-  // clr = Color::Giallo;
-  // cout << clr << endl;
+  Colore clr = Colore::Bianco;
+  cout << clr << endl;
+  clr = Colore::Giallo;
+  cout << clr << endl;
 }

@@ -26,12 +26,16 @@ struct Studente
    * classe con visibilità sempre public
    */
 
-  // // Definisce un costruttore senza parametri che inizializza la struct
-  // // con i valori insicati precedentemente
+  // Definisce un costruttore senza parametri che inizializza la struct
+  // con i valori insicati precedentemente
   // Studente() = default;
-  // // Definisce un costruttore con parametri
-  // Studente(unsigned long idx, string mat, string cog, string nom) {
-  //   Id = idx; Matricola = mat; Cognome = cog; Nome = nom;
+  // Definisce un costruttore con parametri
+  // Studente(unsigned long idx, string mat, string cog, string nom)
+  // {
+  //   Id = idx;
+  //   Matricola = mat;
+  //   Cognome = cog;
+  //   Nome = nom;
   //   // Id++; Matricola += "XYZ";
   // }
 };

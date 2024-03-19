@@ -11,6 +11,7 @@
 
 enum class Colore
 {
+  Giallo,
   Bianco,
   Grigio,
   Nero
