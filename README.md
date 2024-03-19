@@ -83,14 +83,14 @@ In tutti gli esempi si suppone che la cartella corrente sia la cartella **Lezion
 
 #### Compilazione dei sorgenti
 
-Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh` specificando il nome del file eseguibile da generare.
+Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh`.
 
 Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella cartella e di generare un eseguibile con **il nome fornito**.
 
 ##### MWE
 
 ```bash
-./compile.sh {{executableName}}
+./compile.sh
 ```
 
 ##### Flag opzionali compile
@@ -100,11 +100,12 @@ Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella car
 | `-c` | Compilatore da utilizzare |       `g++`       |          ____           |
 | `-o` | Grado di ottimizzazione   |        `0`        | `0`, `1`, `2`, `3`, `s` |
 | `-p` | Path alla cartella        |     `./`          |          ____           |
+| `-f` | Nome dell'eseguibile      |       `program`     |          ____           |
 
 ###### Full Flag MWE
 
 ```bash
-./compile.sh -c {{compiler}} -o {{opt}} -p {{path/to/folder}} {{executableName}}
+./compile.sh -c {{compiler}} -o {{opt}} -p {{path/to/folder}} -f {{executableName}}
 ```
 
 #### Esecuzione degli eseguibili
