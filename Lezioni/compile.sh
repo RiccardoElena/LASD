@@ -4,9 +4,10 @@
 compiler="g++"
 opt="0"
 path="."
+filename="program"
 
 # Analizza le opzioni del comando
-while getopts c:o:p: option
+while getopts c:o:p:f: option
 do
   case "${option}"
   in
@@ -16,6 +17,7 @@ do
        *) opt="";;
      esac;;
   p) path=${OPTARG};;
+  f) filename=${OPTARG};;
   esac
 done
 
@@ -29,15 +31,6 @@ if [ -z "$opt" ]; then
     fi
     read -p "Invalid input. Enter the grade of optimization (0, 1, 2, 3, s): " opt
   done
-fi
-
-# check if filename is given or is empty
-if [ -z "$1" ]; then
-  echo "Enter the name for the file to execute:"
-
-  read filename
-else
-  filename=$1
 fi
 
 command="$compiler -O$opt"

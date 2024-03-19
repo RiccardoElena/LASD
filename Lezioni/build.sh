@@ -4,9 +4,10 @@
 compiler="g++"
 opt="0"
 path="."
+filename="program"
 
 # Analizza le opzioni del comando
-while getopts c:o:p: option
+while getopts c:o:p:f: option
 do
   case "${option}"
   in
@@ -16,6 +17,7 @@ do
        *) opt="";;
      esac;;
   p) path=${OPTARG};;
+  f) filename=${OPTARG};;
   esac
 done
 
@@ -31,19 +33,10 @@ if [ -z "$opt" ]; then
   done
 fi
 
-# check if filename is given or is empty
-if [ -z "$1" ]; then
-  echo "Enter the name for the file to execute:"
-
-  read filename
-else
-  filename=$1
-fi
-
 # Get the directory of the script
 script_dir=$(dirname "$0")
 
-eval_output=$(eval "$script_dir/compile.sh $compiler $opt $path $filename" 2>&1)
+eval_output=$(eval "$script_dir/compile.sh -c $compiler -o $opt -p $path -f $filename" 2>&1)
 # Check if there was an error
 if [ $? -ne 0 ]; then
   echo "Error occurred:"
