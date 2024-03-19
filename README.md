@@ -58,11 +58,18 @@ Per le dettagli ulteriori, come **testi consigliati**, **orari di ricevimento** 
 ### Utilizzo appunti lezioni
 
 Gli appunti delle lezioni consisteranno essenzialmente nel codice sorgente commentato
-nei punti salienti, come possibili istruzioni che portano a errori o sottigliezze d'implementazione non immediate, e nelle domande da sottoporre al docente.
+nei punti salienti, come possibili istruzioni che portano a errori o sottigliezze d'implementazione non immediate, e nelle **domande da sottoporre al docente**.
 
-Per ogni lezione sarà presente una cartella con il numero della lezione e all'interno i file sorgenti e le domande.
+Tali eventuali domande saranno presenti in un file `Questions.md` all'interno della cartella della lezione. In caso di domande specifiche su un particolare punto del codice, sarà presente un commento del tipo
+  
+  ```cpp
+  // ? Questions.md##[n]
+  ```
 
-***Nota***: *I codici sorgenti sono stati scritti con l'IDE VSCode con installata l'estensione di miglioramento dei commenti presente in `.vscode/extensions.json`, che aiuta nella formattazione e nella visualizzazione di tali commenti. Sebbene sia possibile utilizzare questi appunti con qualsiasi IDE è consigliato, per un'esperienza completa, di utilizzare VSCode e di scaricare le estensioni raccomandate.*
+Dove `n` è il numero della domanda da sottoporre al docente. Tale commento sarà
+un riferimento cliccabile alla domanda corrispondente nel file `Questions.md`.
+
+> ***Nota***: *I codici sorgenti sono stati scritti con l'IDE VSCode con installata l'estensione di miglioramento dei commenti presente in `.vscode/extensions.json`, che aiuta nella formattazione e nella visualizzazione di tali commenti. Sebbene sia possibile utilizzare questi appunti con qualsiasi IDE è consigliato, per un'esperienza completa, di utilizzare VSCode e di scaricare le estensioni raccomandate.*
 
 ### Utilizzo degli script
 
@@ -72,24 +79,40 @@ Tutti i **MWE** sono scritti con passaggio di parametri esplicito, ma è possibi
 
 In tutti gli esempi si suppone che la cartella corrente sia la cartella **Lezioni** presente in questa repository.
 
-***Nota***: *Gli script bash sono stati scritti per essere eseguiti in ambiente Unix, quindi potrebbero non funzionare correttamente in ambiente Windows.*
+> ***Nota***: *Gli script bash sono stati scritti per essere eseguiti in ambiente Unix, quindi potrebbero non funzionare correttamente in ambiente Windows.*
 
 #### Compilazione dei sorgenti
 
-Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh` nella cartella di cui si vuole compilare il codice. Lo script si occuperà di compilare tutti i file sorgenti presenti nella cartella e di generare un eseguibile con lo stesso nome della cartella.
+Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh` specificando il nome del file eseguibile da generare.
+
+Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella cartella e di generare un eseguibile con **il nome fornito**.
+
+##### MWE
 
 ```bash
-cd {{folderLezione}}
-../compile.sh {{compiler}} {{executable}}
+./compile.sh {{executableName}}
+```
+
+##### Flag opzionali compile
+
+| Flag |        Descrizione        | Valore di default |   Opzioni disponibili   |
+|:----:|:-------------------------:|:-----------------:|:-----------------------:|
+| `-c` | Compilatore da utilizzare |       `g++`       |          ____           |
+| `-o` | Grado di ottimizzazione   |        `0`        | `0`, `1`, `2`, `3`, `s` |
+| `-p` | Path alla cartella        |     `./`          |          ____           |
+
+###### Full Flag MWE
+
+```bash
+./compile.sh -c {{compiler}} -o {{opt}} -p {{path/to/folder}} {{executableName}}
 ```
 
 #### Esecuzione degli eseguibili
 
-Per eseguire gli eseguibili è sufficiente eseguire lo script `run.sh` nella cartella di cui si vuole eseguire il codice. Lo script si occuperà di eseguire l'eseguibile generato dalla compilazione.
+Per eseguire gli eseguibili è sufficiente eseguire lo script `run.sh` specificando il path relativo al file eseguibile in questione (**senza alcuna estensione**). Lo script si occuperà di eseguire l'eseguibile generato dalla compilazione.
 
 ```bash
-cd {{folderLezione}}
-../run.sh {{executable}}
+./run.sh {{path/to/executable}}
 ```
 
 #### Compilazione e lancio degli eseguibili
@@ -97,8 +120,11 @@ cd {{folderLezione}}
 Per semplificare il processo di compilazione e lancio degli eseguibili è possibile eseguire lo script `build.sh` nella cartella di cui si vuole eseguire il codice. Lo script si occuperà di eseguire la compilazione e l'esecuzione degli eseguibili.
 
 ```bash
-cd {{folderLezione}}
-../build.sh {{compiler}} {{filename}}
+./build.sh {{executableName}}
 ```
+
+##### Flag opzionali build
+
+Le flag opzionali, come l'MWE, sono le stesse di [`compile.sh`](#flag-opzionali-compile).
 
 ## Esercizi
