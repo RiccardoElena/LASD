@@ -1,5 +1,5 @@
 # Ignore bin files
-**/*.bin
+**/*.out
 
 # Ignore books
 
