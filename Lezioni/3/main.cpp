@@ -12,7 +12,7 @@ int main()
     unsigned long *ulptr = new unsigned long; // Uninitialized unsigned long
     // unsigned long* ulptr = new unsigned long(5); // new unsigned long{5} // Unsigned long initialized to 5
     /*
-      Note: la seconda istruzione è leggermente più lenda (manca una scrittura), ma è più sicura
+      Note: la seconda istruzione è leggermente più lenta (ha una scrittura in più), ma è più sicura
       Di base conviene sempre inizializzare tutto per poi ricontrollare se è
       effettivamente necessario
     */

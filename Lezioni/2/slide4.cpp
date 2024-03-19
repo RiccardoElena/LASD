@@ -55,7 +55,7 @@ void slide4()
    * Potrò infatti settare a nullptr il puntatore al valore di ritorno della funzione,
    * che quindi anche quando verrà sovrascritto non intaccherà tale valore, e assegnare al
    * nuovo riferimento il puntatore alla locazione di memoria dove ho i miei dati
-   ? Questions.md #6
+   ? file://./Questions.md##6
    */
 
   cout << "1) " << stringa1 << endl;
@@ -71,7 +71,7 @@ void slide4()
   Alle volte il compilatore capisce da solo che
   sto passando da un riferimento temporaneo a uno permanente
   e fa una "move implicita"
-  ? Questions.md #7
+  ? file://./Questions.md##6
   */
   //
   // cout << "3) " << stringa1 << endl; // valore precedentemente in stringa2

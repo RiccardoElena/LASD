@@ -1,14 +1,18 @@
 # Domande da sottoporre al docente riguardo la Lezione 2
 
-## 1. Tesing Librerie
+## 1
+
+### Tesing Librerie
 
 Per lo svolgimento degli esercizi immagino sarà fondamentale criterio l'efficienza e la correttezza del codice. Per questo motivo mi chiedevo se fornirà dei metodi, dei dummy data, dei programmi o delle librerie di testing per verificare la correttezza e l'efficienza del codice.
 
-### Risposta
+### Risposta 1
 
 Si.
 
-## 2. Valore di ritorno di una funzione assegnato a un tipo referenziato
+## 2
+
+### Valore di ritorno di una funzione assegnato a un tipo referenziato
 
 Nell'esempio fatto (slide3.cpp 21:22) è stato eseguito un codice simile a questo che non ha portato a errori di compilazione:
 
@@ -56,9 +60,11 @@ Queste due soluzioni non danno errore di compilazione, come mai? Perché sono ne
 
 ### Risposta 2
 
-In realtà è corretto che non funzioni ma per tipi primimitivi vecchi compilatori fanno la copia in maniera nascosta. Non andrebbe fatto è corretto avere l'errore lì.
+In realtà è corretto che non funzioni ma per tipi primitivi vecchi compilatori fanno la copia in maniera nascosta. Non andrebbe fatto è corretto avere l'errore lì.
 
-## 3. Riferimenti a riferimenti
+## 3
+
+### Riferimenti a riferimenti
 
 Come funziona un riferimento a riferimento? È possibile dichiarare un riferimento a riferimento? Se sì, come? Ad esempio questo codice è corretto?
 
@@ -75,9 +81,11 @@ int main()
 
 ### Risposta 3
 
-Funziona ma è inutile poichè avranno tutti la stessa locazione.
+Funziona ma è inutile poiché avranno tutti la stessa locazione.
 
-## 4. Casting C-style e static_cast
+## 4
+
+### Casting C-style e static_cast
 
 Negli esempi da lei forniti (slide2.cpp\[23:77\]) sono presentati due casting diversi uno
 vicino all'altro come analoghi, ma il secondo porta un errore di compilazione.
@@ -100,7 +108,9 @@ Come mai il secondo porta a un errore di compilazione? Come mai il primo no?
 
 In realtà è corretto che non funzioni, il casting C è più permissivo e ti fa fare cose scomode e lascia a te la palla. Anche per questo andrebbe usato quello di C++.
 
-## 5. Move a tempo costante
+## 5
+
+### Move a tempo costante
 
 Come avviene nel dettaglio move a tempo costane? Quando vado a spostare il puntatore del valore di ritorno di una funzione su null come fa la prossima funzione a sapere qual è la cella di memoria su cui può scrivere il valore di ritorno?
 
@@ -108,7 +118,9 @@ Come avviene nel dettaglio move a tempo costane? Quando vado a spostare il punta
 
 Quello che viene cancellato al pop è la variabile interna, che nel caso di dati complessi è solo un riferimento al dato.
 
-## 6. Move implicita
+## 6
+
+### Move implicita
 
 Quando avviene la move implicita? È possibile forzare la move implicita? Se sì, come?
 
