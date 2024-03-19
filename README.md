@@ -47,10 +47,10 @@ Per le dettagli ulteriori, come **testi consigliati**, **orari di ricevimento** 
 
 ### Struttura della cartella Lezioni
 
-- `n`: cartella con i contenuti della lezione numero n
+- `{topic}`: cartella con i contenuti relativi a un argomento specifico
   - `*.cpp`: file sorgenti in C++ con il codice sorgente, opportunamente commentato con le spiegazioni
   - `*.hpp`: file header in C++ con le dichiarazioni delle funzioni, opportunamente commentato con le spiegazioni
-  - `[Questions.md]`: file Markdown con eventuali domande da sottoporre al docente riguardo la lezione
+  - `[Questions.md]`: file Markdown con eventuali domande da sottoporre al docente riguardo l'argomento trattato
 - `build.sh`: script bash per compilazione e lancio dei sorgenti
 - `compile.sh`: script bash per compilazione dei sorgenti
 - `run.sh`: script bash per lancio degli eseguibili
@@ -60,7 +60,7 @@ Per le dettagli ulteriori, come **testi consigliati**, **orari di ricevimento** 
 Gli appunti delle lezioni consisteranno essenzialmente nel codice sorgente commentato
 nei punti salienti, come possibili istruzioni che portano a errori o sottigliezze d'implementazione non immediate, e nelle **domande da sottoporre al docente**.
 
-Tali eventuali domande saranno presenti in un file `Questions.md` all'interno della cartella della lezione. In caso di domande specifiche su un particolare punto del codice, sarà presente un commento del tipo
+Tali eventuali domande saranno presenti in un file `Questions.md` all'interno della cartella dell'argomento. In caso di domande specifiche su un particolare punto del codice, sarà presente un commento del tipo
   
   ```cpp
   // ? file://./Questions.md##[n]
