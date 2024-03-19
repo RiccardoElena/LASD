@@ -63,7 +63,7 @@ nei punti salienti, come possibili istruzioni che portano a errori o sottigliezz
 Tali eventuali domande saranno presenti in un file `Questions.md` all'interno della cartella della lezione. In caso di domande specifiche su un particolare punto del codice, sarà presente un commento del tipo
   
   ```cpp
-  // ? Questions.md##[n]
+  // ? file://./Questions.md##[n]
   ```
 
 Dove `n` è il numero della domanda da sottoporre al docente. Tale commento sarà
