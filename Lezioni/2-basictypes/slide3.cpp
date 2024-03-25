@@ -15,6 +15,7 @@ void slide3()
   irvarx++;
   cout << "Int variable and its reference: " << ivarx << " == " << irvarx << "; " << endl;
 
+  // int &test; // COMP_ERR: con il riferimento variabile "test" è richiesto un inizializzatore
   // int &ivary = 0; //COMP_ERR: il valore iniziale del riferimento a non const deve essere un lvalue
   const int &ivary = 0;
 

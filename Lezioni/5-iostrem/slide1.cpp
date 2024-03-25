@@ -13,7 +13,6 @@ using namespace std;
   ! ma operando su tipi diversi in maniera "simmetrica", ovvero senza prediligere
   ! semanticamente nessuno dei due (se non al più ostream che non è nostro onere toccare)
   ! è preferibile definire l'operatore a scope publico.
-  ? file://./Questions.md##2
 */
 
 ostream &operator<<(ostream &outstr, const Studente1 &stu)

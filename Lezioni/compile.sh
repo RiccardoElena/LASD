@@ -39,7 +39,7 @@ for file in *.cpp; do
     command+=" $file"
 done
 
-command+=" -o $filename.out -w all"
+command+=" -o $filename.out -std=c++17 -Wall -Wextra -Wpedantic -Werror"
 
 echo -e "\nCompiling all files into $filename\n$command\n"
 eval_output=$(cd "$path" && eval "$command" 2>&1)

@@ -107,7 +107,7 @@ void nestedCatch()
 
       cout << "i am unable to manage this exception: " << exc.what() << endl;
 
-      throw; // * 3) Eccezione rilanciata
+      throw; // * 3) STESSA Eccezione rilanciata
 
     } // * 3.5) Il try esterno propaga l'eccezione interna
   }
@@ -120,7 +120,8 @@ void nestedCatch()
 
   try
   {
-
+    // * È possibile lanciare qualsiasi cosa come eccezione.
+    // * Chiaramente eccezioni lanciate in questo modo non hanno metodi come what()
     throw 5;
   }
   catch (int num)
