@@ -2,9 +2,10 @@
 
 # Default values
 compiler="g++"
-opt="0"
+opt="3"
 path="."
 filename="a"
+standard="c++20"
 
 # Analizza le opzioni del comando
 while getopts c:o:p:f: option
@@ -18,22 +19,20 @@ do
      esac;;
   p) path=${OPTARG};;
   f) filename=${OPTARG};;
+  std) standard=${OPTARG};;
   esac
 done
 
-# check if filename is given or is empty
-if [ -z "$opt" ]; then
-  read -p "Grade of optimization not given or invalid. Please enter the grade of optimization (0, 1, 2, 3, s): " opt
-  while [[ ! $opt =~ ^[0123s]$ ]]; do
-    if [ -z "$opt" ]; then
-      opt="0"
-      break
-    fi
-    read -p "Invalid input. Enter the grade of optimization (0, 1, 2, 3, s): " opt
-  done
-fi
+# check if opt given is a valid optimization level
+while [[ ! $opt =~ ^[0123s]$ ]]; do
+  read -p "Invalid input. Enter the grade of optimization (0, 1, 2, 3, s): " opt
+  if [ -z "$opt" ]; then
+    opt="0"
+    break
+  fi
+done
 
-command="$compiler -O$opt"
+command="$compiler -O$opt -std=$standard"
 
 for file in *.cpp; do
     command+=" $file"

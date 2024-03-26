@@ -2,6 +2,7 @@
 #include <iostream>
 // Function pointer a la C++
 #include <functional>
+#include <random>
 
 using namespace std;
 
@@ -189,6 +190,9 @@ void quicksort(int *A, uint p, uint r, CompareFunction cmp)
 uint partition(int *A, uint p, uint r, CompareFunction cmp)
 {
 
+  default_random_engine genx(random_device{}());
+  uniform_int_distribution<uint> dist(p, r);
+  swap(A[p], A[dist(genx)]);
   int x = A[p];
   int i = p - 1;
   int j = r + 1;

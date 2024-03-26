@@ -57,11 +57,8 @@ void cLikeRandom()
 
 void cppLikeRandom()
 {
-  // * Creo un dispositivo random. Sfrutta componenti hardware per generare un seed VERAMENTE CASUALE
-  random_device rd;
   // * Creo una nuovo generatore di random
-  default_random_engine genx(rd());
-  // ? file://./Questions.md##1
+  default_random_engine genx(random_device{}());
   // * creo una nuova distribuzione in un intervallo
   uniform_int_distribution<uint> distx(7, 35);
   // * passo il generatore alla distribuzione per ottenere il valori casuali
