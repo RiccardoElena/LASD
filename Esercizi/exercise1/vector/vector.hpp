@@ -15,7 +15,7 @@ namespace lasd
   /* ************************************************************************** */
 
   template <typename Data>
-  class Vector : virtual public LinearContainer<Data>, virtual public ResizableContainer
+  class Vector : virtual public ResizableContainer, virtual public LinearContainer<Data>
   {
 
   private:
@@ -109,8 +109,6 @@ namespace lasd
   protected:
     using Container::size;
 
-    using Vector<Data>::elements;
-
   public:
     // Default constructor
     // SortableVector() specifiers;
@@ -131,10 +129,10 @@ namespace lasd
     /* ************************************************************************ */
 
     // Copy constructor
-    inline explicit SortableVector(const SortableVector<Data> &con);
+    inline explicit SortableVector(const SortableVector<Data> &con) : Vector<Data>::Vector(con){};
 
     // Move constructor
-    inline explicit SortableVector(SortableVector<Data> &&con) noexcept;
+    inline explicit SortableVector(SortableVector<Data> &&con) noexcept : Vector<Data>::Vector(std::move(con)){};
 
     /* ************************************************************************ */
 

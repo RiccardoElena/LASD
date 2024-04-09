@@ -129,15 +129,12 @@ namespace lasd
       return;
     }
 
-    Data *temp = new Data[s]{};
-    unsigned long newSize = std::min(size, s);
-    for (unsigned long i = 0; i < newSize; i++)
-    {
-      temp[i] = elements[i];
-    }
+    Data *temp{new Data[s]{}};
+    std::uninitialized_copy(elements, elements + std::min(size, s), temp);
+    delete[] elements;
+    elements = temp;
+    temp = nullptr;
     size = s;
-    std::swap(temp, elements);
-    delete[] temp;
   }
 
   template <typename Data>
@@ -174,29 +171,15 @@ namespace lasd
   template <typename Data>
   inline SortableVector<Data> &SortableVector<Data>::operator=(const SortableVector<Data> &vec)
   {
-    SortableVector<Data> temp{vec};
-    std::swap(temp, *this);
+    Vector<Data>::operator=(std::move(vec));
     return *this;
   }
 
   template <typename Data>
   inline SortableVector<Data> &SortableVector<Data>::operator=(SortableVector<Data> &&vec) noexcept
   {
-    std::swap(size, vec.size);
-    std::swap(elements, vec.elements);
+    Vector<Data>::operator=(std::move(vec));
     return *this;
   }
 
-  template <typename Data>
-  inline SortableVector<Data>::SortableVector(const SortableVector<Data> &vec) : SortableVector(vec.size)
-  {
-    std::uninitialized_copy(vec.elements, vec.elements + size, elements);
-  }
-
-  template <typename Data>
-  inline SortableVector<Data>::SortableVector(SortableVector<Data> &&vec) noexcept
-  {
-    std::swap(size, vec.size);
-    std::swap(elements, vec.elements);
-  }
 }
