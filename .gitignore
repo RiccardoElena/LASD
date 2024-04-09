@@ -16,4 +16,4 @@
 
 # Ignore edited test files
 
-**/test.*
+**/Esercizi/**/test.*
