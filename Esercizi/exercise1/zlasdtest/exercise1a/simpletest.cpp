@@ -4,11 +4,11 @@
 /* ************************************************************************** */
 
 #include "../container/container.hpp"
-#include "../container/testable.hpp"
 #include "../container/dictionary.hpp"
-#include "../container/traversable.hpp"
-#include "../container/mappable.hpp"
 #include "../container/linear.hpp"
+#include "../container/mappable.hpp"
+#include "../container/testable.hpp"
+#include "../container/traversable.hpp"
 
 #include "../vector/vector.hpp"
 
@@ -20,14 +20,11 @@ using namespace std;
 
 /* ************************************************************************** */
 
-// TODO: Uncomment after Vector implements
-void stestVectorInt(unsigned int &testnum, unsigned int &testerr)
-{
-  unsigned int loctestnum = 0, loctesterr = 0;
-  cout << endl
-       << "Begin of Vector<int> Test:" << endl;
-  try
-  {
+// TODO: Uncomment after Vector implement
+void stestVectorInt(uint &testnum, uint &testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Vector<int> Test:" << endl;
+  try {
     {
       lasd::SortableVector<int> vec;
       Empty(loctestnum, loctesterr, vec, true);
@@ -44,6 +41,27 @@ void stestVectorInt(unsigned int &testnum, unsigned int &testerr)
 
       FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldAdd<int>, 0, 0);
       FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldAdd<int>, 0, 0);
+
+      lasd::SortableVector<int> vec2(100000);
+      for (unsigned long int i = 0; i < vec2.Size(); i++) {
+        vec2[i] = rand() % 100000;
+        cout << vec2[i] << ";";
+      }
+
+      cout << endl;
+
+      vec2.Sort();
+
+      for (unsigned long int i = 0; i < vec2.Size() - 1; i++) {
+        cout << vec2[i] << ";";
+        if (vec2[i] > vec2[i + 1]) {
+          cout << endl << "wrong" << endl;
+          break;
+        }
+      }
+      cout << endl;
+      cout << "ok" << endl;
+      vec2.Sort();
     }
     {
       lasd::SortableVector<int> vec(3);
@@ -65,7 +83,8 @@ void stestVectorInt(unsigned int &testnum, unsigned int &testerr)
       TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<int>);
       TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<int>);
       FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldAdd<int>, 0, 12);
-      FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldMultiply<int>, 1, 60);
+      FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldMultiply<int>, 1,
+                    60);
 
       vec.Sort();
 
@@ -73,28 +92,24 @@ void stestVectorInt(unsigned int &testnum, unsigned int &testerr)
       TraversePostOrder(loctestnum, loctesterr, vec, true, &TraversePrint<int>);
 
       vec.Resize(2);
-      FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldMultiply<int>, 1, 12);
+      FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldMultiply<int>, 1,
+                    12);
     }
-  }
-  catch (...)
-  {
+  } catch (...) {
     loctestnum++;
     loctesterr++;
-    cout << endl
-         << "Unmanaged error! " << endl;
+    cout << endl << "Unmanaged error! " << endl;
   }
-  cout << "End of Vector<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  cout << "End of Vector<int> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
   testnum += loctestnum;
   testerr += loctesterr;
 }
 
-void stestVectorDouble(unsigned int &testnum, unsigned int &testerr)
-{
-  unsigned int loctestnum = 0, loctesterr = 0;
-  cout << endl
-       << "Begin of Vector<double> Test:" << endl;
-  try
-  {
+void stestVectorDouble(uint &testnum, uint &testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Vector<double> Test:" << endl;
+  try {
     lasd::SortableVector<double> vec(3);
     Empty(loctestnum, loctesterr, vec, false);
     Size(loctestnum, loctesterr, vec, true, 3);
@@ -109,27 +124,23 @@ void stestVectorDouble(unsigned int &testnum, unsigned int &testerr)
     Exists(loctestnum, loctesterr, vec, true, 3.3);
 
     FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldAdd<double>, 0.0, 9.9);
-    FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldMultiply<double>, 1.0, 19.965);
-  }
-  catch (...)
-  {
+    FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldMultiply<double>, 1.0,
+                  19.965);
+  } catch (...) {
     loctestnum++;
     loctesterr++;
-    cout << endl
-         << "Unmanaged error! " << endl;
+    cout << endl << "Unmanaged error! " << endl;
   }
-  cout << "End of Vector<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  cout << "End of Vector<double> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
   testnum += loctestnum;
   testerr += loctesterr;
 }
 
-void stestVectorString(unsigned int &testnum, unsigned int &testerr)
-{
-  unsigned int loctestnum = 0, loctesterr = 0;
-  cout << endl
-       << "Begin of Vector<string> Test:" << endl;
-  try
-  {
+void stestVectorString(uint &testnum, uint &testerr) {
+  uint loctestnum = 0, loctesterr = 0;
+  cout << endl << "Begin of Vector<string> Test:" << endl;
+  try {
     lasd::SortableVector<string> vec(2);
 
     Empty(loctestnum, loctesterr, vec, false);
@@ -143,63 +154,66 @@ void stestVectorString(unsigned int &testnum, unsigned int &testerr)
 
     Exists(loctestnum, loctesterr, vec, true, string("A"));
 
-    MapPreOrder(loctestnum, loctesterr, vec, true, [](string &str)
-                { MapStringAppend(str, string(" ")); });
+    MapPreOrder(loctestnum, loctesterr, vec, true,
+                [](string &str) { MapStringAppend(str, string(" ")); });
     TraversePreOrder(loctestnum, loctesterr, vec, true, &TraversePrint<string>);
-    FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldStringConcatenate, string("X"), string("XA B "));
-    FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldStringConcatenate, string("X"), string("XB A "));
+    FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldStringConcatenate,
+                 string("X"), string("XA B "));
+    FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldStringConcatenate,
+                  string("X"), string("XB A "));
 
     Exists(loctestnum, loctesterr, vec, false, string("A"));
 
     lasd::SortableVector<string> copvec(vec);
     EqualVector(loctestnum, loctesterr, vec, copvec, true);
-    MapPreOrder(loctestnum, loctesterr, vec, true, [](string &str)
-                { MapStringAppend(str, string("!")); });
+    MapPreOrder(loctestnum, loctesterr, vec, true,
+                [](string &str) { MapStringAppend(str, string("!")); });
     NonEqualVector(loctestnum, loctesterr, vec, copvec, true);
 
     copvec = move(vec);
-    FoldPreOrder(loctestnum, loctesterr, copvec, true, &FoldStringConcatenate, string("?"), string("?A !B !"));
+    FoldPreOrder(loctestnum, loctesterr, copvec, true, &FoldStringConcatenate,
+                 string("?"), string("?A !B !"));
 
     lasd::SortableVector<string> movvec(move(vec));
-    FoldPreOrder(loctestnum, loctesterr, movvec, true, &FoldStringConcatenate, string("?"), string("?A B "));
+    FoldPreOrder(loctestnum, loctesterr, movvec, true, &FoldStringConcatenate,
+                 string("?"), string("?A B "));
     movvec.Sort();
-    FoldPreOrder(loctestnum, loctesterr, movvec, true, &FoldStringConcatenate, string("?"), string("?A B "));
+    FoldPreOrder(loctestnum, loctesterr, movvec, true, &FoldStringConcatenate,
+                 string("?"), string("?A B "));
     SetAt(loctestnum, loctesterr, vec, false, 1, string(""));
     vec.Resize(1);
     SetAt(loctestnum, loctesterr, vec, true, 0, string("X"));
 
     movvec.Clear();
     Empty(loctestnum, loctesterr, movvec, true);
-  }
-  catch (...)
-  {
+  } catch (...) {
     loctestnum++;
     loctesterr++;
-    cout << endl
-         << "Unmanaged error! " << endl;
+    cout << endl << "Unmanaged error! " << endl;
   }
-  cout << "End of Vector<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  cout << "End of Vector<string> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
   testnum += loctestnum;
   testerr += loctesterr;
 }
 
-void stestVector(unsigned int &testnum, unsigned int &testerr)
-{
-  unsigned int loctestnum = 0, loctesterr = 0;
+void stestVector(uint &testnum, uint &testerr) {
+  uint loctestnum = 0, loctesterr = 0;
   stestVectorInt(loctestnum, loctesterr);
   stestVectorDouble(loctestnum, loctesterr);
   stestVectorString(loctestnum, loctesterr);
   testnum += loctestnum;
   testerr += loctesterr;
   cout << endl
-       << "Exercise 1A - Vector (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+       << "Exercise 1A - Vector (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
 }
 
 /* ************************************************************************** */
 
 // TODO: Uncomment after List implementation
-// void stestListInt(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestListInt(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   cout << endl << "Begin of List<int> Test:" << endl;
 //   try {
 //     lasd::List<int> lst;
@@ -212,9 +226,10 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     Exists(loctestnum, loctesterr, lst, false, 0);
 
 //     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 0);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 0);
+//     TraversePostOrder(loctestnum, loctesterr, lst, true,
+//     &TraversePrint<int>); FoldPreOrder(loctestnum, loctesterr, lst, true,
+//     &FoldAdd<int>, 0, 0); FoldPostOrder(loctestnum, loctesterr, lst, true,
+//     &FoldAdd<int>, 0, 0);
 
 //     RemoveFromFront(loctestnum, loctesterr, lst, false);
 //     FrontNRemove(loctestnum, loctesterr, lst, false, 0);
@@ -236,13 +251,15 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     Exists(loctestnum, loctesterr, lst, false, 4);
 
 //     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<int>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 25);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1, 1620);
+//     TraversePostOrder(loctestnum, loctesterr, lst, true,
+//     &TraversePrint<int>); FoldPreOrder(loctestnum, loctesterr, lst, true,
+//     &FoldAdd<int>, 0, 25); FoldPostOrder(loctestnum, loctesterr, lst, true,
+//     &FoldMultiply<int>, 1, 1620);
 
 //     RemoveFromFront(loctestnum, loctesterr, lst, true);
 //     FrontNRemove(loctestnum, loctesterr, lst, true, 9);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1, 90);
+//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<int>, 1,
+//     90);
 
 //     lasd::List<int> coplst(lst);
 //     EqualList(loctestnum, loctesterr, lst, coplst, true);
@@ -279,13 +296,12 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     loctestnum++; loctesterr++;
 //     cout << endl << "Unmanaged error! " << endl;
 //   }
-//   cout << "End of List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
+//   cout << "End of List<int> Test! (Errors/Tests: " << loctesterr << "/" <<
+//   loctestnum << ")" << endl; testnum += loctestnum; testerr += loctesterr;
 // }
 
-// void stestListDouble(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestListDouble(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   cout << endl << "Begin of List<double> Test:" << endl;
 //   try {
 //     lasd::List<double> lst;
@@ -307,22 +323,22 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 
 //     Exists(loctestnum, loctesterr, lst, false, 0.0);
 
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
-//     TraversePostOrder(loctestnum, loctesterr, lst, true, &TraversePrint<double>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<double>, 0.0, 10.4);
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldMultiply<double>, 1.0, 9.9825);
+//     TraversePreOrder(loctestnum, loctesterr, lst, true,
+//     &TraversePrint<double>); TraversePostOrder(loctestnum, loctesterr, lst,
+//     true, &TraversePrint<double>); FoldPreOrder(loctestnum, loctesterr, lst,
+//     true, &FoldAdd<double>, 0.0, 10.4); FoldPostOrder(loctestnum, loctesterr,
+//     lst, true, &FoldMultiply<double>, 1.0, 9.9825);
 //   }
 //   catch (...) {
 //     loctestnum++; loctesterr++;
 //     cout << endl << "Unmanaged error! " << endl;
 //   }
-//   cout << "End of List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
+//   cout << "End of List<double> Test! (Errors/Tests: " << loctesterr << "/" <<
+//   loctestnum << ")" << endl; testnum += loctestnum; testerr += loctesterr;
 // }
 
-// void stestListString(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestListString(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   cout << endl << "Begin of List<string> Test:" << endl;
 //   try {
 //     lasd::List<string> lst;
@@ -337,10 +353,12 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 
 //     Exists(loctestnum, loctesterr, lst, true, string("B"));
 
-//     MapPreOrder(loctestnum, loctesterr, lst, true, [](string & str) { MapStringAppend(str, string(" ")); });
-//     TraversePreOrder(loctestnum, loctesterr, lst, true, &TraversePrint<string>);
-//     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XA B "));
-//     FoldPostOrder(loctestnum, loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XB A "));
+//     MapPreOrder(loctestnum, loctesterr, lst, true, [](string & str) {
+//     MapStringAppend(str, string(" ")); }); TraversePreOrder(loctestnum,
+//     loctesterr, lst, true, &TraversePrint<string>); FoldPreOrder(loctestnum,
+//     loctesterr, lst, true, &FoldStringConcatenate, string("X"), string("XA B
+//     ")); FoldPostOrder(loctestnum, loctesterr, lst, true,
+//     &FoldStringConcatenate, string("X"), string("XB A "));
 
 //     Exists(loctestnum, loctesterr, lst, false, string("B"));
 
@@ -356,32 +374,33 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
 
 //     coplst = move(lst);
-//     FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldStringConcatenate, string("?"), string("?CB A"));
+//     FoldPreOrder(loctestnum, loctesterr, coplst, true,
+//     &FoldStringConcatenate, string("?"), string("?CB A"));
 //   }
 //   catch (...) {
 //     loctestnum++; loctesterr++;
 //     cout << endl << "Unmanaged error! " << endl;
 //   }
-//   cout << "End of List<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
+//   cout << "End of List<string> Test! (Errors/Tests: " << loctesterr << "/" <<
+//   loctestnum << ")" << endl; testnum += loctestnum; testerr += loctesterr;
 // }
 
-// void stestList(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestList(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   stestListInt(loctestnum, loctesterr);
 //   stestListDouble(loctestnum, loctesterr);
 //   stestListString(loctestnum, loctesterr);
 //   testnum += loctestnum;
 //   testerr += loctesterr;
-//   cout << endl << "Exercise 1A - List (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+//   cout << endl << "Exercise 1A - List (Errors/Tests: " << loctesterr << "/"
+//   << loctestnum << ")" << endl;
 // }
 
 /* ************************************************************************** */
 
 // TODO: Uncomment code after crossed Vector-List implementation
-// void stestVectorListInt(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestVectorListInt(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   cout << endl << "Begin of Vector/List<int> Test:" << endl;
 //   try {
 //     lasd::SortableVector<int> vec(3);
@@ -410,13 +429,13 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     loctestnum++; loctesterr++;
 //     cout << endl << "Unmanaged error! " << endl;
 //   }
-//   cout << "End of Vector/List<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
+//   cout << "End of Vector/List<int> Test! (Errors/Tests: " << loctesterr <<
+//   "/" << loctestnum << ")" << endl; testnum += loctestnum; testerr +=
+//   loctesterr;
 // }
 
-// void stestVectorListDouble(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestVectorListDouble(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   cout << endl << "Begin of Vector/List<double> Test:" << endl;
 //   try {
 //     lasd::SortableVector<double> vec(3);
@@ -445,13 +464,13 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     loctestnum++; loctesterr++;
 //     cout << endl << "Unmanaged error! " << endl;
 //   }
-//   cout << "End of Vector/List<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
+//   cout << "End of Vector/List<double> Test! (Errors/Tests: " << loctesterr <<
+//   "/" << loctestnum << ")" << endl; testnum += loctestnum; testerr +=
+//   loctesterr;
 // }
 
-// void stestVectorListString(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestVectorListString(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   cout << endl << "Begin of Vector/List<string> Test:" << endl;
 //   try {
 //     lasd::SortableVector<string> vec(3);
@@ -488,25 +507,25 @@ void stestVector(unsigned int &testnum, unsigned int &testerr)
 //     loctestnum++; loctesterr++;
 //     cout << endl << "Unmanaged error! " << endl;
 //   }
-//   cout << "End of Vector/List<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
-//   testnum += loctestnum;
-//   testerr += loctesterr;
+//   cout << "End of Vector/List<string> Test! (Errors/Tests: " << loctesterr <<
+//   "/" << loctestnum << ")" << endl; testnum += loctestnum; testerr +=
+//   loctesterr;
 // }
 
-// void stestVectorList(unsigned int & testnum, unsigned int & testerr) {
-//   unsigned int loctestnum = 0, loctesterr = 0;
+// void stestVectorList(uint & testnum, uint & testerr) {
+//   uint loctestnum = 0, loctesterr = 0;
 //   stestVectorListInt(loctestnum, loctesterr);
 //   stestVectorListDouble(loctestnum, loctesterr);
 //   stestVectorListString(loctestnum, loctesterr);
 //   testnum += loctestnum;
 //   testerr += loctesterr;
-//   cout << endl << "Exercise 1A - Vector/List (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+//   cout << endl << "Exercise 1A - Vector/List (Errors/Tests: " << loctesterr
+//   << "/" << loctestnum << ")" << endl;
 // }
 
 /* ************************************************************************** */
 
-void testSimpleExercise1A(unsigned int &testnum, unsigned int &testerr)
-{
+void testSimpleExercise1A(uint &testnum, uint &testerr) {
   // TODO: Uncomment to test Vector
   stestVector(testnum, testerr);
   // TODO: Uncomment to test Vector
@@ -514,5 +533,6 @@ void testSimpleExercise1A(unsigned int &testnum, unsigned int &testerr)
   // TODO: Uncomment to test Vector-List
   // stestVectorList(testnum, testerr);
   cout << endl
-       << "Exercise 1A (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
+       << "Exercise 1A (Simple Test) (Errors/Tests: " << testerr << "/"
+       << testnum << ")" << endl;
 }
