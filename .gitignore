@@ -13,3 +13,7 @@
 
 **/*.o
 **/main
+
+# Ignore edited test files
+
+**/test.*
