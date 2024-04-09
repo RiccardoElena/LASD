@@ -7,9 +7,9 @@
 using namespace std;
 
 // * Primi quicksort con criterio di confronto hard-coded
-void quicksort(int *, uint);
-void quicksort(int *, uint, uint);
-uint partition(int *, uint, uint);
+void quicksort(int *, unsigned int);
+void quicksort(int *, unsigned int, unsigned int);
+unsigned int partition(int *, unsigned int, unsigned int);
 
 // Note: può essere utile creare una enum di risultati dei confronti
 // Note: per partizionare risultati di confronti più complessi di <,> e =
@@ -34,9 +34,9 @@ typedef std::function<ComparisonType(int, int)> CompareFunction;
 
 // * I nostri algoritmi di ordinamento parametrizzano il criterio di ordinamento
 // * sfruttando una funzione di tipo CompareFunction
-void quicksort(int *, uint, CompareFunction);
-void quicksort(int *, uint, uint, CompareFunction);
-uint partition(int *, uint, uint, CompareFunction);
+void quicksort(int *, unsigned int, CompareFunction);
+void quicksort(int *, unsigned int, unsigned int, CompareFunction);
+unsigned int partition(int *, unsigned int, unsigned int, CompareFunction);
 
 // Ordinamento Crescente
 ComparisonType OrdA(int a, int b)
@@ -92,7 +92,7 @@ int main()
   cout << "Ordina la sequenza con ordinamento hard-coded" << endl;
   quicksort(A, 11);
 
-  for (uint i = 0; i < 11; i++)
+  for (unsigned int i = 0; i < 11; i++)
   {
     cout << A[i] << ' ';
   };
@@ -102,7 +102,7 @@ int main()
 
   quicksort(A, 11, OrdA);
 
-  for (uint i = 0; i < 11; i++)
+  for (unsigned int i = 0; i < 11; i++)
   {
     cout << A[i] << ' ';
   };
@@ -110,7 +110,7 @@ int main()
 
   quicksort(A, 11, OrdB);
 
-  for (uint i = 0; i < 11; i++)
+  for (unsigned int i = 0; i < 11; i++)
   {
     cout << A[i] << ' ';
   };
@@ -118,7 +118,7 @@ int main()
 
   quicksort(A, 11, OrdC);
 
-  for (uint i = 0; i < 11; i++)
+  for (unsigned int i = 0; i < 11; i++)
   {
     cout << A[i] << ' ';
   };
@@ -127,22 +127,22 @@ int main()
   return 0;
 }
 
-void quicksort(int *A, uint size)
+void quicksort(int *A, unsigned int size)
 {
   quicksort(A, 0, size - 1);
 }
 
-void quicksort(int *A, uint p, uint r)
+void quicksort(int *A, unsigned int p, unsigned int r)
 {
   if (p < r)
   {
-    uint q = partition(A, p, r);
+    unsigned int q = partition(A, p, r);
     quicksort(A, p, q);
     quicksort(A, q + 1, r);
   }
 }
 
-uint partition(int *A, uint p, uint r)
+unsigned int partition(int *A, unsigned int p, unsigned int r)
 {
 
   int x = A[p];
@@ -172,26 +172,26 @@ uint partition(int *A, uint p, uint r)
   return j;
 }
 
-void quicksort(int *A, uint size, CompareFunction cmp)
+void quicksort(int *A, unsigned int size, CompareFunction cmp)
 {
   quicksort(A, 0, size - 1, cmp);
 }
 
-void quicksort(int *A, uint p, uint r, CompareFunction cmp)
+void quicksort(int *A, unsigned int p, unsigned int r, CompareFunction cmp)
 {
   if (p < r)
   {
-    uint q = partition(A, p, r, cmp);
+    unsigned int q = partition(A, p, r, cmp);
     quicksort(A, p, q, cmp);
     quicksort(A, q + 1, r, cmp);
   }
 }
 
-uint partition(int *A, uint p, uint r, CompareFunction cmp)
+unsigned int partition(int *A, unsigned int p, unsigned int r, CompareFunction cmp)
 {
 
   default_random_engine genx(random_device{}());
-  uniform_int_distribution<uint> dist(p, r);
+  uniform_int_distribution<unsigned int> dist(p, r);
   swap(A[p], A[dist(genx)]);
   int x = A[p];
   int i = p - 1;

@@ -61,7 +61,7 @@ void methods(string &Stringa1, string &Stringa2)
 
   // WARNING: La clear non pulisce veramente la memoria, ma probabilmente
   //! viene solo flaggata come empty (magari con size = 0) per questioni di efficienza
-  uint i = 3;
+  unsigned int i = 3;
   cout << "Char " << i << " of string" << Stringa1 << " is \'" << Stringa1[i] << "\'" << endl; // OUT: n
 
   cout << "String front is \'" << Stringa1.front() << "\'" << endl;
@@ -70,7 +70,7 @@ void methods(string &Stringa1, string &Stringa2)
   cout << (Stringa1 + " $ " + Stringa2) << endl;
 
   i = 1;
-  uint j = 2;
+  unsigned int j = 2;
   /*
     ! In questo caso la funzione substring è programmata per controllare prima di
     ! accedere alla stringa se gli indici sono sensati, se non lo sono viene

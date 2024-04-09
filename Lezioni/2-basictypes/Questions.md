@@ -94,12 +94,12 @@ vicino all'altro come analoghi, ma il secondo porta un errore di compilazione.
   23 | const char * cpcon;
   24 |
   // Irrelevant code...
-  70 | uint uivar = 25;
+  70 | unsigned int uivar = 25;
   // Irrelevant code...
   74 | // C-like cast
-  75 | uivar = *((uint *)cpcon); 
+  75 | uivar = *((unsigned int *)cpcon); 
   76 | // C++ static cast
-  77 | uivar = *(static_cast<uint *>(cpcon));  //COMP_ERR: static_cast da 'const char *' a 'uint *' (aka 'unsigned int *') non è ammesso
+  77 | uivar = *(static_cast<unsigned int *>(cpcon));  //COMP_ERR: static_cast da 'const char *' a 'unsigned int *' (aka 'unsigned int *') non è ammesso
 ```
 
 Come mai il secondo porta a un errore di compilazione? Come mai il primo no?

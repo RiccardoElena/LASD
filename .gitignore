@@ -4,3 +4,12 @@
 # Ignore books
 
 **/books/*
+
+# Ignore scripts files
+
+**/scripts/*
+
+# Ignore compiled files
+
+**/*.o
+**/main

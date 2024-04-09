@@ -7,10 +7,6 @@
 3. [Appunti Lezioni](#appunti-lezioni)
     1. [Struttura della cartella Lezioni](#struttura-della-cartella-lezioni)
     2. [Utilizzo appunti lezioni](#utilizzo-appunti-lezioni)
-    3. [Utilizzo degli script](#utilizzo-degli-script)
-        1. [Compilazione dei sorgenti](#compilazione-dei-sorgenti)
-        2. [Esecuzione degli eseguibili](#esecuzione-degli-eseguibili)
-        3. [Compilazione e lancio degli eseguibili](#compilazione-e-lancio-degli-eseguibili)
 4. [Esercizi](#esercizi)
 
 ## Informazioni generali
@@ -71,75 +67,10 @@ un riferimento cliccabile alla domanda corrispondente nel file `Questions.md`.
 
 > ***Nota***: *I codici sorgenti sono stati scritti con l'IDE VSCode con installata l'estensione di miglioramento dei commenti presente in `.vscode/extensions.json`, che aiuta nella formattazione e nella visualizzazione di tali commenti. Sebbene sia possibile utilizzare questi appunti con qualsiasi IDE è consigliato, per un'esperienza completa, di utilizzare VSCode e di scaricare le estensioni raccomandate.*
 
-### Utilizzo degli script
-
-Sono forniti vati script bash per semplificare il processo di compilazione e lancio degli eseguibili. È fornita una spiegazione di tutti gli script con dei **MWE**.
-
-Tutti i **MWE** sono scritti con passaggio di parametri esplicito, ma è possibile eseguire senza passaggio di parametri, in tal caso verrà chiesto d'inserire i parametri mancanti.
-
-In tutti gli esempi si suppone che la cartella corrente sia la cartella **Lezioni** presente in questa repository.
-
-> ***Nota***: *Gli script bash sono stati scritti per essere eseguiti in ambiente Unix, quindi potrebbero non funzionare correttamente in ambiente Windows.*
-
-#### Compilazione dei sorgenti
-
-Per compilare i sorgenti è sufficiente eseguire lo script `compile.sh`.
-
-Lo script si occuperà di compilare **tutti i file sorgenti** presenti nella cartella e di generare un eseguibile con **il nome fornito** e l'estensione `.out`.
-
-##### MWE
-
-```bash
-./compile.sh
-```
-
-##### Flag opzionali compile
-
-| Flag |        Descrizione        | Valore di default |   Opzioni disponibili   |
-|:----:|:-------------------------:|:-----------------:|:-----------------------:|
-| `-c` | Compilatore da utilizzare |       `g++`       |          ____           |
-| `-o` | Grado di ottimizzazione   |        `0`        | `0`, `1`, `2`, `3`, `s` |
-| `-p` | Path alla cartella        |     `./`          |          ____           |
-| `-f` | Nome dell'eseguibile      |       `a`     |          ____           |
-
-###### Full Flag MWE compile
-
-```bash
-./compile.sh -c {{compiler}} -o {{opt}} -p {{path/to/folder}} -f {{executableName}}
-```
-
-#### Esecuzione degli eseguibili
-
-Per eseguire gli eseguibili è sufficiente eseguire lo script `run.sh` specificando il path relativo al file eseguibile in questione (**senza alcuna estensione**). Lo script si occuperà di eseguire l'eseguibile generato dalla compilazione.
-
-##### MWE
-
-```bash
-./run.sh
-```
-
-##### Flag opzionali run
-
-| Flag |        Descrizione        | Valore di default |   Opzioni disponibili   |
-|:----:|:-------------------------:|:-----------------:|:-----------------------:|
-| `-f` | Nome dell'eseguibile      |       `program`     |          ____         |
-
-###### Full Flag MWE run
-
-```bash
-./run.sh -f {{executableName}}
-```
-
-#### Compilazione e lancio degli eseguibili
-
-Per semplificare il processo di compilazione e lancio degli eseguibili è possibile eseguire lo script `build.sh` nella cartella di cui si vuole eseguire il codice. Lo script si occuperà di eseguire la compilazione e l'esecuzione degli eseguibili.
-
-```bash
-./build.sh
-```
-
-##### Flag opzionali build
-
-Le flag opzionali, come l'MWE, sono le stesse di [`compile.sh`](#flag-opzionali-compile).
-
 ## Esercizi
+
+Nella cartella esercizi sono presenti gli esercizi assegnati dal docente, con relativi file sorgenti e file di test.
+
+Gli esercizi sono già stati risolti, per cui è possibile consultare le soluzioni. Inoltre, sono presenti i file di test per verificare la correttezza delle soluzioni.
+
+Per reperire gli esercizi assegnati dal docente, si rimanda al [sito web del corso](https://www.docenti.unina.it/#!/professor/464142494f4d4f47415645524f4d475646424138334533314837303341/materiale_didattico), (è necessario essere autenticati e iscritti al corso per accedere ai materiali didattici).

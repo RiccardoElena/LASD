@@ -26,7 +26,7 @@ void slide1()
   /*
     Other basic types: [unsigned] int, long (long int), long long (long long
     int), float, double, long double. Synonyms for some standard libraries:
-    uint for unsigned int and ulong for unsigned long.
+    unsigned int for unsigned int and unsigned long for unsigned long.
   */
 
   /*
@@ -34,8 +34,8 @@ void slide1()
     ! a 64bit architecture, having so int with 32 bits and long with 64
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   */
-  uint uivar1 = pow(2, 32) - 120;
-  uint uivar2 = -120;
+  unsigned int uivar1 = pow(2, 32) - 120;
+  unsigned int uivar2 = -120;
   unsigned long ulvar1 = pow(2, 32) - 120;
   unsigned long ulvar2 = -120;
   cout << "Unsigned int variable: " << uivar1 << " == " << uivar2 << "; " << endl;
@@ -48,7 +48,7 @@ void slide1()
   float vecvar[3] = {0.1, 2, 5.7};
   // double vecvar[3] = { 0.1, 2, 5.7 };
   cout << "Double vector variable: ";
-  for (uint i = 0; i < 3; i++)
+  for (unsigned int i = 0; i < 3; i++)
   {
     cout << vecvar[i] << ' ';
   };
@@ -56,9 +56,9 @@ void slide1()
 
   long matvar[3][2] = {{0, 1}, {2, 3}, {4, 5}};
   cout << "Long matrix variable: " << endl;
-  for (uint i = 0; i < 3; i++)
+  for (unsigned int i = 0; i < 3; i++)
   {
-    for (uint j = 0; j < 2; j++)
+    for (unsigned int j = 0; j < 2; j++)
     {
       cout << matvar[i][j] << ' ';
     };

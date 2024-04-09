@@ -30,3 +30,5 @@ build
 Path
 istanziando
 istanziare
+friend
+functions
