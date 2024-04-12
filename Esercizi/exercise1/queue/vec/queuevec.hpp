@@ -4,8 +4,8 @@
 
 /* ************************************************************************** */
 
-#include "../queue.hpp"
 #include "../../vector/vector.hpp"
+#include "../queue.hpp"
 
 /* ************************************************************************** */
 
@@ -13,31 +13,28 @@ namespace lasd {
 
 /* ************************************************************************** */
 
-template <typename Data>
-class QueueVec {
+template <typename Data> class QueueVec {
   // Must extend Queue<Data>,
   //             Vector<Data>
 
 private:
-
   // ...
 
 protected:
-
   // using Vector<Data>::???;
 
   // ...
 
 public:
-
   // Default constructor
   // QueueVec() specifier;
 
   /* ************************************************************************ */
 
   // Specific constructor
-  // QueueVec(argument) specifiers; // A stack obtained from a TraversableContainer
-  // QueueVec(argument) specifiers; // A stack obtained from a MappableContainer
+  // QueueVec(argument) specifiers; // A stack obtained from a
+  // TraversableContainer QueueVec(argument) specifiers; // A stack obtained
+  // from a MappableContainer
 
   /* ************************************************************************ */
 
@@ -70,12 +67,15 @@ public:
 
   // Specific member functions (inherited from Queue)
 
-  // type Head() specifiers; // Override Queue member (non-mutable version; must throw std::length_error when empty)
-  // type Head() specifiers; // Override Queue member (mutable version; must throw std::length_error when empty)
-  // type Dequeue() specifiers; // Override Queue member (must throw std::length_error when empty)
-  // type HeadNDequeue() specifiers; // Override Queue member (must throw std::length_error when empty)
-  // type Enqueue(argument) specifiers; // Override Queue member (copy of the value)
-  // type Enqueue(argument) specifiers; // Override Queue member (move of the value)
+  // type Head() specifiers; // Override Queue member (non-mutable version; must
+  // throw std::length_error when empty) type Head() specifiers; // Override
+  // Queue member (mutable version; must throw std::length_error when empty)
+  // type Dequeue() specifiers; // Override Queue member (must throw
+  // std::length_error when empty) type HeadNDequeue() specifiers; // Override
+  // Queue member (must throw std::length_error when empty) type
+  // Enqueue(argument) specifiers; // Override Queue member (copy of the value)
+  // type Enqueue(argument) specifiers; // Override Queue member (move of the
+  // value)
 
   /* ************************************************************************ */
 
@@ -92,14 +92,12 @@ public:
   // type Clear() specifiers; // Override ClearableContainer member
 
 protected:
-
   // Auxiliary functions, if necessary!
-
 };
 
 /* ************************************************************************** */
 
-}
+} // namespace lasd
 
 #include "queuevec.cpp"
 

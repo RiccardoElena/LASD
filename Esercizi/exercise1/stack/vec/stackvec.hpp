@@ -4,8 +4,8 @@
 
 /* ************************************************************************** */
 
-#include "../stack.hpp"
 #include "../../vector/vector.hpp"
+#include "../stack.hpp"
 
 /* ************************************************************************** */
 
@@ -13,31 +13,28 @@ namespace lasd {
 
 /* ************************************************************************** */
 
-template <typename Data>
-class StackVec {
+template <typename Data> class StackVec {
   // Must extend Stack<Data>,
   //             Vector<Data>
 
 private:
-
   // ...
 
 protected:
-
   // using Vector<Data>::???;
 
   // ...
 
 public:
-
   // Default constructor
   // StackVec() specifier;
 
   /* ************************************************************************ */
 
   // Specific constructor
-  // StackVec(argument) specifiers; // A stack obtained from a TraversableContainer
-  // StackVec(argument) specifiers; // A stack obtained from a MappableContainer
+  // StackVec(argument) specifiers; // A stack obtained from a
+  // TraversableContainer StackVec(argument) specifiers; // A stack obtained
+  // from a MappableContainer
 
   /* ************************************************************************ */
 
@@ -70,12 +67,14 @@ public:
 
   // Specific member functions (inherited from Stack)
 
-  // type Top() specifiers; // Override Stack member (non-mutable version; must throw std::length_error when empty)
-  // type Top() specifiers; // Override Stack member (non-mutable version; must throw std::length_error when empty)
-  // type Pop() specifiers; // Override Stack member (must throw std::length_error when empty)
-  // type TopNPop() specifiers; // Override Stack member (must throw std::length_error when empty)
-  // type Push(argument) specifiers; // Override Stack member (copy of the value)
-  // type Push(argument) specifiers; // Override Stack member (move of the value)
+  // type Top() specifiers; // Override Stack member (non-mutable version; must
+  // throw std::length_error when empty) type Top() specifiers; // Override
+  // Stack member (non-mutable version; must throw std::length_error when empty)
+  // type Pop() specifiers; // Override Stack member (must throw
+  // std::length_error when empty) type TopNPop() specifiers; // Override Stack
+  // member (must throw std::length_error when empty) type Push(argument)
+  // specifiers; // Override Stack member (copy of the value) type
+  // Push(argument) specifiers; // Override Stack member (move of the value)
 
   /* ************************************************************************ */
 
@@ -92,14 +91,12 @@ public:
   // type Clear() specifiers; // Override ClearableContainer member
 
 protected:
-
   // Auxiliary functions, if necessary!
-
 };
 
 /* ************************************************************************** */
 
-}
+} // namespace lasd
 
 #include "stackvec.cpp"
 
