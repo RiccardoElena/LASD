@@ -43,7 +43,7 @@ void lasdtest() {
 
   // cout << endl << "Exercise 1 (Full Test) (Errors/Tests: " << ftesterr << "/"
   // << ftestnum << ")" << endl;
-  if (stesterr == 0) {
+  if (!stesterr) {
     cout << endl
          << endl
          << "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ALL PASSED! "
@@ -51,4 +51,6 @@ void lasdtest() {
          << endl;
   }
   cout << endl << "Goodbye!" << endl;
+
+  throw stesterr;
 }

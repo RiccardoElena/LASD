@@ -11,8 +11,16 @@
 
 int main() {
   std::cout << "Lasd Libraries 2024" << std::endl;
-  lasdtest();
-
-  mytest();
-  return 0;
+  unsigned long errors{0};
+  try {
+    lasdtest();
+  } catch (int e) {
+    errors = e;
+  }
+  try {
+    mytest();
+  } catch (int e) {
+    errors = e;
+  }
+  return errors;
 }
