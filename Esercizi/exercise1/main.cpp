@@ -14,12 +14,12 @@ int main() {
   unsigned long errors{0};
   try {
     lasdtest();
-  } catch (int e) {
+  } catch (unsigned int e) {
     errors = e;
   }
   try {
     mytest();
-  } catch (int e) {
+  } catch (unsigned int e) {
     errors = e;
   }
   return errors;
