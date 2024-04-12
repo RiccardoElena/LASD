@@ -10,7 +10,8 @@
 
 void Empty(unsigned int &, unsigned int &, const lasd::Container &, bool);
 
-void Size(unsigned int &, unsigned int &, const lasd::Container &, bool, unsigned long);
+void Size(unsigned int &, unsigned int &, const lasd::Container &, bool,
+          unsigned long);
 
 /* ************************************************************************** */
 

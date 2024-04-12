@@ -3,6 +3,4 @@
 
 /* ************************************************************************** */
 
-void testFullExercise1A(unsigned int &, unsigned int &)
-{
-}
+void testFullExercise1A(unsigned int &, unsigned int &) {}

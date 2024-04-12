@@ -6,16 +6,10 @@
 #include <string>
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-class Person
-{
+class Person {
 
 public:
-  enum class Gender
-  {
-    F,
-    M,
-    O
-  };
+  enum class Gender { F, M, O };
 
 protected:
   unsigned int age{0};
@@ -33,11 +27,10 @@ protected:
 public:
   Person() = default;
 
-  Person(unsigned int a,
-         Gender g,
-         std::string n,
-         std::string s,
-         std::string fc) : age(a), gender(g), name(n), surname(s) { setFiscalCode(fc); }
+  Person(unsigned int a, Gender g, std::string n, std::string s, std::string fc)
+      : age(a), gender(g), name(n), surname(s) {
+    setFiscalCode(fc);
+  }
 
   Person(const Person &other) = default;
 
@@ -49,99 +42,57 @@ public:
 
   ~Person() = default;
 
-  Person operator+(const Person &other) const
-  {
+  Person operator+(const Person &other) const {
     throw std::runtime_error("Exception: + operator is not supported");
   }
 
-  Person operator-(const Person &other) const
-  {
+  Person operator-(const Person &other) const {
     throw std::runtime_error("Exception: - operator is not supported");
   }
 
-  Person operator*(const Person &other) const
-  {
+  Person operator*(const Person &other) const {
     throw std::runtime_error("Exception: * operator is not supported");
   }
 
-  Person operator/(const Person &other) const
-  {
+  Person operator/(const Person &other) const {
     throw std::runtime_error("Exception: / operator is not supported");
   }
 
-  Person operator%(const Person &other) const
-  {
+  Person operator%(const Person &other) const {
     throw std::runtime_error("Exception: % operator is not supported");
   }
 
-  bool operator==(const Person &other) const
-  {
-    return age == other.age &&
-           gender == other.gender &&
-           name == other.name &&
-           surname == other.surname &&
-           fiscalCode == other.fiscalCode;
+  bool operator==(const Person &other) const {
+    return age == other.age && gender == other.gender && name == other.name &&
+           surname == other.surname && fiscalCode == other.fiscalCode;
   }
 
-  bool operator!=(const Person &other) const
-  {
-    return !(*this == other);
-  }
+  bool operator!=(const Person &other) const { return !(*this == other); }
 
-  std::string getName() const
-  {
-    return name;
-  }
+  std::string getName() const { return name; }
 
-  void setName(const std::string &newName)
-  {
-    name = newName;
-  }
+  void setName(const std::string &newName) { name = newName; }
 
-  std::string getSurname() const
-  {
-    return surname;
-  }
+  std::string getSurname() const { return surname; }
 
-  void setSurname(const std::string &newSurname)
-  {
-    surname = newSurname;
-  }
+  void setSurname(const std::string &newSurname) { surname = newSurname; }
 
-  std::string getFiscalCode() const
-  {
-    return fiscalCode;
-  }
+  std::string getFiscalCode() const { return fiscalCode; }
 
-  void setFiscalCode(const std::string &newFiscalCode)
-  {
+  void setFiscalCode(const std::string &newFiscalCode) {
     if (isValidFiscalCode(newFiscalCode))
       fiscalCode = newFiscalCode;
   }
 
-  unsigned int getAge() const
-  {
-    return age;
-  }
-  void setAge(unsigned int newAge)
-  {
-    age = newAge;
-  }
+  unsigned int getAge() const { return age; }
+  void setAge(unsigned int newAge) { age = newAge; }
 
-  Gender getGender() const
-  {
-    return gender;
-  }
-  void setGender(Gender newGender)
-  {
-    gender = newGender;
-  }
+  Gender getGender() const { return gender; }
+  void setGender(Gender newGender) { gender = newGender; }
 
 private:
-  bool isValidFiscalCode(const std::string &fc) const noexcept
-  {
-    if (fc.length() != 16)
-    {
+  bool isValidFiscalCode(const std::string &fc) const noexcept {
+    if (fc.length() != 16) {
       return false;
     }
 

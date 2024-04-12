@@ -2,8 +2,7 @@
 cc = g++
 cflags = -Wall -pedantic -O3 -std=c++20 -fsanitize=address
 
-# TODO: Uncomment to Compile ex1b
-objects = main.o test.o mytest.o container.o exc1as.o # exc1af.o exc1bs.o exc1bf.o
+objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o
 
 libcon = container/container.hpp container/testable.hpp container/traversable.cpp container/traversable.hpp container/mappable.cpp container/mappable.hpp container/dictionary.cpp container/dictionary.hpp container/linear.cpp container/linear.hpp
 
