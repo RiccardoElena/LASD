@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Makefile
-        run: make
+        run: make -C Esercizi/exercise1
 
       - name: Execute output and check result
         run: |
