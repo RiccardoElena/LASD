@@ -24,8 +24,9 @@ name: Run Makefile and execute output
 
 on:
   push:
-    branches:
-      - main
+    branches: ['master']
+  pull_request:
+    branches: ['master']
 
 jobs:
   build-and-run:
