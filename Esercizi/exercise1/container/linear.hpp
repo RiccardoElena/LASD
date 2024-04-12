@@ -6,6 +6,7 @@
 
 #include "mappable.hpp"
 #include <algorithm>
+#include <climits>
 #include <random>
 
 /* ************************************************************************** */
