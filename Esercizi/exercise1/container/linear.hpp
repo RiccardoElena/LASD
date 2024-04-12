@@ -23,7 +23,6 @@ private:
 
 protected:
   using Container::size;
-  // Default constructor
 
 public:
   // Destructor
@@ -31,46 +30,34 @@ public:
 
   /* ************************************************************************ */
   // Copy assignment
-  LinearContainer &operator=(const LinearContainer &) =
-      delete; // Copy assignment of abstract types is not possible.
+  LinearContainer &operator=(const LinearContainer &) = delete;
 
   // Move assignment
-  LinearContainer &operator=(LinearContainer &&) noexcept =
-      delete; // Move assignment of abstract types is not possible.
+  LinearContainer &operator=(LinearContainer &&) noexcept = delete;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const LinearContainer &)
-      const noexcept; // Comparison of abstract types is possible.
+  bool operator==(const LinearContainer &) const noexcept;
   inline bool operator!=(const LinearContainer &con) const noexcept {
     return !(*this == con);
-  }; // Comparison of abstract types is possible.
+  };
 
   /* ************************************************************************ */
 
   // Specific member functions
 
-  virtual const Data &operator[](const unsigned long int)
-      const = 0; // (non-mutable version; concrete function must throw
-                 // std::out_of_range when out of range)
-  virtual Data &operator[](
-      const unsigned long int) = 0; // (mutable version; concrete function must
-                                    // throw std::out_of_range when out of
-                                    // range)
+  virtual const Data &operator[](const unsigned long int) const = 0;
 
-  // ?  Why don't throw the excep alrady at this level?
-  virtual inline const Data &
-  Front() const; // (non-mutable version; concrete function must throw
-                 // std::length_error when empty)
-  virtual inline Data &Front(); // (mutable version; concrete function must
-                                // throw std::length_error when empty)
+  virtual Data &operator[](const unsigned long int) = 0;
 
-  virtual inline const Data &
-  Back() const; // (non-mutable version; concrete function must throw
-                // std::length_error when empty)
-  virtual inline Data &Back(); // (mutable version; concrete function must throw
-                               // std::length_error when empty)
+  virtual inline const Data &Front() const;
+
+  virtual inline Data &Front();
+
+  virtual inline const Data &Back() const;
+
+  virtual inline Data &Back();
 
   /* ************************************************************************ */
 
@@ -80,21 +67,19 @@ public:
 
   inline void Traverse(TraverseFun fun) const override {
     PreOrderTraverse(fun);
-  }; // Override TraversableContainer member
+  };
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
-  inline void PreOrderTraverse(TraverseFun)
-      const override; // Override PreOrderTraversableContainer member
+  inline void PreOrderTraverse(TraverseFun) const override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderTraversableContainer)
 
-  inline void PostOrderTraverse(TraverseFun)
-      const override; // Override PostOrderTraversableContainer member
+  inline void PostOrderTraverse(TraverseFun) const override;
 
   /* ************************************************************************ */
 
@@ -102,23 +87,19 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  inline void Map(MapFun fun) override {
-    PreOrderMap(fun);
-  }; // Override MappableContainer member
+  inline void Map(MapFun fun) override { PreOrderMap(fun); };
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  inline void
-      PreOrderMap(MapFun) override; // Override PreOrderMappableContainer member
+  inline void PreOrderMap(MapFun) override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  inline void PostOrderMap(
-      MapFun) override; // Override PostOrderMappableContainer member
+  inline void PostOrderMap(MapFun) override;
 };
 
 /* ************************************************************************** */
@@ -131,7 +112,6 @@ private:
 
 protected:
   using Container::size;
-  // Default constructor
 
 public:
   // Destructor
@@ -139,23 +119,23 @@ public:
 
   /* ************************************************************************ */
   // Copy assignment
-  SortableLinearContainer &operator=(const SortableLinearContainer &) noexcept =
-      delete; // Copy assignment of abstract types is not possible.
+  SortableLinearContainer &
+  operator=(const SortableLinearContainer &) noexcept = delete;
 
   // Move assignment
-  SortableLinearContainer &operator=(SortableLinearContainer &&) noexcept =
-      delete; // Move assignment of abstract types is not possible.
+  SortableLinearContainer &
+  operator=(SortableLinearContainer &&) noexcept = delete;
 
   /* ************************************************************************ */
 
   // Comparison operators
 
-  inline bool operator==(const SortableLinearContainer &) const noexcept {
-    return LinearContainer<Data>::operator==();
-  } // Comparison of abstract types is possible.
-  inline bool operator!=(const SortableLinearContainer &) const noexcept {
-    return LinearContainer<Data>::operator==();
-  } // Comparison of abstract types is possible.
+  inline bool operator==(const SortableLinearContainer &con) const noexcept {
+    return LinearContainer<Data>::operator==(con);
+  }
+  inline bool operator!=(const SortableLinearContainer &con) const noexcept {
+    return LinearContainer<Data>::operator!=(con);
+  }
 
   /* ************************************************************************ */
 
@@ -173,7 +153,6 @@ protected:
   unsigned long partition(unsigned long, unsigned long) noexcept;
 
   unsigned long randomMedian(unsigned long, unsigned long) const noexcept;
-  // ...
 };
 
 /* ************************************************************************** */

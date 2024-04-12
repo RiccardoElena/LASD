@@ -95,7 +95,7 @@ void SortableLinearContainer<Data>::quickSort(unsigned long p,
     return;
   }
 
-  if (r - p < 12) {
+  if (r - p < 16) {
     insertionSort(p, r);
     return;
   }
@@ -115,12 +115,9 @@ void SortableLinearContainer<Data>::insertionSort(unsigned long p,
 
     currVal = (*this)[i];
     t = i;
-    while (t > p && (*this)[t - 1] > currVal) {
+    while (t != ULONG_MAX && t > p && (*this)[t - 1] > currVal) {
       (*this)[t] = (*this)[t - 1];
-      if (t > 0)
-        --t;
-      else
-        break;
+      --t;
     }
     (*this)[t] = currVal;
   }

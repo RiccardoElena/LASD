@@ -8,48 +8,45 @@
 
 /* ************************************************************************** */
 
-namespace lasd
-{
+namespace lasd {
 
-  /* ************************************************************************** */
+/* ************************************************************************** */
 
-  template <typename Data>
-  class TestableContainer : virtual public Container
-  {
+template <typename Data> class TestableContainer : virtual public Container {
 
-  private:
-    // ...
+private:
+  // ...
 
-  protected:
-    // Default constructor
+protected:
+  // Default constructor
 
-  public:
-    // Destructor
-    virtual ~TestableContainer() = default;
+public:
+  // Destructor
+  virtual ~TestableContainer() = default;
 
-    /* ************************************************************************ */
+  /* ************************************************************************ */
 
-    // Copy assignment
-    TestableContainer &operator=(const TestableContainer &) = delete; // Copy assignment of abstract types is not possible.
+  // Copy assignment
+  TestableContainer &operator=(const TestableContainer &) = delete;
 
-    // Move assignment
-    TestableContainer &operator=(TestableContainer &&) noexcept = delete; // Move assignment of abstract types is not possible.
+  // Move assignment
+  TestableContainer &operator=(TestableContainer &&) noexcept = delete;
 
-    /* ************************************************************************ */
+  /* ************************************************************************ */
 
-    // Comparison operators
-    bool operator==(const TestableContainer &) const noexcept = delete; // Comparison of abstract types is not possible.
-    bool operator!=(const TestableContainer &) const noexcept = delete; // Comparison of abstract types is not possible.
+  // Comparison operators
+  bool operator==(const TestableContainer &) const noexcept = delete;
+  bool operator!=(const TestableContainer &) const noexcept = delete;
 
-    /* ************************************************************************ */
+  /* ************************************************************************ */
 
-    // Specific member function
+  // Specific member function
 
-    virtual bool Exists(const Data &) const noexcept = 0; // (concrete function should not throw exceptions)
-  };
+  virtual bool Exists(const Data &) const noexcept = 0;
+};
 
-  /* ************************************************************************** */
+/* ************************************************************************** */
 
-}
+} // namespace lasd
 
 #endif
