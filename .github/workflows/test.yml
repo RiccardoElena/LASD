@@ -1,5 +1,3 @@
-name: C/C++ CI
-
 name: Run Makefile and execute output
 
 # on:
