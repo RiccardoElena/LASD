@@ -41,8 +41,13 @@ jobs:
 
       - name: Execute output and check result
         run: |
-          result=$(./Esercizi/exercise1/main)
-          echo "Test terminated with $result error(s)"
+          ./Esercizi/exercise1/main
+          result=$?
+          output="Test terminated with $result error"
+          if [ "$result" -ne 1 ]; then
+            output+="s"
+          fi
+          echo output
           if [ "$result" -ne 0 ]; then
             echo "Test failed! Please check the code before pushing again."
             exit 1
