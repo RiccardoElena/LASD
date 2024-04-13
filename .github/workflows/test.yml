@@ -47,7 +47,7 @@ jobs:
           if [ "$result" -ne 1 ]; then
             output+="s"
           fi
-          echo output
+          echo $output
           if [ "$result" -ne 0 ]; then
             echo "Test failed! Please check the code before pushing again."
             exit 1
