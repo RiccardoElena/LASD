@@ -8,6 +8,7 @@
 # Ignore scripts files
 
 **/scripts/*
+!**/scripts/test.sh
 
 # Ignore compiled files
 
