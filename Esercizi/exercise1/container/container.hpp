@@ -43,9 +43,9 @@ public:
 
   // Specific member functions
 
-  inline bool Empty() const noexcept { return 0 == size; }
+  inline virtual bool Empty() const noexcept { return 0 == size; }
 
-  inline unsigned long Size() const noexcept { return size; }
+  inline virtual unsigned long Size() const noexcept { return size; }
 };
 
 /* ************************************************************************** */

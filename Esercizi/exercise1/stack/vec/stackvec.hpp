@@ -9,86 +9,142 @@
 
 /* ************************************************************************** */
 
+#define RESIZE_TRASHOLD 2
+
+/* ************************************************************************** */
+
 namespace lasd {
 
 /* ************************************************************************** */
 
-template <typename Data> class StackVec {
-  // Must extend Stack<Data>,
-  //             Vector<Data>
+template <typename Data>
+class StackVec : virtual public Stack<Data>, virtual protected Vector<Data> {
 
 private:
   // ...
 
 protected:
-  // using Vector<Data>::???;
+  using Container::size;
 
-  // ...
+  unsigned long top{0};
 
 public:
   // Default constructor
-  // StackVec() specifier;
+  StackVec() = default;
 
   /* ************************************************************************ */
 
+  // ? qual'è il senso di avere come invatiante size > 0 (init_size)
+  // ?  se posso violarla con questi metodi? dovrei fare il controllo che la
+  // ? rispettino?
   // Specific constructor
-  // StackVec(argument) specifiers; // A stack obtained from a
-  // TraversableContainer StackVec(argument) specifiers; // A stack obtained
-  // from a MappableContainer
+  inline explicit StackVec(const TraversableContainer<Data> &con)
+      : Vector<Data>::Vector(con), top(con.Size()){};
+  inline explicit StackVec(MappableContainer<Data> &&con)
+      : Vector<Data>::Vector(std::move(con)), top(con.Size()){};
 
   /* ************************************************************************ */
 
   // Copy constructor
-  // StackVec(argument);
+  inline explicit StackVec(const StackVec &s)
+      : Vector<Data>::Vector(s), top(s.Size()){};
 
   // Move constructor
-  // StackVec(argument);
+  inline explicit StackVec(StackVec &&s)
+      : Vector<Data>::Vector(std::move(s)), top(s.Size()){};
 
   /* ************************************************************************ */
 
   // Destructor
-  // ~StackVec() specifier;
+  virtual ~StackVec() = default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument);
+  inline StackVec &operator=(const StackVec &);
 
   // Move assignment
-  // type operator=(argument);
+  inline StackVec &operator=(StackVec &&) noexcept;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers;
-  // type operator!=(argument) specifiers;
+  inline bool operator==(const StackVec &s) const noexcept {
+    return Vector<Data>::operator==(s);
+  };
+
+  inline bool operator!=(const StackVec &s) const noexcept {
+    return Vector<Data>::operator!=(s);
+  };
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Stack)
 
-  // type Top() specifiers; // Override Stack member (non-mutable version; must
-  // throw std::length_error when empty) type Top() specifiers; // Override
-  // Stack member (non-mutable version; must throw std::length_error when empty)
-  // type Pop() specifiers; // Override Stack member (must throw
-  // std::length_error when empty) type TopNPop() specifiers; // Override Stack
-  // member (must throw std::length_error when empty) type Push(argument)
-  // specifiers; // Override Stack member (copy of the value) type
-  // Push(argument) specifiers; // Override Stack member (move of the value)
+  inline const Data &Top() const override {
+    if (!top)
+      throw std::length_error("The stack is empty");
+    return (*this)[top - 1];
+  };
+
+  inline Data &Top() override {
+    if (!top)
+      throw std::length_error("The stack is empty");
+    std::cerr << top << " " << size << std::endl;
+    return (*this)[top - 1];
+  };
+
+  inline void Pop() override {
+    if (!top)
+      throw std::length_error("The stack is empty");
+
+    if (--top == size / (2 * RESIZE_TRASHOLD))
+      Resize(size / RESIZE_TRASHOLD);
+  }
+
+  Data TopNPop() override {
+    std::cerr << top << " " << size << std::endl;
+    if (!top)
+      throw std::length_error("The stack is empty");
+    Data topEl = (*this)[top - 1];
+    if (--top == size / (2 * RESIZE_TRASHOLD))
+      Resize(size / RESIZE_TRASHOLD);
+
+    return topEl;
+  }
+
+  inline void Push(const Data &d) override {
+    if (top == size)
+      Resize(size ? size * RESIZE_TRASHOLD : 1);
+
+    (*this)[top++] = d;
+  }
+
+  inline void Push(Data &&d) override {
+    if (top == size)
+      Resize(size ? size * RESIZE_TRASHOLD : 1);
+
+    (*this)[top++] = std::move(d);
+  }
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Container)
 
-  // type Empty() specifiers; // Override Container member
+  inline bool Empty() const noexcept override { return top == 0; }
 
-  // type Size() specifiers; // Override Container member
+  inline unsigned long Size() const noexcept override { return top; }
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
-  // type Clear() specifiers; // Override ClearableContainer member
+  void Clear() noexcept {
+    Vector<Data>::Clear();
+    top = 0;
+  }
+
+  using Vector<Data>::Resize;
 
 protected:
   // Auxiliary functions, if necessary!

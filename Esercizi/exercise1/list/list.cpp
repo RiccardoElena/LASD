@@ -35,14 +35,14 @@ template <typename Data> List<Data>::List(List &&l) {
 }
 
 template <typename Data>
-inline List<Data> &List<Data>::operator=(const List<Data> &l) {
+List<Data> &List<Data>::operator=(const List<Data> &l) {
   List<Data> temp{l};
   std::swap(temp, *this);
   return *this;
 }
 
 template <typename Data>
-inline List<Data> &List<Data>::operator=(List<Data> &&l) noexcept {
+List<Data> &List<Data>::operator=(List<Data> &&l) noexcept {
   std::swap(size, l.size);
   std::swap(head, l.head);
   std::swap(tail, l.tail);
@@ -207,7 +207,7 @@ template <typename Data>
 void List<Data>::PreOrderTraverse(TraverseFun fun, Node *curr) const {
   if (!curr)
     return;
-  // std::cout << curr->val << std::endl;
+
   fun(curr->val);
   PreOrderTraverse(fun, curr->next);
 }
