@@ -27,7 +27,7 @@ protected:
 
   struct Node {
 
-    Data val{Data()};
+    Data val{};
 
     Node *next{nullptr};
 

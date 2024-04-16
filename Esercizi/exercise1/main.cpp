@@ -16,6 +16,7 @@ int main() {
   std::string prof_res{""};
   std::string my_res{""};
   unsigned int errors{0};
+  unsigned int total{0};
   try {
     lasdtest();
   } catch (std::string e) {
@@ -41,8 +42,12 @@ int main() {
 
   if (prof_pos != std::string::npos && my_pos != std::string::npos) {
     errors += std::stoi(prof_res.substr(0, prof_pos));
+    total += std::stoi(prof_res.substr(prof_pos + 1));
     errors += std::stoi(my_res.substr(0, my_pos));
+    total += std::stoi(my_res.substr(my_pos + 1));
   }
+
+  std::cout << "Total: " << errors << "/" << total << std::endl;
 
   return errors;
 }
