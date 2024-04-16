@@ -7,8 +7,8 @@
 
 # Ignore scripts files
 
-**/scripts/*
-!**/scripts/test.sh
+**/scripts/
+!**/.github/**/scripts/
 
 # Ignore compiled files
 
