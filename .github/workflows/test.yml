@@ -43,8 +43,8 @@ jobs:
           path: 'Esercizi/exercise1/zmytest'
           token: ${{ secrets.PAT }}
 
-      - name: Run Makefile
-        run: make -C Esercizi/exercise1
+      # - name: Run Makefile
+      #   run: make -C Esercizi/exercise1
 
       - name: Execute output and check result
-        run: ./github/scripts/test.sh
+        run: ./github/workflows/scripts/test.sh
