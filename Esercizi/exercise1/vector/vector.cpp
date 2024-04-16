@@ -25,7 +25,7 @@ inline Vector<Data>::Vector(MappableContainer<Data> &&container)
     : Vector(container.Size()) {
   unsigned long i{0};
   container.Map(
-      [this, &i](Data &currData) { elements[i++] = std::move(currData); });
+      [this, &i](Data &currData) { std::swap(elements[i++], currData); });
 }
 
 template <typename Data>
