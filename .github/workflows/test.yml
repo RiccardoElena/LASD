@@ -36,6 +36,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Checkout other repo into zmytest
+        uses: actions/checkout@v4
+        with:
+          repository: 'LASD_test'
+          path: 'Esercizi/exercise1/zmytest'
+          token: ${{ secrets.PAT }}
+
       - name: Run Makefile
         run: make -C Esercizi/exercise1
 
