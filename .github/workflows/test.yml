@@ -40,4 +40,4 @@ jobs:
         run: make -C Esercizi/exercise1
 
       - name: Execute output and check result
-        run: ./scripts/test.sh
+        run: ./github/scripts/test.sh
