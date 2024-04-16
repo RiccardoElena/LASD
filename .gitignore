@@ -17,4 +17,4 @@
 
 # Ignorecustom test files
 
-/mytest/
+**/zmytest/
