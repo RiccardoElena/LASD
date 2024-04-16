@@ -15,4 +15,6 @@
 **/*.o
 **/main
 
-# Ignore edited test files
+# Ignorecustom test files
+
+/mytest/
