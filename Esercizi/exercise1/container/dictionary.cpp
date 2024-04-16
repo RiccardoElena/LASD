@@ -18,7 +18,7 @@ template <typename Data>
 inline bool
 DictionaryContainer<Data>::InsertAll(MappableContainer<Data> &&con) {
   bool result = true;
-  con.Map([this, &result](const Data &currData) {
+  con.Map([this, &result](Data &currData) {
     result &= this->Insert(std::move(currData));
   });
   return result;
@@ -48,7 +48,7 @@ template <typename Data>
 inline bool
 DictionaryContainer<Data>::InsertSome(MappableContainer<Data> &&con) {
   bool result = false;
-  con.Map([this, &result](const Data &currData) {
+  con.Map([this, &result](Data &currData) {
     result |= this->Insert(std::move(currData));
   });
   return result;

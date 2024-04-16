@@ -27,7 +27,7 @@ protected:
 
   struct Node {
 
-    Data val;
+    Data val{Data()};
 
     Node *next{nullptr};
 
@@ -37,9 +37,9 @@ protected:
 
     // Specific constructors
 
-    explicit Node(const Data &v) : val(v) {}
+    Node(const Data &v) : val(v) {}
 
-    explicit Node(Data &&v) { std::swap(val, v); }
+    Node(Data &&v) noexcept { std::swap(v, val); }
 
     /* ********************************************************************** */
 

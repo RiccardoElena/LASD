@@ -9,7 +9,10 @@
 
 /* ************************************************************************** */
 
-#define REDUCE_TRASHOLD 2
+#define INIT_SIZE 16 //! MUST BE > 0
+#define REDUCE_TRASHOLD 4
+#define INCREASE_FACTOR 2
+#define REDUCE_FACTOR 2
 
 /* ************************************************************************** */
 
@@ -28,37 +31,52 @@ protected:
 
   using Vector<Data>::elements;
 
-  unsigned long head{0}, tail{size}, elNums{size};
+  unsigned long head{0}, tail{0}, elNums{0};
 
   // ...
 
 public:
   // Default constructor
-  QueueVec() = default;
+  QueueVec() : Vector<Data>::Vector(INIT_SIZE){};
 
   /* ************************************************************************ */
 
   // Specific constructor
   inline explicit QueueVec(const TraversableContainer<Data> &con)
-      : Vector<Data>::Vector(con){};
+      : Vector<Data>::Vector(con), tail(con.Size()), elNums(con.Size()) {
+    if (size < INIT_SIZE)
+      Resize(INIT_SIZE);
+  };
 
   inline explicit QueueVec(MappableContainer<Data> &&con)
-      : Vector<Data>::Vector(std::move(con)){};
+      : Vector<Data>::Vector(std::move(con)), tail(con.Size()),
+        elNums(con.Size()) {
+    if (size < INIT_SIZE)
+      Resize(INIT_SIZE);
+  };
 
   /* ************************************************************************ */
 
   // Copy constructor
-  inline explicit QueueVec(const QueueVec &q) : Vector<Data>::Vector(q) {}
+  inline explicit QueueVec(const QueueVec &q)
+      : Vector<Data>::Vector(q), head(q.head), tail(q.tail), elNums(q.elNums) {}
 
   // Move constructor
-  inline explicit QueueVec(QueueVec &&q) : Vector<Data>::Vector(std::move(q)) {}
+  inline explicit QueueVec(QueueVec &&q) noexcept
+      : Vector<Data>::Vector(std::move(q)) {
+    std::swap(head, q.head);
+    std::swap(tail, q.tail);
+    std::swap(elNums, q.elNums);
+  }
 
-  /* ************************************************************************ */
+  /* ************************************************************************
+   */
 
   // Destructor
   virtual ~QueueVec() = default;
 
-  /* ************************************************************************ */
+  /* ************************************************************************
+   */
 
   // Copy assignment
   inline QueueVec &operator=(const QueueVec &);
@@ -67,53 +85,61 @@ public:
 
   inline QueueVec &operator=(QueueVec &&) noexcept;
 
-  /* ************************************************************************ */
+  /* ************************************************************************
+   */
 
   // Comparison operators
   bool operator==(const QueueVec &q) const noexcept {
-    return Vector<Data>::operator==(q);
+    if (q.elNums != elNums)
+      return false;
+
+    for (unsigned long i{0}; i < elNums; ++i)
+      if (elements[(head + i) % size] != q.elements[(q.head + i) % q.size])
+        return false;
+
+    return true;
   };
 
   bool operator!=(const QueueVec &q) const noexcept {
-    return Vector<Data>::operator!=(q);
+    return !(operator==(q));
   };
 
-  /* ************************************************************************ */
+  /* ************************************************************************
+   */
 
   // Specific member functions (inherited from Queue)
 
-  const Data &Head() const override { return (*this)[head]; };
-  Data &Head() override { return (*this)[head]; };
+  inline const Data &Head() const override {
+    if (!elNums)
+      throw std::length_error("The queue is empty");
+    return (*this)[head];
+  };
 
-  void Dequeue() override {
+  inline Data &Head() override {
+    if (!elNums)
+      throw std::length_error("The queue is empty");
+    return (*this)[head];
+  };
+
+  inline void Dequeue() override {
 
     if (!elNums)
       throw std::length_error("The queue is empty");
 
-    ++head;
-    --elNums;
-
-    if (size / (2 * RESIZE_TRASHOLD == elNums))
-      Resize(size / RESIZE_TRASHOLD);
+    head = (head + 1) % size;
+    if (--elNums == size / REDUCE_TRASHOLD)
+      Resize(size / REDUCE_FACTOR);
   }
 
   Data HeadNDequeue() override {
-    if (!elNums)
-      throw std::length_error("The queue is empty");
-
-    Data headEl = (*this)[head];
-    head = (head + 1) % size;
-    --elNums;
-
-    if (size / (2 * RESIZE_TRASHOLD == elNums))
-      Resize(size / RESIZE_TRASHOLD);
-
+    Data headEl = Head();
+    Dequeue();
     return headEl;
   }
 
   void Enqueue(const Data &d) override {
     if (elNums == size)
-      Resize(size ? size * RESIZE_TRASHOLD : 1);
+      Resize(size * INCREASE_FACTOR);
 
     (*this)[tail] = d;
     tail = (tail + 1) % size;
@@ -122,14 +148,15 @@ public:
 
   void Enqueue(Data &&d) override {
     if (elNums == size)
-      Resize(size ? size * RESIZE_TRASHOLD : 1);
+      Resize(size * INCREASE_FACTOR);
 
     (*this)[tail] = std::move(d);
     tail = (tail + 1) % size;
     ++elNums;
   }
 
-  /* ************************************************************************ */
+  /* ************************************************************************
+   */
 
   // Specific member functions (inherited from Container)
 
@@ -137,25 +164,23 @@ public:
 
   unsigned long Size() const noexcept override { return elNums; };
 
-  /* ************************************************************************ */
+  /* ************************************************************************
+   */
 
   // Specific member function (inherited from ClearableContainer)
 
-  void Clear() override {
-    Vector<Data>::Clear();
+  inline void Clear() override {
+    Resize(INIT_SIZE);
     tail = head = elNums = 0;
   }
 
   void Resize(unsigned long s) override {
-    if (!s) {
-      Clear();
+
+    if (s < INIT_SIZE || s == size)
       return;
-    }
 
     Data *temp{new Data[s]{}};
-    unsigned long newSize = std::min(elNums, s);
-
-    for (unsigned long i{head}, j{0}; i < newSize; i = (i + 1) % size, ++j)
+    for (unsigned long i{head}, j{0}; j < elNums; i = (i + 1) % size, ++j)
       temp[j] = elements[i];
 
     delete[] elements;

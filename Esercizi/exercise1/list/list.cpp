@@ -36,8 +36,38 @@ template <typename Data> List<Data>::List(List &&l) {
 
 template <typename Data>
 List<Data> &List<Data>::operator=(const List<Data> &l) {
-  List<Data> temp{l};
-  std::swap(temp, *this);
+
+  if (!l.size) {
+    Clear();
+    return *this;
+  }
+
+  if (!size) {
+    List<Data> temp{l};
+    std::swap(temp, *this);
+    return *this;
+  }
+
+  Node *wl{l.head};
+  tail = head;
+
+  tail->val = wl->val;
+
+  while (tail->next && wl->next) {
+    tail = tail->next;
+    wl = wl->next;
+
+    tail->val = wl->val;
+  }
+
+  if (tail->next) {
+    delete tail->next;
+    tail->next = nullptr;
+  } else
+    for (wl = wl->next; wl; wl = wl->next) {
+      InsertAtBack(wl->val);
+    }
+  size = l.size;
   return *this;
 }
 
@@ -106,7 +136,6 @@ template <typename Data> Data List<Data>::FrontNRemove() {
 
 template <typename Data> void List<Data>::InsertAtBack(const Data &d) {
   Node *temp{new Node(d)};
-  // std::cout << size << (tail == nullptr) << std::endl;
   size++ ? tail->next = temp : head = tail = temp;
   tail = temp;
 }
@@ -120,7 +149,8 @@ template <typename Data> inline bool List<Data>::Insert(const Data &d) {
   if (Exists(d)) {
     return false;
   }
-  InsertAtBack(std::move(d));
+  InsertAtBack(d);
+
   return true;
 }
 template <typename Data> inline bool List<Data>::Insert(Data &&d) {
@@ -128,6 +158,7 @@ template <typename Data> inline bool List<Data>::Insert(Data &&d) {
     return false;
   }
   InsertAtBack(std::move(d));
+
   return true;
 }
 

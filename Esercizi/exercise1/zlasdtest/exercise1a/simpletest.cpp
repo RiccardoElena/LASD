@@ -41,27 +41,6 @@ void stestVectorInt(uint &testnum, uint &testerr) {
 
       FoldPreOrder(loctestnum, loctesterr, vec, true, &FoldAdd<int>, 0, 0);
       FoldPostOrder(loctestnum, loctesterr, vec, true, &FoldAdd<int>, 0, 0);
-
-      // lasd::SortableVector<int> vec2(100000);
-      // for (unsigned long int i = 0; i < vec2.Size(); i++) {
-      //   vec2[i] = rand() % 100000;
-      //   cout << vec2[i] << ";";
-      // }
-
-      // cout << endl;
-
-      // vec2.Sort();
-
-      // for (unsigned long int i = 0; i < vec2.Size() - 1; i++) {
-      //   cout << vec2[i] << ";";
-      //   if (vec2[i] > vec2[i + 1]) {
-      //     cout << endl << "wrong" << endl;
-      //     break;
-      //   }
-      // }
-      // cout << endl;
-      // cout << "ok" << endl;
-      // vec2.Sort();
     }
     {
       lasd::SortableVector<int> vec(3);
@@ -170,11 +149,11 @@ void stestVectorString(uint &testnum, uint &testerr) {
                 [](string &str) { MapStringAppend(str, string("!")); });
     NonEqualVector(loctestnum, loctesterr, vec, copvec, true);
 
-    copvec = move(vec);
+    copvec = std::move(vec);
     FoldPreOrder(loctestnum, loctesterr, copvec, true, &FoldStringConcatenate,
                  string("?"), string("?A !B !"));
 
-    lasd::SortableVector<string> movvec(move(vec));
+    lasd::SortableVector<string> movvec(std::move(vec));
     FoldPreOrder(loctestnum, loctesterr, movvec, true, &FoldStringConcatenate,
                  string("?"), string("?A B "));
     movvec.Sort();
@@ -243,14 +222,8 @@ void stestListInt(uint &testnum, uint &testerr) {
     GetBack(loctestnum, loctesterr, lst, true, 2);
     SetFront(loctestnum, loctesterr, lst, true, 2);
     SetBack(loctestnum, loctesterr, lst, true, 6);
-    // for (unsigned int i = 0; i < lst.Size(); i++) {
-
-    //   cout << lst[i] << endl;
-    // }
-    // cout << lst[3] << endl;
 
     GetAt(loctestnum, loctesterr, lst, true, 3, 4);
-    // cout << lst[3] << endl;
     SetAt(loctestnum, loctesterr, lst, true, 3, 3);
 
     Exists(loctestnum, loctesterr, lst, false, 4);
@@ -273,16 +246,17 @@ void stestListInt(uint &testnum, uint &testerr) {
     InsertAtFront(loctestnum, loctesterr, lst, true, 0);
     InsertAtBack(loctestnum, loctesterr, lst, true, 0);
     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
+
     coplst = lst;
     EqualList(loctestnum, loctesterr, lst, coplst, true);
 
     RemoveFromFront(loctestnum, loctesterr, coplst, true);
     FrontNRemove(loctestnum, loctesterr, coplst, true, 6);
-    coplst = move(lst);
+    coplst = std::move(lst);
     FoldPreOrder(loctestnum, loctesterr, lst, true, &FoldAdd<int>, 0, 11);
     FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldAdd<int>, 0, 17);
 
-    lasd::List<int> movlst(move(lst));
+    lasd::List<int> movlst(std::move(lst));
     MapPreOrder(loctestnum, loctesterr, movlst, true, &MapIncrement<int>);
     FoldPreOrder(loctestnum, loctesterr, movlst, true, &FoldAdd<int>, 0, 14);
 
@@ -384,7 +358,7 @@ void stestListString(uint &testnum, uint &testerr) {
     InsertAtFront(loctestnum, loctesterr, lst, true, string("C"));
     NonEqualList(loctestnum, loctesterr, lst, coplst, true);
 
-    coplst = move(lst);
+    coplst = std::move(lst);
     FoldPreOrder(loctestnum, loctesterr, coplst, true, &FoldStringConcatenate,
                  string("?"), string("?CB A"));
   } catch (...) {
@@ -434,7 +408,6 @@ void stestVectorListInt(uint &testnum, uint &testerr) {
     lasd::SortableVector<int> copvecx(vec);
     EqualVector(loctestnum, loctesterr, copvecx, copvec, true);
 
-    cout << "hello?" << endl;
     lasd::List<int> coplst(vec);
     EqualList(loctestnum, loctesterr, lst, coplst, true);
     lasd::List<int> coplstx(lst);
@@ -512,11 +485,11 @@ void stestVectorListString(uint &testnum, uint &testerr) {
     lasd::List<string> coplstx(lst);
     EqualList(loctestnum, loctesterr, coplstx, coplst, true);
 
-    lasd::List<string> coplsty(move(vec));
+    lasd::List<string> coplsty(std::move(vec));
     EqualList(loctestnum, loctesterr, coplst, coplsty, true);
     EqualVector(loctestnum, loctesterr, vec, copvec, false);
 
-    lasd::SortableVector<string> copvecy(move(lst));
+    lasd::SortableVector<string> copvecy(std::move(lst));
     EqualVector(loctestnum, loctesterr, copvec, copvecy, true);
     EqualList(loctestnum, loctesterr, lst, coplst, false);
   } catch (...) {
@@ -544,7 +517,7 @@ void stestVectorList(uint &testnum, uint &testerr) {
 
 /* ************************************************************************** */
 
-void testSimpleExercise1A(uint &testnum, uint &testerr) {
+void testSimpleExercise1A(unsigned int &testnum, unsigned int &testerr) {
   // TODO: Uncomment to test Vector
   stestVector(testnum, testerr);
   // TODO: Uncomment to test Vector

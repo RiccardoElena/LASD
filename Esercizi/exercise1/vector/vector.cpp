@@ -41,7 +41,6 @@ inline Vector<Data>::Vector(Vector<Data> &&vec) noexcept {
 
 // Operators
 
-// ? why not this?
 template <typename Data>
 inline Vector<Data> &Vector<Data>::operator=(const Vector<Data> &vec) {
   Vector<Data> temp{vec};
@@ -110,10 +109,15 @@ template <typename Data> void Vector<Data>::Resize(unsigned long s) {
   }
 
   Data *temp{new Data[s]{}};
-  std::uninitialized_copy(elements, elements + std::min(size, s), temp);
-  delete[] elements;
-  elements = temp;
-  temp = nullptr;
+
+  unsigned long min{std::min(s, size)};
+
+  for (unsigned long i{0}; i < min; ++i)
+    std::swap(elements[i], temp[i]);
+
+  std::swap(elements, temp);
+  delete[] temp;
+
   size = s;
 }
 

@@ -2,7 +2,7 @@
 cc = g++
 cflags = -Wall -pedantic -O3 -std=c++20 -fsanitize=address
 
-objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o
+objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o myqueue.o myvector.o mylist.o
 
 libcon = container/container.hpp container/testable.hpp container/traversable.cpp container/traversable.hpp container/mappable.cpp container/mappable.hpp container/dictionary.cpp container/dictionary.hpp container/linear.cpp container/linear.hpp
 
@@ -41,3 +41,12 @@ exc1bs.o: $(libexc1b) zlasdtest/exercise1b/simpletest.cpp
 
 exc1bf.o: $(libexc1b) zlasdtest/exercise1b/fulltest.cpp
 	$(cc) $(cflags) -c zlasdtest/exercise1b/fulltest.cpp -o exc1bf.o
+
+myqueue.o: $(libexc1b) zmytest/queue/queue.hpp zmytest/queue/queue.cpp
+	$(cc) $(cflags) -c zmytest/queue/queue.cpp -o myqueue.o
+
+myvector.o: $(libexc1b) zmytest/vector/vector.hpp zmytest/vector/vector.cpp
+	$(cc) $(cflags) -c zmytest/vector/vector.cpp -o myvector.o
+
+mylist.o: $(libexc1b) zmytest/list/list.hpp zmytest/list/list.cpp
+	$(cc) $(cflags) -c zmytest/list/list.cpp -o mylist.o

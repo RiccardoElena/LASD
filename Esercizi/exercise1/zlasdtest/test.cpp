@@ -52,5 +52,5 @@ void lasdtest() {
   }
   cout << endl << "Goodbye!" << endl;
 
-  throw stesterr;
+  throw to_string(stesterr) + "/" + to_string(stestnum);
 }

@@ -9,7 +9,10 @@
 
 /* ************************************************************************** */
 
-#define RESIZE_TRASHOLD 2
+#define INIT_SIZE 16 //! MUST BE > 0
+#define REDUCE_TRASHOLD 4
+#define INCREASE_FACTOR 2
+#define REDUCE_FACTOR 2
 
 /* ************************************************************************** */
 
@@ -30,28 +33,32 @@ protected:
 
 public:
   // Default constructor
-  StackVec() = default;
+  StackVec() : Vector<Data>::Vector(INIT_SIZE){};
 
   /* ************************************************************************ */
 
-  // ? qual'è il senso di avere come invatiante size > 0 (init_size)
-  // ?  se posso violarla con questi metodi? dovrei fare il controllo che la
-  // ? rispettino?
   // Specific constructor
   inline explicit StackVec(const TraversableContainer<Data> &con)
-      : Vector<Data>::Vector(con), top(con.Size()){};
+      : Vector<Data>::Vector(con), top(con.Size()) {
+    if (size < INIT_SIZE)
+      Resize(INIT_SIZE);
+  };
   inline explicit StackVec(MappableContainer<Data> &&con)
-      : Vector<Data>::Vector(std::move(con)), top(con.Size()){};
+      : Vector<Data>::Vector(std::move(con)), top(con.Size()) {
+    if (size < INIT_SIZE)
+      Resize(INIT_SIZE);
+  };
 
   /* ************************************************************************ */
 
   // Copy constructor
   inline explicit StackVec(const StackVec &s)
-      : Vector<Data>::Vector(s), top(s.Size()){};
+      : Vector<Data>::Vector(s), top(s.top){};
 
   // Move constructor
-  inline explicit StackVec(StackVec &&s)
-      : Vector<Data>::Vector(std::move(s)), top(s.Size()){};
+  inline explicit StackVec(StackVec &&s) : Vector<Data>::Vector(std::move(s)) {
+    std::swap(top, s.top);
+  };
 
   /* ************************************************************************ */
 
@@ -90,7 +97,6 @@ public:
   inline Data &Top() override {
     if (!top)
       throw std::length_error("The stack is empty");
-    std::cerr << top << " " << size << std::endl;
     return (*this)[top - 1];
   };
 
@@ -98,31 +104,26 @@ public:
     if (!top)
       throw std::length_error("The stack is empty");
 
-    if (--top == size / (2 * RESIZE_TRASHOLD))
-      Resize(size / RESIZE_TRASHOLD);
+    if (--top == size / REDUCE_TRASHOLD)
+      Resize(size / REDUCE_FACTOR);
   }
 
   Data TopNPop() override {
-    std::cerr << top << " " << size << std::endl;
-    if (!top)
-      throw std::length_error("The stack is empty");
-    Data topEl = (*this)[top - 1];
-    if (--top == size / (2 * RESIZE_TRASHOLD))
-      Resize(size / RESIZE_TRASHOLD);
-
+    Data topEl{Top()};
+    Pop();
     return topEl;
   }
 
   inline void Push(const Data &d) override {
     if (top == size)
-      Resize(size ? size * RESIZE_TRASHOLD : 1);
+      Resize(size * INCREASE_FACTOR);
 
     (*this)[top++] = d;
   }
 
   inline void Push(Data &&d) override {
     if (top == size)
-      Resize(size ? size * RESIZE_TRASHOLD : 1);
+      Resize(size * INCREASE_FACTOR);
 
     (*this)[top++] = std::move(d);
   }
@@ -139,12 +140,15 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  void Clear() noexcept {
-    Vector<Data>::Clear();
+  inline void Clear() noexcept override {
+    Resize(INIT_SIZE);
     top = 0;
   }
 
-  using Vector<Data>::Resize;
+  inline void Resize(unsigned long s) override {
+    if (s >= INIT_SIZE)
+      Vector<Data>::Resize(s);
+  }
 
 protected:
   // Auxiliary functions, if necessary!

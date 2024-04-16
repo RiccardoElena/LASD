@@ -143,8 +143,8 @@ void InsertSomeC(unsigned int &testnum, unsigned int &testerr,
     std::cout << " " << testnum << " (" << testerr
               << ") Insertion in the dictionary container of the values of the "
                  "given mappable container; ";
-    std::cout << ((tst = con.InsertAll(mc)) ? "some value"
-                                            : "none of the values")
+    std::cout << ((tst = con.InsertSome(mc)) ? "some value"
+                                             : "none of the values")
               << " has been inserted: ";
     std::cout << ((tst = (tst == chk)) ? "Correct" : "Error") << "!"
               << std::endl;
@@ -165,8 +165,8 @@ void InsertSomeM(unsigned int &testnum, unsigned int &testerr,
     std::cout << " " << testnum << " (" << testerr
               << ") Insertion in the dictionary container of the values of the "
                  "given mappable container; ";
-    std::cout << ((tst = con.InsertAll(std::move(mc))) ? "some value"
-                                                       : "none of the values")
+    std::cout << ((tst = con.InsertSome(std::move(mc))) ? "some value"
+                                                        : "none of the values")
               << " has been inserted: ";
     std::cout << ((tst = (tst == chk)) ? "Correct" : "Error") << "!"
               << std::endl;
@@ -187,8 +187,8 @@ void RemoveSome(unsigned int &testnum, unsigned int &testerr,
     std::cout << " " << testnum << " (" << testerr
               << ") Removal from the dictionary container of the values of the "
                  "given mappable container; ";
-    std::cout << ((tst = con.RemoveAll(mc)) ? "some value"
-                                            : "none of the values")
+    std::cout << ((tst = con.RemoveSome(mc)) ? "some value"
+                                             : "none of the values")
               << " has been removed: ";
     std::cout << ((tst = (tst == chk)) ? "Correct" : "Error") << "!"
               << std::endl;
