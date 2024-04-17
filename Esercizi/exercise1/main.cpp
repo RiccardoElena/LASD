@@ -18,14 +18,14 @@ int main() {
   unsigned int errors{0};
   unsigned int total{0};
   try {
-    lasdtest();
-  } catch (std::string e) {
-    prof_res = e;
-  }
-  try {
     mytest();
   } catch (std::string e) {
     my_res = e;
+  }
+  try {
+    lasdtest();
+  } catch (std::string e) {
+    prof_res = e;
   }
 
   std::cout << std::endl
