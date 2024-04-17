@@ -168,7 +168,6 @@ void stestStackString(unsigned int &testnum, unsigned int &testerr) {
     PushM(loctestnum, loctesterr, stkvec, string("A"));
     PushM(loctestnum, loctesterr, stkvec, string("B"));
     lasd::StackVec<string> newstkvec(vec);
-    cout << endl << (newstkvec.Size() == stkvec.Size()) << endl;
     EqualStack(loctestnum, loctesterr, stkvec, newstkvec, true);
 
     PushM(loctestnum, loctesterr, stklst, string("B"));

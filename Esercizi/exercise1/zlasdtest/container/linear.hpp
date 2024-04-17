@@ -52,11 +52,6 @@ void GetAt(unsigned int &testnum, unsigned int &testerr,
            const unsigned long &ind, const Data &val) {
   bool tst;
   testnum++;
-  // std::cout << con[0] << std::endl;
-  // for (unsigned int i = 0; i < con.Size(); i++) {
-
-  //   std::cout << std::endl << con[i] << std::endl;
-  // }
   try {
     std::cout << " " << testnum << " (" << testerr
               << ") Get of the linear container at index \"" << ind
