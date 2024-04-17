@@ -20,7 +20,7 @@ private:
   // ...
 
 protected:
-  // ...
+  using List<Data>::size;
 
 public:
   // Default constructor
@@ -29,16 +29,16 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  StackLst(const TraversableContainer<Data> &con) : List<Data>::List(con){};
-  StackLst(MappableContainer<Data> &&con) : List<Data>::List(std::move(con)){};
+  StackLst(const TraversableContainer<Data> &);
+  StackLst(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 
   // Copy constructor
-  inline StackLst(const StackLst &s) : List<Data>::List(s){};
+  inline StackLst(const StackLst &);
 
   // Move constructor
-  inline StackLst(StackLst &&s) : List<Data>::List(std::move(s)){};
+  inline StackLst(StackLst &&);
 
   /* ************************************************************************ */
 
@@ -56,28 +56,22 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  inline bool operator==(const StackLst &s) const noexcept {
-    return List<Data>::operator==(s);
-  };
+  inline bool operator==(const StackLst &) const noexcept;
 
-  inline bool operator!=(const StackLst &s) const noexcept {
-    return List<Data>::operator!=(s);
-  };
+  inline bool operator!=(const StackLst &) const noexcept;
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Stack)
 
-  inline const Data &Top() const override { return List<Data>::Front(); };
-  inline Data &Top() override { return List<Data>::Front(); };
+  inline const Data &Top() const override;
+  inline Data &Top() override;
 
-  inline void Pop() override { List<Data>::RemoveFromFront(); };
-  inline Data TopNPop() override { return List<Data>::FrontNRemove(); };
+  inline void Pop() override;
+  inline Data TopNPop() override;
 
-  inline void Push(const Data &d) override { List<Data>::InsertAtFront(d); };
-  inline void Push(Data &&d) override {
-    List<Data>::InsertAtFront(std::move(d));
-  };
+  inline void Push(const Data &) override;
+  inline void Push(Data &&) override;
 
   /* ************************************************************************ */
 

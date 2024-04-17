@@ -7,7 +7,7 @@ namespace lasd {
 // Operators
 
 template <typename Data>
-bool LinearContainer<Data>::operator==(
+inline bool LinearContainer<Data>::operator==(
     const LinearContainer<Data> &con) const noexcept {
   if (size != con.size) {
     return false;
@@ -19,6 +19,12 @@ bool LinearContainer<Data>::operator==(
     }
   }
   return true;
+}
+
+template <typename Data>
+inline bool LinearContainer<Data>::operator!=(
+    const LinearContainer<Data> &con) const noexcept {
+  return !(*this == con);
 }
 
 // Specific Methods
@@ -55,27 +61,40 @@ template <typename Data> inline Data &LinearContainer<Data>::Back() {
 // Overrided Methods
 
 template <typename Data>
-void LinearContainer<Data>::PreOrderTraverse(const TraverseFun func) const {
+inline void LinearContainer<Data>::Traverse(TraverseFun func) const {
+  PreOrderTraverse(func);
+}
+
+template <typename Data>
+inline void
+LinearContainer<Data>::PreOrderTraverse(const TraverseFun func) const {
   for (unsigned long i = 0; i < size; ++i) {
     func((*this)[i]);
   }
 }
 
 template <typename Data>
-void LinearContainer<Data>::PostOrderTraverse(const TraverseFun func) const {
+inline void
+LinearContainer<Data>::PostOrderTraverse(const TraverseFun func) const {
 
   for (unsigned long i = size; i > 0;) {
     func((*this)[--i]);
   }
 }
 
-template <typename Data> void LinearContainer<Data>::PreOrderMap(MapFun func) {
+template <typename Data> inline void LinearContainer<Data>::Map(MapFun func) {
+  PreOrderMap(func);
+}
+
+template <typename Data>
+inline void LinearContainer<Data>::PreOrderMap(MapFun func) {
   for (unsigned long i = 0; i < size; ++i) {
     func((*this)[i]);
   }
 }
 
-template <typename Data> void LinearContainer<Data>::PostOrderMap(MapFun func) {
+template <typename Data>
+inline void LinearContainer<Data>::PostOrderMap(MapFun func) {
   for (unsigned long i = size; i > 0;) {
     func((*this)[--i]);
   }
@@ -86,7 +105,26 @@ template <typename Data> void LinearContainer<Data>::PostOrderMap(MapFun func) {
 // Sortable Linear Container
 /* ************************************************************************** */
 
+// Operators
+
+template <typename Data>
+inline bool SortableLinearContainer<Data>::operator==(
+    const SortableLinearContainer<Data> &con) const noexcept {
+  return LinearContainer<Data>::operator==(con);
+}
+
+template <typename Data>
+inline bool SortableLinearContainer<Data>::operator!=(
+    const SortableLinearContainer<Data> &con) const noexcept {
+  return !(*this == con);
+}
+
 // Specific Methods
+
+template <typename Data>
+inline void SortableLinearContainer<Data>::Sort() noexcept {
+  quickSort(0, size - 1);
+}
 
 template <typename Data>
 void SortableLinearContainer<Data>::quickSort(unsigned long p,

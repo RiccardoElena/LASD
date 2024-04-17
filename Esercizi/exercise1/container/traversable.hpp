@@ -115,9 +115,7 @@ public:
 
   // Specific member function (inherited from TraversableContainer)
 
-  inline void Traverse(TraverseFun func) const override {
-    PreOrderTraverse(func);
-  }
+  inline void Traverse(TraverseFun) const override;
 };
 
 /* ************************************************************************** */
@@ -167,16 +165,13 @@ public:
       typename TraversableContainer<Data>::template FoldFun<Accumulator>;
 
   template <typename Accumulator>
-  inline Accumulator PostOrderFold(FoldFun<Accumulator> func,
-                                   Accumulator base) const;
+  inline Accumulator PostOrderFold(FoldFun<Accumulator>, Accumulator) const;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TraversableContainer)
 
-  inline void Traverse(const TraverseFun func) const override {
-    PostOrderTraverse(func);
-  }; // Override TraversableContainer member
+  inline void Traverse(TraverseFun) const override;
 };
 
 // TODO: Not yet implemented (Not needed in Ex 1)

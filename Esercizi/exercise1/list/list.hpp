@@ -37,37 +37,29 @@ protected:
 
     // Specific constructors
 
-    Node(const Data &v) : val(v) {}
+    Node(const Data &);
 
-    Node(Data &&v) noexcept { std::swap(v, val); }
+    Node(Data &&) noexcept;
 
     /* ********************************************************************** */
 
     // Copy constructor
-    Node(const Node &other) : val(other.val) {}
+    Node(const Node &);
 
     // Move constructor
-    Node(Node &&other) noexcept {
-      std::swap(other.val, val);
-      std::swap(other.next, next);
-    }
-
+    Node(Node &&) noexcept;
     /* ********************************************************************** */
 
     // Destructor
-    // Destructor
-    virtual ~Node() { delete next; }
+    virtual ~Node();
 
     /* ********************************************************************** */
 
     // Comparison operators
 
-    inline bool operator==(const Node &other) const noexcept {
-      return val == other.val;
-    }
-    inline bool operator!=(const Node &other) const noexcept {
-      return !((*this) == other);
-    }
+    inline bool operator==(const Node &) const noexcept;
+
+    inline bool operator!=(const Node &) const noexcept;
 
     /* ********************************************************************** */
 
@@ -100,7 +92,7 @@ public:
   /* ************************************************************************ */
 
   // Destructor
-  virtual ~List() { delete head; };
+  virtual ~List();
 
   /* ************************************************************************ */
 
@@ -114,9 +106,8 @@ public:
 
   // Comparison operators
   inline bool operator==(const List &) const noexcept;
-  inline bool operator!=(const List &other) const noexcept {
-    return !(*this == other);
-  };
+
+  inline bool operator!=(const List &) const noexcept;
 
   /* ************************************************************************ */
 
@@ -138,19 +129,15 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  inline void Clear() override {
-    size = 0;
-    delete head;
-    head = tail = nullptr;
-  } // Override ClearableContainer member
+  inline void Clear() override;
 
   using TestableContainer<Data>::Exists;
   /* ************************************************************************ */
 
   // Specific member functions (inherited from DictionaryContainer)
 
-  inline bool Insert(const Data &d) override; // Copy of the value
-  inline bool Insert(Data &&d) override;      // Move of the value
+  inline bool Insert(const Data &) override; // Copy of the value
+  inline bool Insert(Data &&) override;      // Move of the value
   bool Remove(const Data &) override;
 
   /* ************************************************************************ */
@@ -172,25 +159,19 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  inline void Traverse(TraverseFun fun) const override {
-    PreOrderTraverse(fun);
-  }
+  inline void Traverse(TraverseFun) const override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderTraversableContainer)
 
-  inline void PreOrderTraverse(TraverseFun fun) const override {
-    PreOrderTraverse(fun, head);
-  }
+  inline void PreOrderTraverse(TraverseFun) const override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderTraversableContainer)
 
-  inline void PostOrderTraverse(TraverseFun fun) const override {
-    PostOrderTraverse(fun, head);
-  }
+  inline void PostOrderTraverse(TraverseFun) const override;
 
   /* ************************************************************************ */
 
@@ -198,21 +179,18 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  inline void Map(MapFun fun) override {
-    PreOrderMap(fun);
-  } // Override MappableContainer member
-
+  inline void Map(MapFun) override;
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  inline void PreOrderMap(MapFun fun) override { PreOrderMap(fun, head); }
+  inline void PreOrderMap(MapFun) override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  inline void PostOrderMap(MapFun fun) override { PostOrderMap(fun, head); }
+  inline void PostOrderMap(MapFun) override;
 
 protected:
   void PreOrderTraverse(TraverseFun, Node *) const;

@@ -37,6 +37,7 @@ public:
 
   // Comparison operators
   bool operator==(const Container &) const noexcept = delete;
+
   bool operator!=(const Container &) const noexcept = delete;
 
   /* ************************************************************************ */

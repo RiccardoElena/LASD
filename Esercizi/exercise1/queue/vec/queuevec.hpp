@@ -37,37 +37,22 @@ protected:
 
 public:
   // Default constructor
-  QueueVec() : Vector<Data>::Vector(INIT_SIZE){};
+  QueueVec();
 
   /* ************************************************************************ */
 
   // Specific constructor
-  inline explicit QueueVec(const TraversableContainer<Data> &con)
-      : Vector<Data>::Vector(con), tail(con.Size()), elNums(con.Size()) {
-    if (size < INIT_SIZE)
-      Resize(INIT_SIZE);
-  };
+  explicit QueueVec(const TraversableContainer<Data> &);
 
-  inline explicit QueueVec(MappableContainer<Data> &&con)
-      : Vector<Data>::Vector(std::move(con)), tail(con.Size()),
-        elNums(con.Size()) {
-    if (size < INIT_SIZE)
-      Resize(INIT_SIZE);
-  };
+  explicit QueueVec(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 
   // Copy constructor
-  inline explicit QueueVec(const QueueVec &q)
-      : Vector<Data>::Vector(q), head(q.head), tail(q.tail), elNums(q.elNums) {}
+  explicit QueueVec(const QueueVec &);
 
   // Move constructor
-  inline explicit QueueVec(QueueVec &&q) noexcept
-      : Vector<Data>::Vector(std::move(q)) {
-    std::swap(head, q.head);
-    std::swap(tail, q.tail);
-    std::swap(elNums, q.elNums);
-  }
+  explicit QueueVec(QueueVec &&) noexcept;
 
   /* ************************************************************************
    */
@@ -89,107 +74,44 @@ public:
    */
 
   // Comparison operators
-  bool operator==(const QueueVec &q) const noexcept {
-    if (q.elNums != elNums)
-      return false;
+  inline bool operator==(const QueueVec &) const noexcept;
 
-    for (unsigned long i{0}; i < elNums; ++i)
-      if (elements[(head + i) % size] != q.elements[(q.head + i) % q.size])
-        return false;
-
-    return true;
-  };
-
-  bool operator!=(const QueueVec &q) const noexcept {
-    return !(operator==(q));
-  };
+  inline bool operator!=(const QueueVec &) const noexcept;
 
   /* ************************************************************************
    */
 
   // Specific member functions (inherited from Queue)
 
-  inline const Data &Head() const override {
-    if (!elNums)
-      throw std::length_error("The queue is empty");
-    return (*this)[head];
-  };
+  inline const Data &Head() const override;
 
-  inline Data &Head() override {
-    if (!elNums)
-      throw std::length_error("The queue is empty");
-    return (*this)[head];
-  };
+  inline Data &Head() override;
 
-  inline void Dequeue() override {
+  inline void Dequeue() override;
 
-    if (!elNums)
-      throw std::length_error("The queue is empty");
+  inline Data HeadNDequeue() override;
 
-    head = (head + 1) % size;
-    if (--elNums == size / REDUCE_TRASHOLD)
-      Resize(size / REDUCE_FACTOR);
-  }
+  void Enqueue(const Data &) override;
 
-  Data HeadNDequeue() override {
-    Data headEl = Head();
-    Dequeue();
-    return headEl;
-  }
-
-  void Enqueue(const Data &d) override {
-    if (elNums == size)
-      Resize(size * INCREASE_FACTOR);
-
-    (*this)[tail] = d;
-    tail = (tail + 1) % size;
-    ++elNums;
-  }
-
-  void Enqueue(Data &&d) override {
-    if (elNums == size)
-      Resize(size * INCREASE_FACTOR);
-
-    (*this)[tail] = std::move(d);
-    tail = (tail + 1) % size;
-    ++elNums;
-  }
+  void Enqueue(Data &&) override;
 
   /* ************************************************************************
    */
 
   // Specific member functions (inherited from Container)
 
-  inline bool Empty() const noexcept override { return elNums == 0; };
+  inline bool Empty() const noexcept override;
 
-  unsigned long Size() const noexcept override { return elNums; };
+  unsigned long Size() const noexcept override;
 
   /* ************************************************************************
    */
 
   // Specific member function (inherited from ClearableContainer)
 
-  inline void Clear() override {
-    Resize(INIT_SIZE);
-    tail = head = elNums = 0;
-  }
+  inline void Clear() override;
 
-  void Resize(unsigned long s) override {
-
-    if (s < INIT_SIZE || s == size)
-      return;
-
-    Data *temp{new Data[s]{}};
-    for (unsigned long i{head}, j{0}; j < elNums; i = (i + 1) % size, ++j)
-      temp[j] = elements[i];
-
-    delete[] elements;
-
-    elements = temp;
-    head = 0;
-    tail = elNums;
-    size = s;
-  }
+  void Resize(unsigned long) override;
 
 protected:
   // Auxiliary functions, if necessary!

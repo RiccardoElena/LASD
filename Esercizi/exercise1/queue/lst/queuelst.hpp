@@ -19,8 +19,7 @@ class QueueLst : virtual public Queue<Data>, virtual protected List<Data> {
 private:
   // ...
 
-protected:
-  // ...
+  using List<Data>::size;
 
 public:
   // Default constructor
@@ -29,18 +28,17 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  explicit QueueLst(const TraversableContainer<Data> &con)
-      : List<Data>::List(con) {}
-  explicit QueueLst(MappableContainer<Data> &&con)
-      : List<Data>::List(std::move(con)) {}
+  explicit QueueLst(const TraversableContainer<Data> &);
+
+  explicit QueueLst(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 
   // Copy constructor
-  QueueLst(const QueueLst &q) : List<Data>::List(q) {}
+  QueueLst(const QueueLst &);
 
   // Move constructor
-  QueueLst(QueueLst &&q) noexcept : List<Data>::List(std::move(q)) {}
+  QueueLst(QueueLst &&) noexcept;
 
   /* ************************************************************************
    */
@@ -52,37 +50,32 @@ public:
    */
 
   // Copy assignment
-  inline QueueLst &operator=(const QueueLst &q);
+  inline QueueLst &operator=(const QueueLst &);
 
   // Move assignment
-  inline QueueLst &operator=(QueueLst &&q) noexcept;
+  inline QueueLst &operator=(QueueLst &&) noexcept;
 
   /* ************************************************************************
    */
 
   // Comparison operators
-  bool operator==(const QueueLst &q) const noexcept {
-    return List<Data>::operator==(q);
-  }
-  bool operator!=(const QueueLst &q) const noexcept {
-    return List<Data>::operator!=(q);
-  }
+  bool operator==(const QueueLst &) const noexcept;
+
+  bool operator!=(const QueueLst &) const noexcept;
 
   /* ************************************************************************
    */
 
   // Specific member functions (inherited from Queue)
 
-  inline Data &Head() override { return List<Data>::Front(); };
-  inline const Data &Head() const override { return List<Data>::Front(); };
+  inline Data &Head() override;
+  inline const Data &Head() const override;
 
-  inline void Dequeue() override { List<Data>::RemoveFromFront(); };
-  inline Data HeadNDequeue() override { return List<Data>::FrontNRemove(); };
+  inline void Dequeue() override;
+  inline Data HeadNDequeue() override;
 
-  inline void Enqueue(const Data &d) override { List<Data>::InsertAtBack(d); };
-  inline void Enqueue(Data &&d) override {
-    List<Data>::InsertAtBack(std::move(d));
-  };
+  inline void Enqueue(const Data &) override;
+  inline void Enqueue(Data &&) override;
 
   /* ************************************************************************
    */

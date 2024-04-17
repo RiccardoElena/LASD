@@ -39,6 +39,12 @@ TraversableContainer<Data>::Exists(const Data &data) const noexcept {
 // Specific Methods
 
 template <typename Data>
+inline void
+PreOrderTraversableContainer<Data>::Traverse(TraverseFun func) const {
+  PreOrderTraverse(func);
+}
+
+template <typename Data>
 template <typename Accumulator>
 inline Accumulator
 PreOrderTraversableContainer<Data>::PreOrderFold(FoldFun<Accumulator> func,
@@ -54,6 +60,12 @@ PreOrderTraversableContainer<Data>::PreOrderFold(FoldFun<Accumulator> func,
 /* ************************************************************************** */
 
 // Specific Methods
+
+template <typename Data>
+inline void
+PostOrderTraversableContainer<Data>::Traverse(TraverseFun func) const {
+  PostOrderTraverse(func);
+}
 
 template <typename Data>
 template <typename Accumulator>

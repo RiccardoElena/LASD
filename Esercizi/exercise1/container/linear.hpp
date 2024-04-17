@@ -39,10 +39,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const LinearContainer &) const noexcept;
-  inline bool operator!=(const LinearContainer &con) const noexcept {
-    return !(*this == con);
-  };
+  inline bool operator==(const LinearContainer &) const noexcept;
+  inline bool operator!=(const LinearContainer &) const noexcept;
 
   /* ************************************************************************ */
 
@@ -66,9 +64,7 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  inline void Traverse(TraverseFun fun) const override {
-    PreOrderTraverse(fun);
-  };
+  inline void Traverse(TraverseFun) const override;
 
   /* ************************************************************************ */
 
@@ -88,7 +84,7 @@ public:
 
   using typename MappableContainer<Data>::MapFun;
 
-  inline void Map(MapFun fun) override { PreOrderMap(fun); };
+  inline void Map(MapFun) override;
 
   /* ************************************************************************ */
 
@@ -131,18 +127,16 @@ public:
 
   // Comparison operators
 
-  inline bool operator==(const SortableLinearContainer &con) const noexcept {
-    return LinearContainer<Data>::operator==(con);
-  }
-  inline bool operator!=(const SortableLinearContainer &con) const noexcept {
-    return LinearContainer<Data>::operator!=(con);
-  }
+  inline bool operator==(const SortableLinearContainer &) const noexcept;
 
-  /* ************************************************************************ */
+  inline bool operator!=(const SortableLinearContainer &) const noexcept;
+
+  /* ************************************************************************
+   */
 
   // Specific member function
 
-  inline void Sort() noexcept { quickSort(0, size - 1); }
+  inline void Sort() noexcept;
 
 protected:
   // Auxiliary member functions
