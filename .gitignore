@@ -18,3 +18,7 @@
 # Ignorecustom test files
 
 **/zmytest/
+
+# Ignoring vscode settings
+
+**/.vscode
