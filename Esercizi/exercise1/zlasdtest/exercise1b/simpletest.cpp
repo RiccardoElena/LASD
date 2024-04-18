@@ -170,6 +170,7 @@ void stestStackString(unsigned int &testnum, unsigned int &testerr) {
     lasd::StackVec<string> newstkvec(vec);
     EqualStack(loctestnum, loctesterr, stkvec, newstkvec, true);
 
+    // ? wtf  is this?
     PushM(loctestnum, loctesterr, stklst, string("B"));
     PushM(loctestnum, loctesterr, stklst, string("A"));
     lasd::StackLst<string> newstklst(vec);

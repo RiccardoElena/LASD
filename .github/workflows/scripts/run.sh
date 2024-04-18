@@ -2,7 +2,7 @@
             dir=$(dirname "$makefile")
             echo "compiling $dir/makefile"
             make -C "$dir"
-            $dir/main
+            $dir/main 1
             result=$?
             output="Test terminated with $result error"
             if [ "$result" -ne 1 ]; then
