@@ -83,8 +83,7 @@ int summary() {
     total = std::stoi(ptotal) + std::stoi(mtotal);
 
     pacc = (1 - (std::stod(perr) / std::stod(ptotal))) * 100;
-    // macc = (1 - (std::stod(merr) / std::stod(mtotal))) * 100;
-    macc = 0.3333333;
+    macc = (1 - (std::stod(merr) / std::stod(mtotal))) * 100;
 
     tacc = (1 - (errors / total)) * 100;
   }
