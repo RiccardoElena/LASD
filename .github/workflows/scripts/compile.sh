@@ -1,5 +1,9 @@
- find ./.. -name makefile | while read makefile; do
-            dir=$(dirname "$makefile")
-            echo "compiling $dir/makefile"
-            make -C "$dir"
-          done
+find ./.. -name 'exercise*' -type d | sort -V | tail -n 1 | while read dir; do
+    makefile="$dir/makefile"
+    if [ -f "$makefile" ]; then
+        echo "compiling $makefile"
+        make -C "$dir"
+    else
+        echo "No makefile found in $dir"
+    fi
+done
