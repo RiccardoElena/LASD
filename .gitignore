@@ -1,3 +1,6 @@
+# Ignore macOS specific files
+.DS_Store
+
 # Ignore bin files
 **/*.out
 
@@ -22,3 +25,7 @@
 # Ignoring vscode settings
 
 **/.vscode
+
+# Ignoring incompleted exercises
+
+**/exercise2/*
