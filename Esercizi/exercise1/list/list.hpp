@@ -193,7 +193,7 @@ public:
   inline void PostOrderMap(MapFun) override;
 
 protected:
-  void PreOrderTraverse(TraverseFun, Node *) const;
+  inline void PreOrderTraverse(TraverseFun, Node *) const;
 
   void PostOrderTraverse(TraverseFun, Node *) const;
 

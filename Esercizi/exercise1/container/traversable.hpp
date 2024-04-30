@@ -174,7 +174,7 @@ public:
   inline void Traverse(TraverseFun) const override;
 };
 
-// TODO: Not yet implemented (Not needed in Ex 1)
+// Not yet implemented (Not needed in Ex 1)
 /* ************************************************************************** */
 
 template <typename Data> class InOrderTraversableContainer {

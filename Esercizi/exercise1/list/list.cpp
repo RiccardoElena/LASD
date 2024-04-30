@@ -341,12 +341,22 @@ template <typename Data> inline void List<Data>::PostOrderMap(MapFun fun) {
 
 // Internal Methods
 template <typename Data>
-void List<Data>::PreOrderTraverse(TraverseFun fun, Node *curr) const {
-  if (!curr)
-    return;
+inline void List<Data>::PreOrderTraverse(TraverseFun fun, Node *curr) const {
 
-  fun(curr->val);
-  PreOrderTraverse(fun, curr->next);
+  /* Recursive Version is probably more elegant but it's not stack safe
+   so I'm using a while loop instead. The recursive version get a stack overflow
+   around 32/35k calls, so for around that size or bigger is not practible*/
+
+  /*if (!curr)
+      return;
+
+    fun(curr->val);
+    PreOrderTraverse(fun, curr->next); */
+
+  while (curr) {
+    fun(curr->val);
+    curr = curr->next;
+  }
 }
 
 template <typename Data>
@@ -358,10 +368,15 @@ void List<Data>::PostOrderTraverse(TraverseFun fun, Node *curr) const {
 }
 template <typename Data>
 void List<Data>::PreOrderMap(MapFun fun, Node *curr) const {
-  if (!curr)
-    return;
-  fun(curr->val);
-  PreOrderMap(fun, curr->next);
+  /*if (!curr)
+      return;
+    fun(curr->val);
+    PreOrderMap(fun, curr->next); */
+
+  while (curr) {
+    fun(curr->val);
+    curr = curr->next;
+  }
 }
 
 template <typename Data>

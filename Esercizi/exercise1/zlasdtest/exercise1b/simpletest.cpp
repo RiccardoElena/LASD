@@ -20,7 +20,6 @@ using namespace std;
 
 /* ************************************************************************** */
 
-// TODO: Uncomment to test Stack
 template <typename Stk>
 void stestStackInt(Stk &stk, unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctestnum = 0, loctesterr = 0;
@@ -170,7 +169,6 @@ void stestStackString(unsigned int &testnum, unsigned int &testerr) {
     lasd::StackVec<string> newstkvec(vec);
     EqualStack(loctestnum, loctesterr, stkvec, newstkvec, true);
 
-    // ? wtf  is this?
     PushM(loctestnum, loctesterr, stklst, string("B"));
     PushM(loctestnum, loctesterr, stklst, string("A"));
     lasd::StackLst<string> newstklst(vec);
@@ -199,7 +197,6 @@ void stestStack(unsigned int &testnum, unsigned int &testerr) {
 /* **************************************************************************
  */
 
-// TODO: Uncomment to Test Queue
 template <typename Que>
 void stestQueueInt(Que &que, unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctestnum = 0, loctesterr = 0;

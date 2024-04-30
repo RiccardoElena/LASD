@@ -149,7 +149,7 @@ public:
 
 /* ************************************************************************** */
 
-// TODO: Not yet implemented (Not needed in Ex 1)
+// Not yet implemented (Not needed in Ex 1)
 template <typename Data> class InOrderMappableContainer {
   // Must extend MappableContainer<Data>,
   //             InOrderTraversableContainer<Data>

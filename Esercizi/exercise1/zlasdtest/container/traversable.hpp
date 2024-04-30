@@ -32,9 +32,7 @@ void Fold(
     unsigned int &testnum, unsigned int &testerr,
     const lasd::TraversableContainer<Data> &con, bool chk,
     typename lasd::TraversableContainer<Data>::template FoldFun<Value> fun,
-    const Value &inival,
-    const Value &finval) // TODO: Test on linux without template
-{
+    const Value &inival, const Value &finval) {
   bool tst;
   testnum++;
   try {
