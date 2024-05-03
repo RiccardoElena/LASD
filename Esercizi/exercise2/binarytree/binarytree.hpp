@@ -505,9 +505,7 @@ private:
 protected:
   StackVec<const typename BinaryTree<Data>::Node *> s{};
   // StackLst<const typename BinaryTree<Data>::Node *> s{};
-
-  // ? how to deal with empty tree
-  const typename BinaryTree<Data>::Node *root = nullptr;
+  const typename BinaryTree<Data>::Node *root{nullptr};
 
 public:
   // Specific constructors
