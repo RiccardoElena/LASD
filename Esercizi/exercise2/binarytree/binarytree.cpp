@@ -242,8 +242,11 @@ BTPreOrderIterator<Data>::BTPreOrderIterator(const BTPreOrderIterator &it)
   // TODO: consider istantiating the stack with size bt.Height()
 }
 template <typename Data>
-BTPreOrderIterator<Data>::BTPreOrderIterator(BTPreOrderIterator &&it) noexcept
-    : s(std::move(it.s)), root(std::move(it.root)) {}
+BTPreOrderIterator<Data>::BTPreOrderIterator(BTPreOrderIterator &&it) noexcept {
+  // TODO: consider istantiating the stack with size bt.Height()
+  std::swap(s, it.s);
+  std::swap(root, it.root);
+}
 
 // Operators
 
@@ -402,8 +405,11 @@ BTPostOrderIterator<Data>::BTPostOrderIterator(const BTPostOrderIterator &it)
 }
 template <typename Data>
 BTPostOrderIterator<Data>::BTPostOrderIterator(
-    BTPostOrderIterator &&it) noexcept
-    : s(std::move(it.s)), root(it.root) {}
+    BTPostOrderIterator &&it) noexcept {
+  // TODO: consider istantiating the stack with size bt.Height()
+  std::swap(s, it.s);
+  std::swap(root, it.root);
+}
 
 // Operators
 
@@ -568,8 +574,11 @@ BTInOrderIterator<Data>::BTInOrderIterator(const BTInOrderIterator &it)
   // TODO: consider istantiating the stack with size bt.Height()
 }
 template <typename Data>
-BTInOrderIterator<Data>::BTInOrderIterator(BTInOrderIterator &&it) noexcept
-    : s(std::move(it.s)), root(std::move(it.root)) {}
+BTInOrderIterator<Data>::BTInOrderIterator(BTInOrderIterator &&it) noexcept {
+  // TODO: consider istantiating the stack with size bt.Height()
+  std::swap(s, it.s);
+  std::swap(root, it.root);
+}
 
 // Operators
 
@@ -729,8 +738,11 @@ BTBreadthIterator<Data>::BTBreadthIterator(const BTBreadthIterator &it)
   // TODO: consider istantiating the stack with size bt.Height()
 }
 template <typename Data>
-BTBreadthIterator<Data>::BTBreadthIterator(BTBreadthIterator &&it) noexcept
-    : q(std::move(it.q)), root(std::move(it.root)) {}
+BTBreadthIterator<Data>::BTBreadthIterator(BTBreadthIterator &&it) noexcept {
+  // TODO: consider istantiating the stack with size bt.Height()
+  std::swap(q, it.q);
+  std::swap(root, it.root);
+}
 
 // Operators
 

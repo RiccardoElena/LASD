@@ -28,9 +28,9 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  explicit QueueLst(const TraversableContainer<Data> &);
+  QueueLst(const TraversableContainer<Data> &);
 
-  explicit QueueLst(MappableContainer<Data> &&);
+  QueueLst(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 

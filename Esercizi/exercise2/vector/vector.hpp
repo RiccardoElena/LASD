@@ -32,7 +32,7 @@ public:
   /* ************************************************************************ */
 
   // Specific constructors
-  explicit Vector(const unsigned long initSize) {
+  Vector(const unsigned long initSize) {
     size = initSize;
     elements = new Data[initSize]();
   };
@@ -42,10 +42,10 @@ public:
   /* ************************************************************************ */
 
   // Copy constructor
-  explicit Vector(const Vector<Data> &);
+  Vector(const Vector<Data> &);
 
   // Move constructor
-  explicit Vector(Vector<Data> &&) noexcept;
+  Vector(Vector<Data> &&) noexcept;
 
   /* ************************************************************************ */
 
@@ -128,11 +128,11 @@ public:
   /* ************************************************************************ */
 
   // Copy constructor
-  inline explicit SortableVector(const SortableVector<Data> &con)
+  inline SortableVector(const SortableVector<Data> &con)
       : Vector<Data>::Vector(con){};
 
   // Move constructor
-  inline explicit SortableVector(SortableVector<Data> &&con) noexcept
+  inline SortableVector(SortableVector<Data> &&con) noexcept
       : Vector<Data>::Vector(std::move(con)){};
 
   /* ************************************************************************ */

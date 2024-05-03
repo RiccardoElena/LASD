@@ -629,7 +629,6 @@ protected:
   QueueVec<const typename BinaryTree<Data>::Node *> q{};
   // QueueLst<const typename BinaryTree<Data>::Node *> q{};
 
-  // ? how to deal with empty tree
   const typename BinaryTree<Data>::Node *root = nullptr;
 
 public:

@@ -42,17 +42,17 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  explicit QueueVec(const TraversableContainer<Data> &);
+  QueueVec(const TraversableContainer<Data> &);
 
-  explicit QueueVec(MappableContainer<Data> &&);
+  QueueVec(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 
   // Copy constructor
-  explicit QueueVec(const QueueVec &);
+  QueueVec(const QueueVec &);
 
   // Move constructor
-  explicit QueueVec(QueueVec &&) noexcept;
+  QueueVec(QueueVec &&) noexcept;
 
   /* ************************************************************************
    */

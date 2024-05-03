@@ -40,16 +40,16 @@ public:
   /* ************************************************************************ */
 
   // Specific constructor
-  explicit StackVec(const TraversableContainer<Data> &);
-  explicit StackVec(MappableContainer<Data> &&);
+  StackVec(const TraversableContainer<Data> &);
+  StackVec(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 
   // Copy constructor
-  explicit StackVec(const StackVec &);
+  StackVec(const StackVec &);
 
   // Move constructor
-  explicit StackVec(StackVec &&) noexcept;
+  StackVec(StackVec &&) noexcept;
 
   /* ************************************************************************ */
 
