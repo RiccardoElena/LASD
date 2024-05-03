@@ -27,5 +27,4 @@
 **/.vscode
 
 # Ignoring incompleted exercises
-
-**/exercise2/*
+# **/exercise2/*

@@ -13,3 +13,4 @@ find ./.. -name 'exercise*' -type d | grep -P 'exercise\d+$' | sort -V | tail -n
       exit 1
     fi
 done
+
