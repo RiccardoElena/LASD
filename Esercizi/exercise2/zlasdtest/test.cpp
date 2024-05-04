@@ -19,6 +19,9 @@ string lasdtest() {
   uint stestnum = 0, stesterr = 0;
   uint ftestnum = 0, ftesterr = 0;
 
+  // extra variable used only in print
+  uint toterr = 0, totnum = 0;
+
   loctestnum = 0;
   loctesterr = 0;
   testSimpleExercise1A(loctestnum, loctesterr);
@@ -49,6 +52,9 @@ string lasdtest() {
   cout << endl
        << "Exercise 1 (Full Test) (Errors/Tests: " << ftesterr << "/"
        << ftestnum << ")" << endl;
+
+  toterr += stesterr + ftesterr;
+  totnum += stestnum + ftestnum;
 
   stestnum = 0;
   stesterr = 0;
@@ -86,6 +92,9 @@ string lasdtest() {
        << "Exercise 2 (Full Test) (Errors/Tests: " << ftesterr << "/"
        << ftestnum << ")" << endl;
 
+  toterr += stesterr + ftesterr;
+  totnum += stestnum + ftestnum;
+
   cout << endl << "Goodbye!" << endl;
-  return to_string(stesterr) + "/" + to_string(stestnum);
+  return to_string(toterr) + "/" + to_string(totnum);
 }

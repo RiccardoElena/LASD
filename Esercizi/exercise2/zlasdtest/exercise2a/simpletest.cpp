@@ -195,9 +195,6 @@ void stestBinaryTreeFloat(uint &testnum, uint &testerr) {
     lasd::BinaryTreeVec<double> copbtvec(std::move(btvec));
     Empty(loctestnum, loctesterr, btvec, true);
     NonEqualBT(loctestnum, loctesterr, copbtvec, btvec);
-    Traverse(loctestnum, loctesterr, copbtvec, true, TraversePrint<double>);
-    Traverse(loctestnum, loctesterr, btvec, true, TraversePrint<double>);
-    cout << copbtvec.Root().Element() << endl;
     btvec = copbtvec;
     EqualBT(loctestnum, loctesterr, copbtvec, btvec);
 

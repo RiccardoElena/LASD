@@ -278,7 +278,7 @@ inline bool BTPreOrderIterator<Data>::operator==(
 template <typename Data>
 inline bool BTPreOrderIterator<Data>::operator!=(
     const BTPreOrderIterator &it) const noexcept {
-  return s != it.s && *root != *it.root;
+  return !(*this == it);
 }
 
 template <typename Data>
@@ -441,7 +441,7 @@ inline bool BTPostOrderIterator<Data>::operator==(
 template <typename Data>
 inline bool BTPostOrderIterator<Data>::operator!=(
     const BTPostOrderIterator &it) const noexcept {
-  return s != it.s && *root != *it.root;
+  return !(*this == it);
 }
 
 template <typename Data>
@@ -610,7 +610,7 @@ inline bool BTInOrderIterator<Data>::operator==(
 template <typename Data>
 inline bool BTInOrderIterator<Data>::operator!=(
     const BTInOrderIterator &it) const noexcept {
-  return s != it.s && *root != *it.root;
+  return !(*this == it);
 }
 
 template <typename Data>
@@ -774,7 +774,7 @@ inline bool BTBreadthIterator<Data>::operator==(
 template <typename Data>
 inline bool BTBreadthIterator<Data>::operator!=(
     const BTBreadthIterator &it) const noexcept {
-  return q != it.q && *root != *it.root;
+  return !(*this == it);
 }
 
 template <typename Data>
