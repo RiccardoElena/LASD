@@ -33,11 +33,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install specific version of g++
-        run: |
-          sudo apt-get install -y g++-13.2.0
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13.2.0 60
-
       - name: Checkout code
         uses: actions/checkout@v4
 
