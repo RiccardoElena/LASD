@@ -20,7 +20,6 @@ private:
 
 protected:
 public:
-  // FIXME put public but up
   using typename BinaryTree<Data>::Node;
   using typename MutableBinaryTree<Data>::MutableNode;
 

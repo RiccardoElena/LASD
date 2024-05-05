@@ -88,22 +88,29 @@ public:
 
   /* ************************************************************************ */
 
+  // Specific member function (inherited from TraversableContainer)
+  using typename TraversableContainer<Data>::TraverseFun;
+  inline void Traverse(TraverseFun) const override;
+
+  /* ************************************************************************ */
+
   // Specific member function (inherited from DictionaryContainer)
 
-  inline bool Insert(const Data &);
-  inline bool Insert(Data &&);
-  inline bool Remove(const Data &);
+  inline bool Insert(const Data &) override;
+  inline bool Insert(Data &&) override;
+  inline bool Remove(const Data &) override;
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from TestableContainer)
 
-  inline bool Exists(const Data &) const noexcept;
+  inline bool Exists(const Data &) const noexcept override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
+  // ? Is it really needed
   using BinaryTreeLnk<Data>::Clear;
 
 protected:
@@ -112,26 +119,26 @@ protected:
   inline Data DataNDelete(NodeLnk *&);
   void Delete(NodeLnk *&);
 
-  void SkipLeft(NodeLnk *&);
-  void SkipRight(NodeLnk *&);
+  inline void SkipLeft(NodeLnk *&);
+  inline void SkipRight(NodeLnk *&);
 
-  NodeLnk *&Min(NodeLnk *&) noexcept;
+  inline NodeLnk *&Min(NodeLnk *&) noexcept;
   const NodeLnk *const &Min(const NodeLnk *const &) const noexcept;
   // MutableNode *Min(NodeLnk *) noexcept;
 
-  NodeLnk *&Max(NodeLnk *&) noexcept;
+  inline NodeLnk *&Max(NodeLnk *&) noexcept;
   const NodeLnk *const &Max(const NodeLnk *const &) const noexcept;
   // MutableNode *Max(NodeLnk *) noexcept;
 
-  NodeLnk **Predecessor(NodeLnk *&, const Data &) noexcept;
+  inline NodeLnk **Predecessor(NodeLnk *&, const Data &) noexcept;
   const NodeLnk *const *Predecessor(const NodeLnk *const &,
                                     const Data &) const noexcept;
 
-  NodeLnk **Successor(NodeLnk *&, const Data &) noexcept;
+  inline NodeLnk **Successor(NodeLnk *&, const Data &) noexcept;
   const NodeLnk *const *Successor(const NodeLnk *const &,
                                   const Data &) const noexcept;
 
-  NodeLnk *&FindPosition(NodeLnk *&, const Data &) noexcept;
+  inline NodeLnk *&FindPosition(NodeLnk *&, const Data &) noexcept;
   const NodeLnk *const &FindPosition(const NodeLnk *const &,
                                      const Data &) const noexcept;
 };

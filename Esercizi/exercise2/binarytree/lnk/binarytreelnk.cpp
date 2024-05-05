@@ -56,17 +56,19 @@ BinaryTreeLnk<Data>::NodeLnk::operator=(NodeLnk &&n) noexcept {
   return *this;
 }
 
+// ?  is really necessary to make comparison?
 // Comparison operator
-template <typename Data>
-bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk &n) const noexcept {
-  return data == n.data && ((!l && !n.l) || (l && n.l && *l == *n.l)) &&
-         ((!r && !n.r) || (r && n.r && *r == *n.r));
-}
+// template <typename Data>
+// bool BinaryTreeLnk<Data>::NodeLnk::operator==(const NodeLnk &n) const
+// noexcept {
+//   return MutableBinaryTree<Data>::MutableNode::operator==(n);
+// }
 
-template <typename Data>
-bool BinaryTreeLnk<Data>::NodeLnk::operator!=(const NodeLnk &n) const noexcept {
-  return !(*this == n);
-}
+// template <typename Data>
+// bool BinaryTreeLnk<Data>::NodeLnk::operator!=(const NodeLnk &n) const
+// noexcept {
+//   return !(*this == n);
+// }
 
 // Overrided Methods
 

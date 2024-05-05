@@ -155,6 +155,13 @@ template <typename Data> inline void BST<Data>::RemoveSuccessor(const Data &d) {
   Delete(*temp);
 }
 
+// Overrided Methods
+
+template <typename Data>
+inline void BST<Data>::Traverse(TraverseFun func) const {
+  return BinaryTree<Data>::InOrderTraverse(func);
+}
+
 template <typename Data> inline bool BST<Data>::Insert(const Data &d) {
   NodeLnk *&temp{FindPosition(root, d)};
   if (temp)
@@ -198,7 +205,7 @@ BST<Data>::Min(const NodeLnk *const &ptr) const noexcept {
 }
 
 template <typename Data>
-BST<Data>::NodeLnk *&BST<Data>::Min(NodeLnk *&ptr) noexcept {
+inline BST<Data>::NodeLnk *&BST<Data>::Min(NodeLnk *&ptr) noexcept {
   return const_cast<NodeLnk *&>(static_cast<const BST<Data> *>(this)->Min(ptr));
 }
 
@@ -209,7 +216,7 @@ BST<Data>::Max(const NodeLnk *const &ptr) const noexcept {
 }
 
 template <typename Data>
-BST<Data>::NodeLnk *&BST<Data>::Max(NodeLnk *&ptr) noexcept {
+inline BST<Data>::NodeLnk *&BST<Data>::Max(NodeLnk *&ptr) noexcept {
   return const_cast<NodeLnk *&>(static_cast<const BST<Data> *>(this)->Max(ptr));
 }
 
@@ -219,7 +226,7 @@ template <typename Data> inline Data BST<Data>::DataNDelete(NodeLnk *&ptr) {
   return d;
 }
 
-template <typename Data> void BST<Data>::SkipLeft(NodeLnk *&ptr) {
+template <typename Data> inline void BST<Data>::SkipLeft(NodeLnk *&ptr) {
   NodeLnk *temp{ptr->l};
   ptr->l = nullptr;
   delete ptr;
@@ -229,7 +236,7 @@ template <typename Data> void BST<Data>::SkipLeft(NodeLnk *&ptr) {
 
 // ? is better to make the skip void(and solving the case) or letting it return
 // the head?
-template <typename Data> void BST<Data>::SkipRight(NodeLnk *&ptr) {
+template <typename Data> inline void BST<Data>::SkipRight(NodeLnk *&ptr) {
   NodeLnk *temp{ptr->r};
   ptr->r = nullptr;
   delete ptr;
@@ -265,8 +272,8 @@ BST<Data>::Predecessor(const NodeLnk *const &ptr,
 }
 
 template <typename Data>
-BST<Data>::NodeLnk **BST<Data>::Predecessor(NodeLnk *&ptr,
-                                            const Data &d) noexcept {
+inline BST<Data>::NodeLnk **BST<Data>::Predecessor(NodeLnk *&ptr,
+                                                   const Data &d) noexcept {
   return const_cast<NodeLnk **>(
       static_cast<const BST<Data> *>(this)->Predecessor(ptr, d));
 }
@@ -285,8 +292,8 @@ BST<Data>::Successor(const NodeLnk *const &ptr, const Data &d) const noexcept {
 }
 
 template <typename Data>
-BST<Data>::NodeLnk **BST<Data>::Successor(NodeLnk *&ptr,
-                                          const Data &d) noexcept {
+inline BST<Data>::NodeLnk **BST<Data>::Successor(NodeLnk *&ptr,
+                                                 const Data &d) noexcept {
   return const_cast<NodeLnk **>(
       static_cast<const BST<Data> *>(this)->Successor(ptr, d));
 }
@@ -302,8 +309,8 @@ BST<Data>::FindPosition(const NodeLnk *const &ptr,
 }
 
 template <typename Data>
-BST<Data>::NodeLnk *&BST<Data>::FindPosition(NodeLnk *&ptr,
-                                             const Data &d) noexcept {
+inline BST<Data>::NodeLnk *&BST<Data>::FindPosition(NodeLnk *&ptr,
+                                                    const Data &d) noexcept {
   return const_cast<NodeLnk *&>(
       static_cast<const BST<Data> *>(this)->FindPosition(ptr, d));
 }

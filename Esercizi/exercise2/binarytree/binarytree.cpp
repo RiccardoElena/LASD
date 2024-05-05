@@ -46,7 +46,7 @@ BinaryTree<Data>::operator!=(const BinaryTree<Data> &other) const noexcept {
 
 template <typename Data>
 inline void BinaryTree<Data>::Traverse(TraverseFun func) const {
-  return PreOrderTraverse(func);
+  return BreadthTraverse(func);
 }
 
 template <typename Data>
@@ -137,7 +137,7 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun func) const {
 // Binary Tree Methods
 
 template <typename Data> inline void MutableBinaryTree<Data>::Map(MapFun func) {
-  return PreOrderMap(func);
+  return BreadthMap(func);
 }
 
 template <typename Data>
@@ -230,7 +230,6 @@ template <typename Data> void MutableBinaryTree<Data>::BreadthMap(MapFun func) {
 
 template <typename Data>
 BTPreOrderIterator<Data>::BTPreOrderIterator(const BinaryTree<Data> &bt) {
-  // TODO: consider istantiating the stack with size bt.Height()
   if (!bt.Empty())
     root = &bt.Root();
   Init();
@@ -238,12 +237,10 @@ BTPreOrderIterator<Data>::BTPreOrderIterator(const BinaryTree<Data> &bt) {
 
 template <typename Data>
 BTPreOrderIterator<Data>::BTPreOrderIterator(const BTPreOrderIterator &it)
-    : s(it.s), root(it.root) {
-  // TODO: consider istantiating the stack with size bt.Height()
-}
+    : s(it.s), root(it.root) {}
+
 template <typename Data>
 BTPreOrderIterator<Data>::BTPreOrderIterator(BTPreOrderIterator &&it) noexcept {
-  // TODO: consider istantiating the stack with size bt.Height()
   std::swap(s, it.s);
   std::swap(root, it.root);
 }
@@ -391,22 +388,18 @@ inline Data &BTPreOrderMutableIterator<Data>::operator*() {
 
 template <typename Data>
 BTPostOrderIterator<Data>::BTPostOrderIterator(const BinaryTree<Data> &bt) {
-  // TODO: consider istantiating the stack with size bt.Height()
   if (!bt.Empty())
-    // TODO: check if you can use {} instead of =
     root = &bt.Root();
   Init();
 }
 
 template <typename Data>
 BTPostOrderIterator<Data>::BTPostOrderIterator(const BTPostOrderIterator &it)
-    : s(it.s), root(it.root) {
-  // TODO: consider istantiating the stack with size bt.Height()
-}
+    : s(it.s), root(it.root) {}
+
 template <typename Data>
 BTPostOrderIterator<Data>::BTPostOrderIterator(
     BTPostOrderIterator &&it) noexcept {
-  // TODO: consider istantiating the stack with size bt.Height()
   std::swap(s, it.s);
   std::swap(root, it.root);
 }
@@ -562,7 +555,6 @@ inline Data &BTPostOrderMutableIterator<Data>::operator*() {
 
 template <typename Data>
 BTInOrderIterator<Data>::BTInOrderIterator(const BinaryTree<Data> &bt) {
-  // TODO: consider istantiating the stack with size bt.Height()
   if (!bt.Empty())
     root = &bt.Root();
   Init();
@@ -570,12 +562,10 @@ BTInOrderIterator<Data>::BTInOrderIterator(const BinaryTree<Data> &bt) {
 
 template <typename Data>
 BTInOrderIterator<Data>::BTInOrderIterator(const BTInOrderIterator &it)
-    : s(it.s), root(it.root) {
-  // TODO: consider istantiating the stack with size bt.Height()
-}
+    : s(it.s), root(it.root) {}
+
 template <typename Data>
 BTInOrderIterator<Data>::BTInOrderIterator(BTInOrderIterator &&it) noexcept {
-  // TODO: consider istantiating the stack with size bt.Height()
   std::swap(s, it.s);
   std::swap(root, it.root);
 }
@@ -726,7 +716,6 @@ inline Data &BTInOrderMutableIterator<Data>::operator*() {
 
 template <typename Data>
 BTBreadthIterator<Data>::BTBreadthIterator(const BinaryTree<Data> &bt) {
-  // TODO: consider istantiating the stack with size bt.Height()
   if (!bt.Empty())
     root = &bt.Root();
   Init();
@@ -734,12 +723,10 @@ BTBreadthIterator<Data>::BTBreadthIterator(const BinaryTree<Data> &bt) {
 
 template <typename Data>
 BTBreadthIterator<Data>::BTBreadthIterator(const BTBreadthIterator &it)
-    : q(it.q), root(it.root) {
-  // TODO: consider istantiating the stack with size bt.Height()
-}
+    : q(it.q), root(it.root) {}
+
 template <typename Data>
 BTBreadthIterator<Data>::BTBreadthIterator(BTBreadthIterator &&it) noexcept {
-  // TODO: consider istantiating the stack with size bt.Height()
   std::swap(q, it.q);
   std::swap(root, it.root);
 }
