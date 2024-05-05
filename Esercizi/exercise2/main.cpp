@@ -70,6 +70,7 @@ int summary() {
 
   chrono::duration<double> pTestTime = mid - start;
   chrono::duration<double> mTestTime = end - mid;
+  chrono::duration<double> tTestTime = end - start;
 
   unsigned int errors{0}, total{0};
   double pacc{0}, macc{0}, tacc{0};
@@ -143,9 +144,9 @@ int summary() {
        << setw(padding(to_string(total))) << "" << "|"
        << setw(padding(to_string((int)tacc)) - 2) << "" << setprecision(2)
        << tacc << setw(padding(to_string((int)tacc)) - 1) << "" << "|"
-       << setw(padding(to_string((int)pTestTime.count())) - 3) << "" << fixed
-       << setprecision(4) << pTestTime.count()
-       << setw(padding(to_string((int)pTestTime.count())) - 2) << "" << "|"
+       << setw(padding(to_string((int)tTestTime.count())) - 3) << "" << fixed
+       << setprecision(4) << tTestTime.count()
+       << setw(padding(to_string((int)tTestTime.count())) - 2) << "" << "|"
        << endl;
   cout << "    "
           "---------------------------------------------------------------"
