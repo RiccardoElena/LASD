@@ -39,13 +39,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'RiccardoElena/LASD_test'
-          path: 'Esercizi/exercise1/zmytest'
-          token: ${{ secrets.PAT }}
-
-      - name: Checkout other repo into zmytest
-        uses: actions/checkout@v4
-        with:
-          repository: 'RiccardoElena/LASD_test'
           path: 'Esercizi/exercise2/zmytest'
           token: ${{ secrets.PAT }}
 
