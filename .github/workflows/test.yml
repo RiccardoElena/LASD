@@ -31,7 +31,6 @@ on:
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,6 +48,13 @@ jobs:
           repository: 'RiccardoElena/LASD_test'
           path: 'Esercizi/exercise2/zmytest'
           token: ${{ secrets.PAT }}
+
+      - name: Install gcc 13
+        run: |
+          sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+          sudo apt-get update
+          sudo apt install -y gcc-13
+          g++ --version
 
       - name: Run Makefile
         run: ./.github/workflows/scripts/compile.sh
