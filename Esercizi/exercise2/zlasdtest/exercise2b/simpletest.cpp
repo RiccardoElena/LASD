@@ -4,11 +4,11 @@
 /* ************************************************************************** */
 
 #include "../container/container.hpp"
-#include "../container/testable.hpp"
 #include "../container/dictionary.hpp"
-#include "../container/traversable.hpp"
-#include "../container/mappable.hpp"
 #include "../container/linear.hpp"
+#include "../container/mappable.hpp"
+#include "../container/testable.hpp"
+#include "../container/traversable.hpp"
 
 #include "../iterator/iterator.hpp"
 
@@ -26,7 +26,7 @@ using namespace std;
 
 /* ************************************************************************** */
 
-void stestBSTInt(uint & testnum, uint & testerr) {
+void stestBSTInt(uint &testnum, uint &testerr) {
   uint loctestnum = 0, loctesterr = 0;
   cout << endl << "Begin of BST<int> Test" << endl;
   try {
@@ -126,7 +126,7 @@ void stestBSTInt(uint & testnum, uint & testerr) {
 
     NonEqualBST(loctestnum, loctesterr, bst1, bst2);
 
-    lasd::BST<int> bst3(move(bst2));
+    lasd::BST<int> bst3(std::move(bst2));
 
     Empty(loctestnum, loctesterr, bst2, true);
     Size(loctestnum, loctesterr, bst2, true, 0);
@@ -134,7 +134,7 @@ void stestBSTInt(uint & testnum, uint & testerr) {
     Empty(loctestnum, loctesterr, bst3, false);
     Size(loctestnum, loctesterr, bst3, true, 3);
 
-    bst2 = move(bst1);
+    bst2 = std::move(bst1);
 
     Empty(loctestnum, loctesterr, bst1, true);
     Size(loctestnum, loctesterr, bst1, true, 0);
@@ -155,17 +155,18 @@ void stestBSTInt(uint & testnum, uint & testerr) {
 
     Empty(loctestnum, loctesterr, bst, true);
     Size(loctestnum, loctesterr, bst, true, 0);
-  }
-  catch (...) {
-    loctestnum++; loctesterr++;
+  } catch (...) {
+    loctestnum++;
+    loctesterr++;
     cout << endl << "Unmanaged error! " << endl;
   }
-  cout << "End of BST<int> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  cout << "End of BST<int> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
   testnum += loctestnum;
   testerr += loctesterr;
 }
 
-void stestBSTFloat(uint & testnum, uint & testerr) {
+void stestBSTFloat(uint &testnum, uint &testerr) {
   uint loctestnum = 0, loctesterr = 0;
   cout << endl << "Begin of BST<double> Test" << endl;
   try {
@@ -184,9 +185,11 @@ void stestBSTFloat(uint & testnum, uint & testerr) {
     Empty(loctestnum, loctesterr, bst1, false);
     Size(loctestnum, loctesterr, bst1, true, 6);
 
-    TraversePreOrder(loctestnum, loctesterr, bst1, true, &TraversePrint<double>);
+    TraversePreOrder(loctestnum, loctesterr, bst1, true,
+                     &TraversePrint<double>);
     TraverseInOrder(loctestnum, loctesterr, bst1, true, &TraversePrint<double>);
-    TraversePostOrder(loctestnum, loctesterr, bst1, true, &TraversePrint<double>);
+    TraversePostOrder(loctestnum, loctesterr, bst1, true,
+                      &TraversePrint<double>);
     TraverseBreadth(loctestnum, loctesterr, bst1, true, &TraversePrint<double>);
 
     Root(loctestnum, loctesterr, bst1, true, 3.5);
@@ -218,17 +221,18 @@ void stestBSTFloat(uint & testnum, uint & testerr) {
 
     EqualBST(loctestnum, loctesterr, bst1, bst2);
     NonEqualBT(loctestnum, loctesterr, bst1, bst2);
-  }
-  catch (...) {
-    loctestnum++; loctesterr++;
+  } catch (...) {
+    loctestnum++;
+    loctesterr++;
     cout << endl << "Unmanaged error! " << endl;
   }
-  cout << "End of BST<double> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  cout << "End of BST<double> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
   testnum += loctestnum;
   testerr += loctesterr;
 }
 
-void stestBSTString(uint & testnum, uint & testerr) {
+void stestBSTString(uint &testnum, uint &testerr) {
   uint loctestnum = 0, loctesterr = 0;
   cout << endl << "Begin of BST<string> Test" << endl;
   try {
@@ -258,22 +262,26 @@ void stestBSTString(uint & testnum, uint & testerr) {
     ++itr4;
     Terminated(loctestnum, loctesterr, itr4, true);
 
-    FoldInOrder(loctestnum, loctesterr, bst, true, &FoldStringConcatenate, string("?"), string("?ABCDE"));
-  }
-  catch (...) {
-    loctestnum++; loctesterr++;
+    FoldInOrder(loctestnum, loctesterr, bst, true, &FoldStringConcatenate,
+                string("?"), string("?ABCDE"));
+  } catch (...) {
+    loctestnum++;
+    loctesterr++;
     cout << endl << "Unmanaged error! " << endl;
   }
-  cout << "End of BST<string> Test! (Errors/Tests: " << loctesterr << "/" << loctestnum << ")" << endl;
+  cout << "End of BST<string> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
   testnum += loctestnum;
   testerr += loctesterr;
 }
 
 /* ************************************************************************** */
 
-void testSimpleExercise2B(uint & testnum, uint & testerr) {
+void testSimpleExercise2B(uint &testnum, uint &testerr) {
   stestBSTInt(testnum, testerr);
   stestBSTFloat(testnum, testerr);
   stestBSTString(testnum, testerr);
-  cout << endl << "Exercise 2B (Simple Test) (Errors/Tests: " << testerr << "/" << testnum << ")" << endl;
+  cout << endl
+       << "Exercise 2B (Simple Test) (Errors/Tests: " << testerr << "/"
+       << testnum << ")" << endl;
 }
