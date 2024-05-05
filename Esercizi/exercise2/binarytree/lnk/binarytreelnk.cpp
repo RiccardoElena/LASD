@@ -91,7 +91,7 @@ inline bool BinaryTreeLnk<Data>::NodeLnk::HasRightChild() const noexcept {
 }
 
 template <typename Data>
-inline const typename BinaryTree<Data>::Node &
+inline const BinaryTreeLnk<Data>::Node &
 BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
   if (l)
     return *l;
@@ -99,7 +99,7 @@ BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
 }
 
 template <typename Data>
-inline const typename BinaryTree<Data>::Node &
+inline const BinaryTreeLnk<Data>::Node &
 BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
   if (r)
     return *r;
@@ -107,7 +107,7 @@ BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
 }
 
 template <typename Data>
-inline typename MutableBinaryTree<Data>::MutableNode &
+inline BinaryTreeLnk<Data>::MutableNode &
 BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
   if (l)
     return *l;
@@ -115,7 +115,7 @@ BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
 }
 
 template <typename Data>
-inline typename MutableBinaryTree<Data>::MutableNode &
+inline BinaryTreeLnk<Data>::MutableNode &
 BinaryTreeLnk<Data>::NodeLnk::RightChild() {
   if (r)
     return *r;
@@ -144,7 +144,7 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data> &&con) noexcept {
 
   QueueVec<BinaryTreeLnk<Data>::NodeLnk *> q{};
 
-  con.Map([&q, this](const Data &currD) {
+  con.Map([&q, this](Data &currD) {
     BinaryTreeLnk<Data>::NodeLnk *t{new NodeLnk(std::move(currD))};
     q.Enqueue(t);
     size++ ? size % 2 ? q.HeadNDequeue()->r = t : q.Head()->l = t
@@ -205,16 +205,14 @@ BinaryTreeLnk<Data>::operator!=(const BinaryTreeLnk<Data> &btl) const noexcept {
 // Overrided Methods
 
 template <typename Data>
-inline const typename BinaryTree<Data>::Node &
-BinaryTreeLnk<Data>::Root() const {
+inline const BinaryTreeLnk<Data>::Node &BinaryTreeLnk<Data>::Root() const {
   if (root)
     return *root;
   throw std::out_of_range("This tree is empty");
 }
 
 template <typename Data>
-inline typename MutableBinaryTree<Data>::MutableNode &
-BinaryTreeLnk<Data>::Root() {
+inline BinaryTreeLnk<Data>::MutableNode &BinaryTreeLnk<Data>::Root() {
   if (root)
     return *root;
   throw std::out_of_range("This tree is empty");

@@ -107,7 +107,7 @@ BinaryTreeVec<Data>::BinaryTreeVec(const TraversableContainer<Data> &con) {
 template <typename Data>
 BinaryTreeVec<Data>::BinaryTreeVec(MappableContainer<Data> &&con) noexcept {
   vec.Resize(con.Size());
-  con.Map([this](const Data &currData) {
+  con.Map([this](Data &currData) {
     // TODO try oneline
     vec[size] = new NodeVec(std::move(currData), &vec, size);
     size++;

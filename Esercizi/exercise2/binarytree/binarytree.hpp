@@ -180,10 +180,12 @@ public:
      */
 
     // Specific member functions
-
+    using BinaryTree<Data>::Node::Element;
     virtual Data &Element() noexcept = 0;
 
+    using BinaryTree<Data>::Node::LeftChild;
     virtual MutableNode &LeftChild() = 0;
+    using BinaryTree<Data>::Node::RightChild;
     virtual MutableNode &RightChild() = 0;
   };
 
@@ -204,6 +206,7 @@ public:
   // Specific member functions
 
   // ? this generate a stange warning
+  using BinaryTree<Data>::Root;
   virtual MutableNode &Root() = 0;
 
   /* ************************************************************************ */

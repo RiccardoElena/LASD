@@ -19,21 +19,24 @@ private:
   // ...
 
 protected:
+public:
   // FIXME put public but up
   using typename BinaryTree<Data>::Node;
   using typename MutableBinaryTree<Data>::MutableNode;
 
+protected:
   struct NodeLnk : virtual public MutableNode {
 
   private:
     // ...
 
   protected:
+    //...
+
+  public:
     Data data{};
     NodeLnk *l = nullptr;
     NodeLnk *r = nullptr;
-
-  public:
     friend class BinaryTreeLnk<Data>;
 
     // default constructor
@@ -69,15 +72,15 @@ protected:
     inline bool HasLeftChild() const noexcept override;
     inline bool HasRightChild() const noexcept override;
 
-    inline const typename BinaryTree<Data>::Node &LeftChild() const override;
-    inline const typename BinaryTree<Data>::Node &RightChild() const override;
+    inline const Node &LeftChild() const override;
+    inline const Node &RightChild() const override;
 
     // Specific Methods (Inherited from MutableNode)
 
     inline Data &Element() noexcept override;
 
-    inline typename MutableBinaryTree<Data>::MutableNode &LeftChild() override;
-    inline typename MutableBinaryTree<Data>::MutableNode &RightChild() override;
+    inline MutableNode &LeftChild() override;
+    inline MutableNode &RightChild() override;
   };
 
   NodeLnk *root{nullptr};
@@ -126,13 +129,13 @@ public:
 
   // Specific member functions (inherited from BinaryTree)
 
-  inline const typename BinaryTree<Data>::Node &Root() const override;
+  inline const Node &Root() const override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MutableBinaryTree)
 
-  inline typename MutableBinaryTree<Data>::MutableNode &Root() override;
+  inline MutableNode &Root() override;
 
   /* ************************************************************************ */
 
