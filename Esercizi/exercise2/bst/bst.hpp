@@ -61,6 +61,9 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
+  using BinaryTree<Data>::operator==;
+  using BinaryTree<Data>::operator!=;
+
   bool operator==(const BST &) const noexcept;
   bool operator!=(const BST &) const noexcept;
 

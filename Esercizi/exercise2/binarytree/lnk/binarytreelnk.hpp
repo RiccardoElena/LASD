@@ -38,29 +38,32 @@ protected:
     NodeLnk *r = nullptr;
     friend class BinaryTreeLnk<Data>;
 
-    // default constructor
+    // Default constructor
     inline NodeLnk() = default;
 
-    // specific constructor
+    // Specific constructor
     inline NodeLnk(const Data &);
     inline NodeLnk(Data &&) noexcept;
 
-    // copy constructor
+    // Copy constructor
     inline NodeLnk(const NodeLnk &);
 
-    // move constructor
+    // Move constructor
     inline NodeLnk(NodeLnk &&);
 
-    // destructor
+    // Destructor
     virtual inline ~NodeLnk();
 
-    // copy assignement
+    // Copy assignement
     inline NodeLnk &operator=(const NodeLnk &);
 
-    // move assignement
+    // Move assignement
     inline NodeLnk &operator=(NodeLnk &&) noexcept;
 
-    // comparison operator
+    // Comparison operator
+    using BinaryTree<Data>::Node::operator==;
+    using BinaryTree<Data>::Node::operator!=;
+
     bool operator==(const NodeLnk &) const noexcept;
     inline bool operator!=(const NodeLnk &) const noexcept;
 

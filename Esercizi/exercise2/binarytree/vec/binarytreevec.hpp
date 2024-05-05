@@ -49,6 +49,9 @@ protected:
     virtual ~NodeVec() = default;
 
     // comparison operator
+    using BinaryTree<Data>::Node::operator==;
+    using BinaryTree<Data>::Node::operator!=;
+
     inline bool operator==(const NodeVec &) const noexcept;
     inline bool operator!=(const NodeVec &) const noexcept;
 
