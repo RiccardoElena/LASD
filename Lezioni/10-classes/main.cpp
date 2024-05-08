@@ -6,20 +6,19 @@
 
 #include <iostream>
 // #include "example1.hpp"
-// #include "example2.hpp"
+#include "example2.hpp"
 // #include "example3.hpp"
 // #include "example4.hpp"
 // #include "example5.hpp"
-#include "example6.hpp"
+// #include "example6.hpp"
 // #include "example7.hpp"
 // #include "example8.hpp"
 
-int main()
-{
+int main() {
 
   // example1();
 
-  // example2();
+  example2();
 
   // example3();
 
@@ -27,7 +26,7 @@ int main()
 
   // example5();
 
-  example6();
+  // example6();
 
   // example7();
 
