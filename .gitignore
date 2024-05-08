@@ -20,7 +20,7 @@
 
 # Ignorecustom test files
 
-**/zmytest/
+#**/zmytest/
 
 # Ignoring vscode settings
 

@@ -35,12 +35,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Checkout other repo into zmytest
-        uses: actions/checkout@v4
-        with:
-          repository: 'RiccardoElena/LASD_test'
-          path: 'Esercizi/exercise2/zmytest'
-          token: ${{ secrets.PAT }}
+      #- name: Checkout other repo into zmytest
+      #  uses: actions/checkout@v4
+      #  with:
+      #    repository: 'RiccardoElena/LASD_test'
+      #    path: 'Esercizi/exercise2/zmytest'
+      #    token: ${{ secrets.PAT }}
 
       - name: Set g++ version to 13
         run: |
