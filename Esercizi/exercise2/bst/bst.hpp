@@ -72,12 +72,10 @@ public:
   // Specific member functions
 
   virtual inline const Data &Min() const;
-  // inline Data &Min();
   virtual inline Data MinNRemove();
   virtual inline void RemoveMin();
 
   virtual inline const Data &Max() const;
-  // inline Data &Max();
   virtual inline Data MaxNRemove();
   virtual inline void RemoveMax();
 
@@ -113,7 +111,12 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  // ? Is it really needed
+  using BinaryTree<Data>::Root;
+
+  /* ************************************************************************ */
+
+  // Specific member function (inherited from ClearableContainer)
+
   using BinaryTreeLnk<Data>::Clear;
 
 protected:

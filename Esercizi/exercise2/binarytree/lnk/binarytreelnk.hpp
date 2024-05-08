@@ -49,7 +49,7 @@ protected:
     inline NodeLnk(const NodeLnk &);
 
     // Move constructor
-    inline NodeLnk(NodeLnk &&);
+    inline NodeLnk(NodeLnk &&) noexcept;
 
     // Destructor
     virtual inline ~NodeLnk();
@@ -61,6 +61,7 @@ protected:
     inline NodeLnk &operator=(NodeLnk &&) noexcept;
 
     // Comparison operator
+
     using BinaryTree<Data>::Node::operator==;
     using BinaryTree<Data>::Node::operator!=;
 
@@ -98,7 +99,7 @@ public:
   // Specific constructors
   BinaryTreeLnk(const TraversableContainer<Data> &);
 
-  BinaryTreeLnk(MappableContainer<Data> &&) noexcept;
+  BinaryTreeLnk(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 

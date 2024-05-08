@@ -85,7 +85,7 @@ public:
 
   // Specific constructors
   BinaryTreeVec(const TraversableContainer<Data> &);
-  BinaryTreeVec(MappableContainer<Data> &&) noexcept;
+  BinaryTreeVec(MappableContainer<Data> &&);
 
   /* ************************************************************************ */
 
@@ -118,13 +118,13 @@ public:
 
   // Specific member functions (inherited from BinaryTree)
 
-  inline const BinaryTree<Data>::Node &Root() const override;
+  inline const Node &Root() const override;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MutableBinaryTree)
 
-  inline MutableBinaryTree<Data>::MutableNode &Root() override;
+  inline MutableNode &Root() override;
 
   /* ************************************************************************ */
 

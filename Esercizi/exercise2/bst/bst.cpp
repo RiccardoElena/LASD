@@ -98,60 +98,53 @@ template <typename Data> inline void BST<Data>::RemoveMax() {
 
 template <typename Data>
 inline const Data &BST<Data>::Predecessor(const Data &d) const {
-  if (!root)
-    throw std::length_error("The tree is empty");
+
   const NodeLnk *const *temp{Predecessor(root, d)};
   if (!temp)
-    throw std::length_error("No predecessor found");
+    throw std::length_error(root ? "No predecessor found"
+                                 : "The tree is empty");
   return (*temp)->data;
 }
 
 template <typename Data>
 inline Data BST<Data>::PredecessorNRemove(const Data &d) {
-  if (!root)
-    throw std::length_error("The tree is empty");
   NodeLnk **temp{Predecessor(root, d)};
   if (!temp)
-    throw std::length_error("No predecessor found");
+    throw std::length_error(root ? "No predecessor found"
+                                 : "The tree is empty");
   return DataNDelete(*temp);
 }
 
 template <typename Data>
 inline void BST<Data>::RemovePredecessor(const Data &d) {
-  if (!root)
-    throw std::length_error("The tree is empty");
   NodeLnk **temp{Predecessor(root, d)};
   if (!temp)
-    throw std::length_error("No predecessor found");
+    throw std::length_error(root ? "No predecessor found"
+                                 : "The tree is empty");
   Delete(*temp);
 }
 
+// ? *& and not ** with pen and paper
 template <typename Data>
 inline const Data &BST<Data>::Successor(const Data &d) const {
-  if (!root)
-    throw std::length_error("The tree is empty");
   const NodeLnk *const *temp{Successor(root, d)};
   if (!temp)
-    throw std::length_error("No predecessor found");
+    throw std::length_error(root ? "No successor found" : "The tree is empty");
   return (*temp)->data;
 }
 
 template <typename Data>
 inline Data BST<Data>::SuccessorNRemove(const Data &d) {
-  if (!root)
-    throw std::length_error("The tree is empty");
   NodeLnk **temp{Successor(root, d)};
   if (!temp)
-    throw std::length_error("No predecessor found");
+    throw std::length_error(root ? "No successor found" : "The tree is empty");
   return DataNDelete(*temp);
 }
 
 template <typename Data> inline void BST<Data>::RemoveSuccessor(const Data &d) {
-  if (!root)
-    throw std::length_error("The tree is empty");
   NodeLnk **temp{Successor(root, d)};
   if (!temp)
-    throw std::length_error("No predecessor found");
+    throw std::length_error(root ? "No successor found" : "The tree is empty");
   Delete(*temp);
 }
 

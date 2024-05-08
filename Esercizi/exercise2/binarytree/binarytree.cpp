@@ -1,3 +1,5 @@
+#ifndef __BINARYTREE_H__
+#define __BINARYTREE_H__
 
 namespace lasd {
 
@@ -57,8 +59,8 @@ inline void BinaryTree<Data>::PreOrderTraverse(TraverseFun func) const {
 }
 
 template <typename Data>
-inline void BinaryTree<Data>::PreOrderTraverse(TraverseFun func,
-                                               const Node &curr) const {
+void BinaryTree<Data>::PreOrderTraverse(TraverseFun func,
+                                        const Node &curr) const {
   func(curr.Element());
 
   if (curr.HasLeftChild())
@@ -76,8 +78,8 @@ inline void BinaryTree<Data>::PostOrderTraverse(TraverseFun func) const {
 }
 
 template <typename Data>
-inline void BinaryTree<Data>::PostOrderTraverse(TraverseFun func,
-                                                const Node &curr) const {
+void BinaryTree<Data>::PostOrderTraverse(TraverseFun func,
+                                         const Node &curr) const {
 
   if (curr.HasLeftChild())
     PostOrderTraverse(func, curr.LeftChild());
@@ -96,8 +98,8 @@ inline void BinaryTree<Data>::InOrderTraverse(TraverseFun func) const {
 }
 
 template <typename Data>
-inline void BinaryTree<Data>::InOrderTraverse(TraverseFun func,
-                                              const Node &curr) const {
+void BinaryTree<Data>::InOrderTraverse(TraverseFun func,
+                                       const Node &curr) const {
 
   if (curr.HasLeftChild())
     InOrderTraverse(func, curr.LeftChild());
@@ -114,7 +116,8 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun func) const {
   if (Empty())
     return;
 
-  QueueVec<const Node *> q;
+  QueueVec<const Node *> q{};
+  // QueueLst<const Node *> q{};
 
   q.Enqueue(&Root());
 
@@ -204,7 +207,8 @@ template <typename Data> void MutableBinaryTree<Data>::BreadthMap(MapFun func) {
   if (Empty())
     return;
 
-  QueueVec<MutableNode *> q;
+  QueueVec<MutableNode *> q{};
+  // QueueLst<MutableNode *> q{};
 
   q.Enqueue(&Root());
 
@@ -269,7 +273,7 @@ BTPreOrderIterator<Data>::operator=(BTPreOrderIterator<Data> &&it) noexcept {
 template <typename Data>
 inline bool BTPreOrderIterator<Data>::operator==(
     const BTPreOrderIterator &it) const noexcept {
-  return s == it.s && *root == *it.root;
+  return root == it.root && s == it.s;
 }
 
 template <typename Data>
@@ -350,7 +354,8 @@ template <typename Data>
 inline BTPreOrderMutableIterator<Data> &
 BTPreOrderMutableIterator<Data>::operator=(
     const BTPreOrderMutableIterator &it) {
-  return BTPreOrderIterator<Data>::operator=(it);
+  BTPreOrderIterator<Data>::operator=(it);
+  return *this;
 }
 
 // Move assignment
@@ -358,7 +363,8 @@ template <typename Data>
 inline BTPreOrderMutableIterator<Data> &
 BTPreOrderMutableIterator<Data>::operator=(
     BTPreOrderMutableIterator &&it) noexcept {
-  return BTPreOrderIterator<Data>::operator=(std::move(it));
+  BTPreOrderIterator<Data>::operator=(std::move(it));
+  return *this;
 }
 
 // Comparison Operators
@@ -428,7 +434,7 @@ BTPostOrderIterator<Data>::operator=(BTPostOrderIterator<Data> &&it) noexcept {
 template <typename Data>
 inline bool BTPostOrderIterator<Data>::operator==(
     const BTPostOrderIterator &it) const noexcept {
-  return s == it.s && *root == *it.root;
+  return root == it.root && s == it.s;
 }
 
 template <typename Data>
@@ -517,7 +523,8 @@ template <typename Data>
 inline BTPostOrderMutableIterator<Data> &
 BTPostOrderMutableIterator<Data>::operator=(
     const BTPostOrderMutableIterator &it) {
-  return BTPostOrderIterator<Data>::operator=(it);
+  BTPostOrderIterator<Data>::operator=(it);
+  return *this;
 }
 
 // Move assignment
@@ -525,7 +532,8 @@ template <typename Data>
 inline BTPostOrderMutableIterator<Data> &
 BTPostOrderMutableIterator<Data>::operator=(
     BTPostOrderMutableIterator &&it) noexcept {
-  return BTPostOrderIterator<Data>::operator=(std::move(it));
+  BTPostOrderIterator<Data>::operator=(std::move(it));
+  return *this;
 }
 
 // Comparison Operators
@@ -594,7 +602,7 @@ BTInOrderIterator<Data>::operator=(BTInOrderIterator<Data> &&it) noexcept {
 template <typename Data>
 inline bool BTInOrderIterator<Data>::operator==(
     const BTInOrderIterator &it) const noexcept {
-  return s == it.s && *root == *it.root;
+  return root == it.root && s == it.s;
 }
 
 template <typename Data>
@@ -678,7 +686,8 @@ BTInOrderMutableIterator<Data>::BTInOrderMutableIterator(
 template <typename Data>
 inline BTInOrderMutableIterator<Data> &
 BTInOrderMutableIterator<Data>::operator=(const BTInOrderMutableIterator &it) {
-  return BTInOrderIterator<Data>::operator=(it);
+  BTInOrderIterator<Data>::operator=(it);
+  return *this;
 }
 
 // Move assignment
@@ -686,7 +695,8 @@ template <typename Data>
 inline BTInOrderMutableIterator<Data> &
 BTInOrderMutableIterator<Data>::operator=(
     BTInOrderMutableIterator &&it) noexcept {
-  return BTInOrderIterator<Data>::operator=(std::move(it));
+  BTInOrderIterator<Data>::operator=(std::move(it));
+  return *this;
 }
 
 // Comparison Operators
@@ -755,7 +765,7 @@ BTBreadthIterator<Data>::operator=(BTBreadthIterator<Data> &&it) noexcept {
 template <typename Data>
 inline bool BTBreadthIterator<Data>::operator==(
     const BTBreadthIterator &it) const noexcept {
-  return q == it.q && *root == *it.root;
+  return root == it.root && q == it.q;
 }
 
 template <typename Data>
@@ -833,7 +843,8 @@ BTBreadthMutableIterator<Data>::BTBreadthMutableIterator(
 template <typename Data>
 inline BTBreadthMutableIterator<Data> &
 BTBreadthMutableIterator<Data>::operator=(const BTBreadthMutableIterator &it) {
-  return BTBreadthIterator<Data>::operator=(it);
+  BTBreadthIterator<Data>::operator=(it);
+  return *this;
 }
 
 // Move assignment
@@ -841,7 +852,8 @@ template <typename Data>
 inline BTBreadthMutableIterator<Data> &
 BTBreadthMutableIterator<Data>::operator=(
     BTBreadthMutableIterator &&it) noexcept {
-  return BTBreadthIterator<Data>::operator=(std::move(it));
+  BTBreadthIterator<Data>::operator=(std::move(it));
+  return *this;
 }
 
 // Comparison Operators
@@ -864,3 +876,5 @@ inline Data &BTBreadthMutableIterator<Data>::operator*() {
 
 /* ************************************************************************** */
 } // namespace lasd
+
+#endif // __BINARYTREE_H__

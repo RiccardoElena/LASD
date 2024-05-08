@@ -17,9 +17,10 @@ template <typename Data>
 inline BinaryTreeVec<Data>::NodeVec::NodeVec(
     Data &&d, Vector<typename BinaryTreeVec<Data>::NodeVec *> *vec,
     unsigned long p) noexcept {
-  std::swap(v, vec);
   std::swap(data, d);
-  std::swap(pos, p);
+  v = vec;
+  // std::swap(pos, p);
+  pos = p;
 }
 
 // Operators
@@ -99,16 +100,16 @@ BinaryTreeVec<Data>::BinaryTreeVec(const TraversableContainer<Data> &con) {
   vec.Resize(con.Size());
   con.Traverse([this](const Data &currData) {
     vec[size] = new NodeVec(currData, &vec, size);
-    size++;
+    ++size;
   });
 }
 
 template <typename Data>
-BinaryTreeVec<Data>::BinaryTreeVec(MappableContainer<Data> &&con) noexcept {
+BinaryTreeVec<Data>::BinaryTreeVec(MappableContainer<Data> &&con) {
   vec.Resize(con.Size());
   con.Map([this](Data &currData) {
     vec[size] = new NodeVec(std::move(currData), &vec, size);
-    size++;
+    ++size;
   });
 }
 
@@ -184,27 +185,24 @@ BinaryTreeVec<Data>::operator!=(const BinaryTreeVec<Data> &btv) const noexcept {
 }
 
 template <typename Data>
-inline const typename BinaryTree<Data>::Node &
+inline const typename BinaryTreeVec<Data>::Node &
 BinaryTreeVec<Data>::Root() const {
   if (!size)
-    throw std::out_of_range("The tree is empty");
+    throw std::length_error("The tree is empty");
   return *(vec[0]);
 }
 
 template <typename Data>
-inline typename MutableBinaryTree<Data>::MutableNode &
-BinaryTreeVec<Data>::Root() {
+inline typename BinaryTreeVec<Data>::MutableNode &BinaryTreeVec<Data>::Root() {
   if (!size)
-    throw std::out_of_range("The tree is empty");
+    throw std::length_error("The tree is empty");
   return *(vec[0]);
 }
 
 template <typename Data> void BinaryTreeVec<Data>::Clear() {
-  // if (size)
-  for (unsigned long i{0}; i < vec.Size(); ++i) {
-    std::cout << size << " " << vec.Size() << std::endl;
+  for (unsigned long i{0}; i < vec.Size(); ++i)
     delete vec[i];
-  }
+
   vec.Clear();
   size = 0;
 }

@@ -5,7 +5,7 @@ cc = g++
 
 cflags = -Wall -pedantic -O3 -std=c++20 -fsanitize=address
 
-objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o exc2as.o exc2af.o  myqueue.o myvector.o mylist.o mystack.o exc2bs.o exc2bf.o
+objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o exc2as.o exc2af.o  myqueue.o myvector.o mylist.o mystack.o exc2bs.o exc2bf.o myiterator.o mybinarytree.o mybst.o
 
 libcon = container/container.hpp container/testable.hpp container/traversable.cpp container/traversable.hpp container/mappable.cpp container/mappable.hpp container/dictionary.cpp container/dictionary.hpp container/linear.cpp container/linear.hpp
 
@@ -72,3 +72,12 @@ mylist.o: $(libexc1b) zmytest/list/list.hpp zmytest/list/list.cpp
 
 mystack.o: $(libexc1b) zmytest/stack/stack.hpp zmytest/stack/stack.cpp
 	$(cc) $(cflags) -c zmytest/stack/stack.cpp -o mystack.o
+
+myiterator.o: $(libexc1b) zmytest/iterator/iterator.hpp zmytest/iterator/iterator.cpp
+	$(cc) $(cflags) -c zmytest/iterator/iterator.cpp -o myiterator.o
+
+mybinarytree.o: $(libexc1b) zmytest/binarytree/binarytree.hpp zmytest/binarytree/binarytree.cpp
+	$(cc) $(cflags) -c zmytest/binarytree/binarytree.cpp -o mybinarytree.o
+
+mybst.o: $(libexc1b) zmytest/bst/bst.hpp zmytest/bst/bst.cpp
+	$(cc) $(cflags) -c zmytest/bst/bst.cpp -o mybst.o

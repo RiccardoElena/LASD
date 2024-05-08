@@ -24,7 +24,7 @@ inline BinaryTreeLnk<Data>::NodeLnk::NodeLnk(const NodeLnk &n)
 };
 
 template <typename Data>
-inline BinaryTreeLnk<Data>::NodeLnk::NodeLnk(NodeLnk &&n) {
+inline BinaryTreeLnk<Data>::NodeLnk::NodeLnk(NodeLnk &&n) noexcept {
   std::swap(n.data, data);
   std::swap(n.l, l);
   std::swap(n.r, r);
@@ -84,44 +84,44 @@ inline Data &BinaryTreeLnk<Data>::NodeLnk::Element() noexcept {
 
 template <typename Data>
 inline bool BinaryTreeLnk<Data>::NodeLnk::HasLeftChild() const noexcept {
-  return l != nullptr;
+  return l;
 }
 
 template <typename Data>
 inline bool BinaryTreeLnk<Data>::NodeLnk::HasRightChild() const noexcept {
-  return r != nullptr;
+  return r;
 }
 
 template <typename Data>
 inline const BinaryTreeLnk<Data>::Node &
 BinaryTreeLnk<Data>::NodeLnk::LeftChild() const {
-  if (l)
-    return *l;
-  throw std::out_of_range("This node has not left child");
+  if (!l)
+    throw std::out_of_range("This node has not left child");
+  return *l;
 }
 
 template <typename Data>
 inline const BinaryTreeLnk<Data>::Node &
 BinaryTreeLnk<Data>::NodeLnk::RightChild() const {
-  if (r)
-    return *r;
-  throw std::out_of_range("This node has not right child");
+  if (!r)
+    throw std::out_of_range("This node has not right child");
+  return *r;
 }
 
 template <typename Data>
 inline BinaryTreeLnk<Data>::MutableNode &
 BinaryTreeLnk<Data>::NodeLnk::LeftChild() {
-  if (l)
-    return *l;
-  throw std::out_of_range("This node has not left child");
+  if (!l)
+    throw std::out_of_range("This node has not left child");
+  return *l;
 }
 
 template <typename Data>
 inline BinaryTreeLnk<Data>::MutableNode &
 BinaryTreeLnk<Data>::NodeLnk::RightChild() {
-  if (r)
-    return *r;
-  throw std::out_of_range("This node has not right child");
+  if (!r)
+    throw std::out_of_range("This node has not right child");
+  return *r;
 }
 
 // BinaryTreeLnk Methods
@@ -132,6 +132,7 @@ template <typename Data>
 BinaryTreeLnk<Data>::BinaryTreeLnk(const TraversableContainer<Data> &con) {
 
   QueueVec<BinaryTreeLnk<Data>::NodeLnk *> q{};
+  // QueueLst<BinaryTreeLnk<Data>::NodeLnk *> q{};
 
   con.Traverse([&q, this](const Data &currD) {
     BinaryTreeLnk<Data>::NodeLnk *t{new NodeLnk(currD)};
@@ -142,9 +143,10 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(const TraversableContainer<Data> &con) {
 }
 
 template <typename Data>
-BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data> &&con) noexcept {
+BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data> &&con) {
 
   QueueVec<BinaryTreeLnk<Data>::NodeLnk *> q{};
+  // QueueLst<BinaryTreeLnk<Data>::NodeLnk *> q{};
 
   con.Map([&q, this](Data &currD) {
     BinaryTreeLnk<Data>::NodeLnk *t{new NodeLnk(std::move(currD))};
@@ -156,8 +158,10 @@ BinaryTreeLnk<Data>::BinaryTreeLnk(MappableContainer<Data> &&con) noexcept {
 
 template <typename Data>
 inline BinaryTreeLnk<Data>::BinaryTreeLnk(const BinaryTreeLnk &btl) {
-  size = btl.size;
-  root = new NodeLnk(*btl.root);
+  if (btl.size) {
+    size = btl.size;
+    root = new NodeLnk(*btl.root);
+  }
 }
 
 template <typename Data>
@@ -210,14 +214,14 @@ template <typename Data>
 inline const BinaryTreeLnk<Data>::Node &BinaryTreeLnk<Data>::Root() const {
   if (root)
     return *root;
-  throw std::out_of_range("This tree is empty");
+  throw std::length_error("This tree is empty");
 }
 
 template <typename Data>
 inline BinaryTreeLnk<Data>::MutableNode &BinaryTreeLnk<Data>::Root() {
   if (root)
     return *root;
-  throw std::out_of_range("This tree is empty");
+  throw std::length_error("This tree is empty");
 }
 
 template <typename Data> inline void BinaryTreeLnk<Data>::Clear() {

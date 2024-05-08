@@ -24,11 +24,12 @@ void GetElement(uint &testnum, uint &testerr,
   testerr += (1 - (uint)tst);
 }
 
-// ? Why tring to change a non mutable Node
+// ! this implementation wasn't warking, been fixed
+// ? notify to mogavero (const? Node?)
 template <typename Data>
 void SetElement(uint &testnum, uint &testerr,
-                const typename lasd::BinaryTree<Data>::Node &nod, bool chk,
-                const Data &val) {
+                typename lasd::MutableBinaryTree<Data>::MutableNode &nod,
+                bool chk, const Data &val) {
   bool tst;
   testnum++;
   try {

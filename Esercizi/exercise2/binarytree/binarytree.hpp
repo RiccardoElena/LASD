@@ -64,12 +64,11 @@ public:
     // Specific member functions
 
     virtual const Data &Element() const noexcept = 0;
-
     virtual inline bool IsLeaf() const noexcept;
+
     virtual bool HasLeftChild() const noexcept = 0;
     virtual bool HasRightChild() const noexcept = 0;
 
-    // ? being the non mutable version of node should i return a const ref?
     virtual const Node &LeftChild() const = 0;
     virtual const Node &RightChild() const = 0;
   };
@@ -190,6 +189,7 @@ public:
 
     using BinaryTree<Data>::Node::LeftChild;
     virtual MutableNode &LeftChild() = 0;
+
     using BinaryTree<Data>::Node::RightChild;
     virtual MutableNode &RightChild() = 0;
   };
@@ -210,7 +210,6 @@ public:
   /* ************************************************************************ */
   // Specific member functions
 
-  // ? this generate a stange warning
   using BinaryTree<Data>::Root;
   virtual MutableNode &Root() = 0;
 
@@ -455,7 +454,7 @@ protected:
 
 template <typename Data>
 class BTPostOrderMutableIterator : virtual public MutableIterator<Data>,
-                                   BTPostOrderIterator<Data> {
+                                   virtual public BTPostOrderIterator<Data> {
 
 private:
   // ...
@@ -513,6 +512,7 @@ private:
 protected:
   StackVec<const typename BinaryTree<Data>::Node *> s{};
   // StackLst<const typename BinaryTree<Data>::Node *> s{};
+
   const typename BinaryTree<Data>::Node *root{nullptr};
 
 public:
