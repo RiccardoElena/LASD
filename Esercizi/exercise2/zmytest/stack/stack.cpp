@@ -22,6 +22,8 @@ using namespace std;
 
 /* ************************************************************************** */
 
+namespace customTests {
+
 template <typename Stk>
 void stacktestint(Stk &stk, unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctesterr{0};
@@ -234,3 +236,5 @@ void my_stack_test(unsigned int &testnum, unsigned int &testerr) {
   my_stack_int(testnum, testerr);
   my_stack_str(testnum, testerr);
 }
+
+} // namespace customTests

@@ -104,11 +104,6 @@ public:
 
   using typename TraversableContainer<Data>::TraverseFun;
 
-  /*
-   ? Default Traverse?
-   * Breadth is better for copy from a tree vec
-   * InOrder Better for BST
-  */
   inline void Traverse(TraverseFun) const override;
 
   /* ************************************************************************ */

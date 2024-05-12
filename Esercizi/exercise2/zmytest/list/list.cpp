@@ -19,6 +19,7 @@
 using namespace std;
 
 /* ************************************************************************** */
+namespace customTests {
 
 void my_list_int(unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctesterr{0};
@@ -327,3 +328,5 @@ void my_list_test(unsigned int &testnum, unsigned int &testerr) {
 
 /* **************************************************************************
  */
+
+} // namespace customTests

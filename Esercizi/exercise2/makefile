@@ -1,8 +1,6 @@
 
 cc = g++
 
-# ? can we add -Werror
-
 cflags = -Wall -pedantic -O3 -std=c++20 -fsanitize=address
 
 objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o exc2as.o exc2af.o  myqueue.o myvector.o mylist.o mystack.o exc2bs.o exc2bf.o myiterator.o mybinarytree.o mybst.o

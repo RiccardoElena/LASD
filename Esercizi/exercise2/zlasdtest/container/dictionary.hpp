@@ -42,7 +42,6 @@ void InsertM(unsigned int &testnum, unsigned int &testerr,
               << " been inserted: ";
     std::cout << ((tst = (tst == chk)) ? "Correct" : "Error") << "!"
               << std::endl;
-    std::cout << "Correct!" << std::endl;
   } catch (std::exception &exc) {
     tst = false;
     std::cout << "\"" << exc.what() << "\": " << "Error!" << std::endl;

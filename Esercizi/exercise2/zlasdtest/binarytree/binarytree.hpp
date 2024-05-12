@@ -24,8 +24,6 @@ void GetElement(uint &testnum, uint &testerr,
   testerr += (1 - (uint)tst);
 }
 
-// ! this implementation wasn't warking, been fixed
-// ? notify to mogavero (const? Node?)
 template <typename Data>
 void SetElement(uint &testnum, uint &testerr,
                 typename lasd::MutableBinaryTree<Data>::MutableNode &nod,
@@ -34,8 +32,7 @@ void SetElement(uint &testnum, uint &testerr,
   testnum++;
   try {
     std::cout << " " << testnum << " (" << testerr
-              << ") Setting the front of the linear container to \"" << val
-              << "\": ";
+              << ") Setting the data of the node to \"" << val << "\": ";
     nod.Element() = val;
     std::cout << ((tst = ((nod.Element() == val) == chk)) ? "Correct" : "Error")
               << "!" << std::endl;

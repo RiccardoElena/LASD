@@ -24,6 +24,7 @@
 using namespace std;
 
 /* ************************************************************************** */
+namespace customTests {
 
 template <typename BT>
 void binarytreetestint(unsigned int &testnum, unsigned int &testerr) {
@@ -42,8 +43,9 @@ void binarytreetestint(unsigned int &testnum, unsigned int &testerr) {
     TraversePostOrder(loctestnum, loctesterr, t, true, TraversePrint<int>);
     TraverseInOrder(loctestnum, loctesterr, t, true, TraversePrint<int>);
 
-    v[0] = 1;
-    v[1] = 0;
+    SetAt(loctestnum, loctesterr, v, true, 0, 1);
+    SetAt(loctestnum, loctesterr, v, true, 1, 0);
+
     BT t2{v};
 
     NonEqualBT(loctestnum, loctesterr, t, t2);
@@ -107,7 +109,7 @@ void binarytreetestint(unsigned int &testnum, unsigned int &testerr) {
     Empty(loctestnum, loctesterr, t2, true);
 
     lasd::Vector<int> v2(6);
-    for (int i{0}; i < v2.Size(); ++i)
+    for (int i{0}; i < 6; ++i)
       v2[i] = i + 1;
 
     BT t5{v2};
@@ -309,17 +311,21 @@ void binarytrecrosstestint(unsigned int &testnum, unsigned int &testerr) {
 
     EqualBT(loctestnum, loctesterr, tl, tv);
 
-    tl.Root().LeftChild().RightChild().Element() = 10000;
+    SetElement<int>(loctestnum, loctesterr, tl.Root().LeftChild().RightChild(),
+                    true, 10000);
     NonEqualBT(loctestnum, loctesterr, tl, tv);
 
-    tl.Root().LeftChild().RightChild().Element() = 3;
-    tl.Root().LeftChild().LeftChild().Element() = 4;
+    SetElement(loctestnum, loctesterr, tl.Root().LeftChild().RightChild(), true,
+               3);
+    SetElement(loctestnum, loctesterr, tl.Root().LeftChild().LeftChild(), true,
+               4);
 
     Traverse(loctestnum, loctesterr, tl, true, TraversePrint<int>);
     Traverse(loctestnum, loctesterr, tv, true, TraversePrint<int>);
 
     NonEqualBT(loctestnum, loctesterr, tl, tv);
 
+    // Strange behavoir discussed in class
     tv = tl;
     tl = tv;
 
@@ -340,6 +346,7 @@ void binarytrecrosstestint(unsigned int &testnum, unsigned int &testerr) {
     Traverse(loctestnum, loctesterr, tv, true, TraversePrint<int>);
     Traverse(loctestnum, loctesterr, tl2, true, TraversePrint<int>);
 
+    // Strange behavoir discussed in class
     tv = std::move(tl2);
 
     Traverse(loctestnum, loctesterr, tv, true, TraversePrint<int>);
@@ -411,3 +418,5 @@ void my_binarytree_test(unsigned int &testnum, unsigned int &testerr) {
   my_binarytree_int(testnum, testerr);
   my_binarytree_double(testnum, testerr);
 }
+
+} // namespace customTests

@@ -76,6 +76,7 @@ public:
 
   // Specific member functions
 
+  using Iterator<Data>::operator*;
   virtual Data &operator*() = 0;
 };
 

@@ -227,8 +227,6 @@ template <typename Data> inline void BST<Data>::SkipLeft(NodeLnk *&ptr) {
   ptr = temp;
 }
 
-// ? is better to make the skip void(and solving the case) or letting it return
-// the head?
 template <typename Data> inline void BST<Data>::SkipRight(NodeLnk *&ptr) {
   NodeLnk *temp{ptr->r};
   ptr->r = nullptr;

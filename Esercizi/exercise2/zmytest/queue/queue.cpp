@@ -31,6 +31,7 @@ uniform_int_distribution<unsigned long> distULong(0, 2000);
 uniform_real_distribution<double> distDouble(-10000.0, 10000.0);
 
 /* ************************************************************************** */
+namespace customTests {
 
 template <typename Que>
 void queuetestint(Que &que, unsigned int &testnum, unsigned int &testerr) {
@@ -408,3 +409,5 @@ void my_queue_test(unsigned int &testnum, unsigned int &testerr) {
   my_queue_str(testnum, testerr);
   my_queue_n_lst(testnum, testerr);
 }
+
+} // namespace customTests

@@ -8,11 +8,12 @@
 #include "stack/stack.hpp"
 #include "vector/vector.hpp"
 
-#include "iterator/iterator.hpp"
 #include "binarytree/binarytree.hpp"
 #include "bst/bst.hpp"
+#include "iterator/iterator.hpp"
 
 using namespace std;
+using namespace customTests;
 using TestFun = function<void(unsigned int &, unsigned int &)>;
 
 unsigned int testnum = 0;

@@ -1,6 +1,8 @@
 #ifndef MYITERATORTEST_HPP
 #define MYITERATORTEST_HPP
 
+namespace customTests {
+
 void my_iterator_test(unsigned int &, unsigned int &);
 
 template <typename IT>
@@ -34,4 +36,5 @@ void NonEqualIterator(uint &testnum, uint &testerr, const IT &it1,
   testerr += (1 - (uint)tst);
 }
 
+} // namespace customTests
 #endif

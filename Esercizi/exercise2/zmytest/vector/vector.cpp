@@ -22,6 +22,8 @@ using namespace std;
 
 /* ************************************************************************** */
 
+namespace customTests {
+
 void my_vector_int(unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctestnum{0};
   unsigned int loctesterr{0};
@@ -174,7 +176,6 @@ void my_vector_int(unsigned int &testnum, unsigned int &testerr) {
     InsertAtBack(loctestnum, loctesterr, lst2, true, 2);
     InsertAtBack(loctestnum, loctesterr, lst2, true, 3);
 
-    // ? ask mogavero about this
     lasd::List<int> lst3(lst2);
     lasd::SortableVector<int> vec9(std::move(lst2));
 
@@ -192,8 +193,11 @@ void my_vector_int(unsigned int &testnum, unsigned int &testerr) {
   testerr += loctesterr;
 }
 
-/* ************************************************************************** */
+/* **************************************************************************
+ */
 
 void my_vector_test(unsigned int &testnum, unsigned int &testerr) {
   my_vector_int(testnum, testerr);
 }
+
+} // namespace customTests
