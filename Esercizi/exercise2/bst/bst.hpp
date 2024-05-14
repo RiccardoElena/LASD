@@ -136,12 +136,12 @@ protected:
   const NodeLnk *const &Max(const NodeLnk *const &) const noexcept;
   // MutableNode *Max(NodeLnk *) noexcept;
 
-  inline NodeLnk **Predecessor(NodeLnk *&, const Data &) noexcept;
-  const NodeLnk *const *Predecessor(const NodeLnk *const &,
+  inline NodeLnk *&Predecessor(NodeLnk *&, const Data &) noexcept;
+  const NodeLnk *const &Predecessor(const NodeLnk *const &,
                                     const Data &) const noexcept;
 
-  inline NodeLnk **Successor(NodeLnk *&, const Data &) noexcept;
-  const NodeLnk *const *Successor(const NodeLnk *const &,
+  inline NodeLnk *&Successor(NodeLnk *&, const Data &) noexcept;
+  const NodeLnk *const &Successor(const NodeLnk *const &,
                                   const Data &) const noexcept;
 
   inline NodeLnk *&FindPosition(NodeLnk *&, const Data &) noexcept;

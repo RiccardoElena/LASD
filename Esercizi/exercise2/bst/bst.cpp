@@ -99,53 +99,52 @@ template <typename Data> inline void BST<Data>::RemoveMax() {
 template <typename Data>
 inline const Data &BST<Data>::Predecessor(const Data &d) const {
 
-  const NodeLnk *const *temp{Predecessor(root, d)};
+  const NodeLnk *const &temp{Predecessor(root, d)};
   if (!temp)
     throw std::length_error(root ? "No predecessor found"
                                  : "The tree is empty");
-  return (*temp)->data;
+  return temp->data;
 }
 
 template <typename Data>
 inline Data BST<Data>::PredecessorNRemove(const Data &d) {
-  NodeLnk **temp{Predecessor(root, d)};
+  NodeLnk *&temp{Predecessor(root, d)};
   if (!temp)
     throw std::length_error(root ? "No predecessor found"
                                  : "The tree is empty");
-  return DataNDelete(*temp);
+  return DataNDelete(temp);
 }
 
 template <typename Data>
 inline void BST<Data>::RemovePredecessor(const Data &d) {
-  NodeLnk **temp{Predecessor(root, d)};
+  NodeLnk *&temp{Predecessor(root, d)};
   if (!temp)
     throw std::length_error(root ? "No predecessor found"
                                  : "The tree is empty");
-  Delete(*temp);
+  Delete(temp);
 }
 
-// ? *& and not ** with pen and paper
 template <typename Data>
 inline const Data &BST<Data>::Successor(const Data &d) const {
-  const NodeLnk *const *temp{Successor(root, d)};
+  const NodeLnk *const &temp{Successor(root, d)};
   if (!temp)
     throw std::length_error(root ? "No successor found" : "The tree is empty");
-  return (*temp)->data;
+  return temp->data;
 }
 
 template <typename Data>
 inline Data BST<Data>::SuccessorNRemove(const Data &d) {
-  NodeLnk **temp{Successor(root, d)};
+  NodeLnk *&temp{Successor(root, d)};
   if (!temp)
     throw std::length_error(root ? "No successor found" : "The tree is empty");
-  return DataNDelete(*temp);
+  return DataNDelete(temp);
 }
 
 template <typename Data> inline void BST<Data>::RemoveSuccessor(const Data &d) {
-  NodeLnk **temp{Successor(root, d)};
+  NodeLnk *&temp{Successor(root, d)};
   if (!temp)
     throw std::length_error(root ? "No successor found" : "The tree is empty");
-  Delete(*temp);
+  Delete(temp);
 }
 
 // Overrided Methods
@@ -249,43 +248,43 @@ template <typename Data> void BST<Data>::Delete(NodeLnk *&ptr) {
 }
 
 template <typename Data>
-const BST<Data>::NodeLnk *const *
+const BST<Data>::NodeLnk *const &
 BST<Data>::Predecessor(const NodeLnk *const &ptr,
                        const Data &d) const noexcept {
   if (!ptr)
-    return nullptr;
+    return ptr;
 
   if (ptr->data >= d)
     return Predecessor(ptr->l, d);
 
-  const NodeLnk *const *temp{Predecessor(ptr->r, d)};
-  return temp ? temp : &ptr;
+  const NodeLnk *const &temp{Predecessor(ptr->r, d)};
+  return temp ? temp : ptr;
 }
 
 template <typename Data>
-inline BST<Data>::NodeLnk **BST<Data>::Predecessor(NodeLnk *&ptr,
+inline BST<Data>::NodeLnk *&BST<Data>::Predecessor(NodeLnk *&ptr,
                                                    const Data &d) noexcept {
-  return const_cast<NodeLnk **>(
+  return const_cast<NodeLnk *&>(
       static_cast<const BST<Data> *>(this)->Predecessor(ptr, d));
 }
 
 template <typename Data>
-const BST<Data>::NodeLnk *const *
+const BST<Data>::NodeLnk *const &
 BST<Data>::Successor(const NodeLnk *const &ptr, const Data &d) const noexcept {
   if (!ptr)
-    return nullptr;
+    return ptr;
 
   if (ptr->data <= d)
     return Successor(ptr->r, d);
 
-  const NodeLnk *const *temp{Successor(ptr->l, d)};
-  return temp ? temp : &ptr;
+  const NodeLnk *const &temp{Successor(ptr->l, d)};
+  return temp ? temp : ptr;
 }
 
 template <typename Data>
-inline BST<Data>::NodeLnk **BST<Data>::Successor(NodeLnk *&ptr,
+inline BST<Data>::NodeLnk *&BST<Data>::Successor(NodeLnk *&ptr,
                                                  const Data &d) noexcept {
-  return const_cast<NodeLnk **>(
+  return const_cast<NodeLnk *&>(
       static_cast<const BST<Data> *>(this)->Successor(ptr, d));
 }
 
