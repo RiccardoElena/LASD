@@ -363,6 +363,63 @@ void my_bst_int(unsigned int &testnum, unsigned int &testerr) {
     RemoveSome(testnum, testerr, bst3, true, v);
     Empty(testnum, testerr, bst3, true);
 
+    Min(testnum, testerr, bst3, false, 0);
+    RemoveMin(testnum, testerr, bst3, false);
+    MinNRemove(testnum, testerr, bst3, false, 0);
+    Max(testnum, testerr, bst3, false, 0);
+    RemoveMax(testnum, testerr, bst3, false);
+    MaxNRemove(testnum, testerr, bst3, false, 0);
+    Predecessor(testnum, testerr, bst3, false, 0, 0);
+    RemovePredecessor(testnum, testerr, bst3, false, 0);
+    PredecessorNRemove(testnum, testerr, bst3, false, 0, 0);
+    Successor(testnum, testerr, bst3, false, 0, 0);
+    RemoveSuccessor(testnum, testerr, bst3, false, 0);
+    SuccessorNRemove(testnum, testerr, bst3, false, 0, 0);
+
+    Exists(testnum, testerr, bst3, false, 0);
+    Remove(testnum, testerr, bst3, false, 0);
+    InsertM(testnum, testerr, bst3, true, 0);
+
+    Min(testnum, testerr, bst3, true, 0);
+    RemoveMin(testnum, testerr, bst3, true);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    MinNRemove(testnum, testerr, bst3, true, 0);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    Max(testnum, testerr, bst3, true, 0);
+
+    RemoveMax(testnum, testerr, bst3, true);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    MaxNRemove(testnum, testerr, bst3, true, 0);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    Predecessor(testnum, testerr, bst3, false, 0, 0);
+    RemovePredecessor(testnum, testerr, bst3, false, 0);
+    PredecessorNRemove(testnum, testerr, bst3, false, 0, 0);
+
+    Successor(testnum, testerr, bst3, false, 0, 0);
+    RemoveSuccessor(testnum, testerr, bst3, false, 0);
+    SuccessorNRemove(testnum, testerr, bst3, false, 0, 0);
+
+    Predecessor(testnum, testerr, bst3, true, 1, 0);
+    RemovePredecessor(testnum, testerr, bst3, true, 1);
+    InsertM(testnum, testerr, bst3, true, 0);
+    PredecessorNRemove(testnum, testerr, bst3, true, 1, 0);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    Successor(testnum, testerr, bst3, true, -1, 0);
+
+    RemoveSuccessor(testnum, testerr, bst3, true, -1);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    SuccessorNRemove(testnum, testerr, bst3, true, -1, 0);
+
+    InsertM(testnum, testerr, bst3, true, 0);
+    Exists(testnum, testerr, bst3, true, 0);
+    Remove(testnum, testerr, bst3, true, 0);
+
     InsertAllC(testnum, testerr, bst3, true, v);
     RemoveAll(testnum, testerr, bst3, true, v);
     Empty(testnum, testerr, bst3, true);
