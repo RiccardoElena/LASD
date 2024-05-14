@@ -19,7 +19,6 @@ inline BinaryTreeVec<Data>::NodeVec::NodeVec(
     unsigned long p) noexcept {
   std::swap(data, d);
   v = vec;
-  // std::swap(pos, p);
   pos = p;
 }
 
