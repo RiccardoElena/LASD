@@ -13,6 +13,7 @@
 
 #include "../../zlasdtest/binarytree/binarytree.hpp"
 #include "../../zlasdtest/bst/bst.hpp"
+#include "../../zlasdtest/iterator/iterator.hpp"
 
 /* ************************************************************************** */
 
@@ -520,8 +521,138 @@ void my_bst_int(unsigned int &testnum, unsigned int &testerr) {
 
 /* ************************************************************************** */
 
-void my_bst_test(unsigned int &testnum, unsigned int &testerr) {
+template <typename IT>
+void mybsttestiterator(const typename lasd::SortableVector<int> &vec,
+                       unsigned int &testnum, unsigned int &testerr) {
+  unsigned int loctesterr{0};
+  unsigned int loctestnum{0};
 
+  try {
+
+    lasd::SortableVector<int> v{16};
+    v[0] = 9;
+    v[1] = 5;
+    v[2] = 15;
+    v[3] = 4;
+    v[4] = 6;
+    v[5] = 12;
+    v[6] = 18;
+    v[7] = 1;
+    v[8] = 8;
+    v[9] = 10;
+    v[10] = 14;
+    v[11] = 16;
+    v[12] = 2;
+    v[13] = 7;
+    v[14] = 13;
+    v[15] = 17;
+
+    lasd::BST<int> bst{v};
+    Traverse(loctestnum, loctesterr, vec, true, TraversePrint<int>);
+    IT it{bst};
+
+    for (int i = 0; !it.Terminated(); ++i, ++it)
+      GetItrValue(loctestnum, loctesterr, it, true, vec[i]);
+
+    Terminated(loctestnum, loctesterr, it, true);
+    it.Reset();
+
+    bool flag{false};
+    for (int i = 0; !it.Terminated(); ++i, ++it) {
+      GetItrValue(loctestnum, loctesterr, it, true, vec[i]);
+
+      if (!flag && i > bst.Size() / 2) {
+        flag = true;
+        it.Reset();
+        i = 0;
+      }
+    }
+  } catch (...) {
+    loctestnum++;
+    loctesterr++;
+    cout << endl << "Unmanaged error! " << endl;
+  }
+
+  cout << "End of My Iterator<int> Test! (Errors/Tests: " << loctesterr << "/"
+       << loctestnum << ")" << endl;
+  testnum += loctestnum;
+  testerr += loctesterr;
+}
+
+/* **************************************************************************
+ */
+
+void my_bst_iterator(unsigned int &testnum, unsigned int &testerr) {
+
+  lasd::SortableVector<int> v{16};
+  v[0] = 9;
+  v[1] = 5;
+  v[2] = 15;
+  v[3] = 4;
+  v[4] = 6;
+  v[5] = 12;
+  v[6] = 18;
+  v[7] = 1;
+  v[8] = 8;
+  v[9] = 10;
+  v[10] = 14;
+  v[11] = 16;
+  v[12] = 2;
+  v[13] = 7;
+  v[14] = 13;
+  v[15] = 17;
+
+  cout << endl << "Begin of My Unmutable Breadth Iterator<int> Test:" << endl;
+  mybsttestiterator<lasd::BTBreadthIterator<int>>(v, testnum, testerr);
+
+  v[0] = 9;
+  v[1] = 5;
+  v[2] = 4;
+  v[3] = 1;
+  v[4] = 2;
+  v[5] = 6;
+  v[6] = 8;
+  v[7] = 7;
+  v[8] = 15;
+  v[9] = 12;
+  v[10] = 10;
+  v[11] = 14;
+  v[12] = 13;
+  v[13] = 18;
+  v[14] = 16;
+  v[15] = 17;
+  cout << endl << "Begin of My Unmutable PreOrder Iterator<int> Test:" << endl;
+  mybsttestiterator<lasd::BTPreOrderIterator<int>>(v, testnum, testerr);
+
+  v.Sort();
+  cout << endl << "Begin of My Unmutable InOrder Iterator<int> Test:" << endl;
+  mybsttestiterator<lasd::BTInOrderIterator<int>>(v, testnum, testerr);
+
+  v[0] = 2;
+  v[1] = 1;
+  v[2] = 4;
+  v[3] = 7;
+  v[4] = 8;
+  v[5] = 6;
+  v[6] = 5;
+  v[7] = 10;
+  v[8] = 13;
+  v[9] = 14;
+  v[10] = 12;
+  v[11] = 17;
+  v[12] = 16;
+  v[13] = 18;
+  v[14] = 15;
+  v[15] = 9;
+  cout << endl << "Begin of My Unmutable PostOrder Iterator<int> Test:" << endl;
+  mybsttestiterator<lasd::BTPostOrderIterator<int>>(v, testnum, testerr);
+}
+
+/* **************************************************************************
+ */
+
+void my_bst_test(unsigned int &testnum, unsigned int &testerr) {
+  my_bst_iterator(testnum, testerr);
   my_bst_int(testnum, testerr);
 }
 
