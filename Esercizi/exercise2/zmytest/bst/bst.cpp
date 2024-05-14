@@ -558,7 +558,7 @@ void mybsttestiterator(const typename lasd::SortableVector<int> &vec,
     it.Reset();
 
     bool flag{false};
-    for (int i = 0; !it.Terminated(); ++i, ++it) {
+    for (unsigned int i{0}; !it.Terminated(); ++i, ++it) {
       GetItrValue(loctestnum, loctesterr, it, true, vec[i]);
 
       if (!flag && i > bst.Size() / 2) {
