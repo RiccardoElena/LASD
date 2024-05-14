@@ -179,7 +179,7 @@ public:
      */
 
     // Specific member functions
-    using BinaryTree<Data>::Node::Element;
+    // using BinaryTree<Data>::Node::Element;
     virtual Data &Element() noexcept = 0;
 
     using BinaryTree<Data>::Node::LeftChild;
