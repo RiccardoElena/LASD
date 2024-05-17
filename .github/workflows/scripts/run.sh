@@ -1,6 +1,8 @@
 
 
 find ./.. -name 'exercise*' -type d | grep -P 'exercise\d+$' | sort -V | tail -n 1 | while read dir; do
+#  find ./.. -name 'exercise*' -type d | grep -P 'exercise2$' | sort -V | tail -n 2 | while read dir; do
+    make -C $dir
     $dir/main a
     result=$?
     output="Test terminated with $result error"
