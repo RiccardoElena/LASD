@@ -7,7 +7,7 @@ then
     echo "bc could not be found, installing..."
     sudo apt-get update && sudo apt-get install -y bc
 fi
-find ./.. -name 'exercise*' -type d | grep -P 'exercise\d+$' | sort -V | tail -n 1 | while read dir; do
+find ./Esercizi -name 'exercise*' -type d -maxdepth 1 | grep -P 'exercise\d+$' | sort -V | tail -n 1 | while read dir; do
   make -C $dir
   for ((i=1; i<=execs; i++)); do
       runtime=$( { time $dir/main a > /dev/null; } 2>&1 | awk '/real/ { split($2, time, /[ms]/); print time[1]*60 + time[2] }' )

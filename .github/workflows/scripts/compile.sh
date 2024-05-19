@@ -1,4 +1,4 @@
-find ./.. -name 'exercise*' -type d | grep -P 'exercise\d+$' | sort -V | tail -n 1 | while read dir; do
+find ./Esercizi -name 'exercise*' -type d -maxdepth 1| grep -P 'exercise\d+$' | sort -V | tail -n 1 | while read dir; do
 # find ./.. -name 'exercise*' -type d | grep -P 'exercise2$' | sort -V | tail -n 2 | head -n 2 | while read dir; do
   g++ --version
 
