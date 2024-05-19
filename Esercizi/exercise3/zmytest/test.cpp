@@ -92,7 +92,7 @@ string mytest() {
        << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#" << endl;
 
   cout << endl
-       << "Exercise 2 Results: Passed/Tests: " << testpassed << "/" << testnum
+       << "Exercise 1 Results: Passed/Tests: " << testpassed << "/" << testnum
        << " (" << accuracy << "%)" << endl;
 
   return to_string(testerr) + "/" + to_string(testnum);
