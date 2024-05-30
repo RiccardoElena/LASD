@@ -160,8 +160,7 @@ template <typename Data> inline bool BST<Data>::Insert(const Data &d) {
     return false;
 
   temp = new BST<Data>::NodeLnk(d);
-  ++size;
-  return true;
+  return ++size;
 }
 
 template <typename Data> inline bool BST<Data>::Insert(Data &&d) {
@@ -170,8 +169,7 @@ template <typename Data> inline bool BST<Data>::Insert(Data &&d) {
     return false;
 
   temp = new BST<Data>::NodeLnk(std::move(d));
-  ++size;
-  return true;
+  return ++size;
 }
 
 template <typename Data> inline bool BST<Data>::Remove(const Data &d) {

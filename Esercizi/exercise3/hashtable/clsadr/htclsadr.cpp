@@ -9,16 +9,15 @@ namespace lasd {
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(unsigned long s) {
-  // tsize = s > MIN_TSIZE ? next2Power(s) : MIN_TSIZE;
-  tsize = s > MIN_TSIZE ? s : MIN_TSIZE;
+  tsize = s > MIN_TSIZE ? PrimeSucc(s) : MIN_TSIZE;
 
   table.Resize(tsize);
 }
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(const TraversableContainer<Data> &con)
-    : HashTableClsAdr(con.Size() << 1) {
-  InserAll(con);
+    : HashTableClsAdr(con.Size()) {
+  DictionaryContainer<Data>::InsertAll(con);
 }
 
 template <typename Data>
@@ -30,15 +29,15 @@ HashTableClsAdr<Data>::HashTableClsAdr(unsigned long s,
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(MappableContainer<Data> &&con) noexcept
-    : HashTableClsAdr(con.Size() << 1) {
-  InserAll(std::move(con));
+    : HashTableClsAdr(con.Size()) {
+  DictionaryContainer<Data>::InsertAll(std::move(con));
 }
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(unsigned long s,
                                        MappableContainer<Data> &&con) noexcept
     : HashTableClsAdr(s) {
-  InserAll(std::move(con));
+  DictionaryContainer<Data>::InsertAll(std::move(con));
 }
 
 template <typename Data>
@@ -47,7 +46,9 @@ HashTableClsAdr<Data>::HashTableClsAdr(const HashTableClsAdr<Data> &ht)
 
 template <typename Data>
 HashTableClsAdr<Data>::HashTableClsAdr(HashTableClsAdr<Data> &&ht) noexcept
-    : HashTable<Data>::HashTable(std::move(ht)), table(std::move(ht.table)) {}
+    : HashTable<Data>::HashTable(std::move(ht)) {
+  std::swap(table, ht.table);
+}
 
 // Operators
 
@@ -79,7 +80,7 @@ bool HashTableClsAdr<Data>::operator==(
 
   bool f{true};
   for (unsigned long i{0}; i < tsize; ++i) {
-    table[i].Traverse([&f, ht](const Data &currD) { f &= ht.Exists(currD); });
+    table[i].Traverse([&f, &ht](const Data &currD) { f &= ht.Exists(currD); });
     if (!f)
       return false;
   }
@@ -93,30 +94,33 @@ bool HashTableClsAdr<Data>::operator!=(
 }
 
 // Overrided Methods
-// FIXME: check this implementaton, not sure about size increment;
-template <typename Data> bool HashTableClsAdr<Data>::Insert(const Data &d) {
+template <typename Data>
+inline bool HashTableClsAdr<Data>::Insert(const Data &d) {
   return table[HashKey(d)].Insert(d) && ++size;
 }
 
-template <typename Data> bool HashTableClsAdr<Data>::Insert(Data &&d) {
+template <typename Data> inline bool HashTableClsAdr<Data>::Insert(Data &&d) {
   return table[HashKey(d)].Insert(std::move(d)) && ++size;
 }
 
-template <typename Data> bool HashTableClsAdr<Data>::Remove(const Data &d) {
+template <typename Data>
+inline bool HashTableClsAdr<Data>::Remove(const Data &d) {
   return table[HashKey(d)].Remove(d) && size--;
 }
 
 template <typename Data>
-bool HashTableClsAdr<Data>::Exists(const Data &d) const noexcept {
+inline bool HashTableClsAdr<Data>::Exists(const Data &d) const noexcept {
   return table[HashKey(d)].Exists(d);
 }
 
-// ? what should happen with resizing in smaller size?
 template <typename Data> void HashTableClsAdr<Data>::Resize(unsigned long s) {
-  if (s < MIN_TSIZE)
-    s = MIN_TSIZE;
 
-  HashTableClsAdr<Data> temp{s};
+  if (!s) {
+    Clear();
+    return;
+  }
+
+  HashTableClsAdr<Data> temp{PrimeSucc(s)};
 
   for (unsigned long i{0}; i < tsize; ++i)
     temp.InsertAll(table[i]);
@@ -126,33 +130,14 @@ template <typename Data> void HashTableClsAdr<Data>::Resize(unsigned long s) {
 
 template <typename Data> void HashTableClsAdr<Data>::Clear() {
 
-  // ? really needed?
   for (unsigned long i{0}; i < tsize; ++i)
     table[i].Clear();
 
+  tsize = MIN_TSIZE;
   table.Resize(MIN_TSIZE);
   size = 0;
 }
 
-// Auxiliary Functions
-
-// FIXME this function tend to ask too much memory
-template <typename Data>
-unsigned long HashTableClsAdr<Data>::next2Power(unsigned long s) noexcept {
-  if (s && !(s & (s - 1)))
-    return s;
-
-  unsigned long nbits = sizeof(s) << 3;
-
-  // ? what to do for huge size?
-  // if (s > (1 << (nbits - 1)))
-  //   return std::numeric_limits<unsigned long>::max();
-
-  for (unsigned int i{1}; i < nbits; i = i << 1)
-    s |= s >> i;
-
-  return s;
-}
 /* ************************************************************************** */
 
 } // namespace lasd

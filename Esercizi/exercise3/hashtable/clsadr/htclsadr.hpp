@@ -25,9 +25,8 @@ protected:
 
   using HashTable<Data>::size;
   using HashTable<Data>::tsize;
-  using HashTable<Data>::HashKey;
 
-  Vector<List<Data>> table{size};
+  Vector<List<Data>> table{tsize};
 
 public:
   // Default constructor
@@ -81,17 +80,18 @@ public:
 
   // Specific member functions (inherited from DictionaryContainer)
 
-  bool Insert(const Data &)
+  inline bool Insert(const Data &)
       override; // Override DictionaryContainer member (Copy of the value)
-  bool Insert(Data &&)
+  inline bool Insert(Data &&)
       override; // Override DictionaryContainer member (Move of the value)
-  bool Remove(const Data &) override; // Override DictionaryContainer member
+  inline bool
+  Remove(const Data &) override; // Override DictionaryContainer member
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from TestableContainer)
 
-  bool Exists(const Data &)
+  inline bool Exists(const Data &)
       const noexcept override; // Override TestableContainer member
 
   /* ************************************************************************ */
@@ -107,7 +107,8 @@ public:
   void Clear() override; // Override Container member
 
 protected:
-  unsigned long next2Power(unsigned long) noexcept;
+  using HashTable<Data>::HashKey;
+  using HashTable<Data>::PrimeSucc;
 };
 
 /* ************************************************************************** */

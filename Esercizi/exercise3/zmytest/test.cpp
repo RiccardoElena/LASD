@@ -12,6 +12,8 @@
 #include "bst/bst.hpp"
 #include "iterator/iterator.hpp"
 
+#include "hashtable/hashtable.hpp"
+
 using namespace std;
 using namespace customTests;
 using TestFun = function<void(unsigned int &, unsigned int &)>;
@@ -43,6 +45,7 @@ void runTests() {
 
   run(my_bst_test);
 
+  run(my_hashtable_test);
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 }
 

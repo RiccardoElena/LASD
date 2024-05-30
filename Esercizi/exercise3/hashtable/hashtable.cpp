@@ -23,7 +23,7 @@ public:
 template <> class Hashable<std::string> {
 public:
   unsigned long operator()(const std::string &d) const noexcept {
-    unsigned long res{0};
+    unsigned long res{5262};
 
     for (unsigned long i{0}; i < d.length(); ++i)
       res += ((res << 5) - res) + d[i];
@@ -75,7 +75,32 @@ HashTable<Data> &HashTable<Data>::operator=(HashTable<Data> &&other) noexcept {
 
 template <typename Data>
 inline unsigned long HashTable<Data>::HashKey(const Data &d) const noexcept {
-  return ((a * hash(d) + b) % p) % tsize;
+  return HashKey(hash(d));
+}
+
+template <typename Data>
+inline unsigned long HashTable<Data>::HashKey(unsigned long k) const noexcept {
+  return ((a * k + b) % MAX_PRIME) % tsize;
+}
+
+template <typename Data>
+unsigned long HashTable<Data>::PrimeSucc(unsigned long d) const noexcept {
+  unsigned long best{25}, i{0}, j{25}, m;
+
+  while (i < j)
+    primes[m = (i + j) >> 1] < d ? i = m + 1 : best = j = m;
+
+  return primes[best];
+}
+
+template <typename Data>
+unsigned long HashTable<Data>::PrimePred(unsigned long d) const noexcept {
+  unsigned long best{0}, i{0}, j{25}, m;
+
+  while (i < j)
+    primes[m = (i + j) >> 1] >= d ? j = m : i = (best = m) + 1;
+
+  return primes[best];
 }
 
 /* ************************************************************************** */

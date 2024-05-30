@@ -12,7 +12,8 @@
 
 /* ************************************************************************** */
 
-#define MIN_TSIZE 128
+#define MIN_TSIZE 53
+#define MAX_PRIME 1610612747
 
 /* ************************************************************************** */
 
@@ -41,21 +42,25 @@ protected:
   unsigned long a{1};
   unsigned long b{0};
 
-  // ? with this hashing method (Cormen), tsize still matters?
-  static const unsigned long p{0x3D30F19CD101};
+  static const unsigned long constexpr primes[26]{
+      53,        97,        193,       389,       769,       1543,     3079,
+      6151,      12289,     24593,     49157,     98317,     196613,   393241,
+      786433,    1572869,   3145739,   6291469,   12582917,  25165843, 50331653,
+      100663319, 201326611, 402653189, 805306457, 1610612741};
+
+  // static const unsigned long p{0x3D30F19CD101};
 
   std::default_random_engine gen{
       std::default_random_engine(std::random_device{}())};
 
   std::uniform_int_distribution<unsigned long> dista{
-      std::uniform_int_distribution<unsigned long>(1, p - 1)};
+      std::uniform_int_distribution<unsigned long>(1, MAX_PRIME - 1)};
 
   std::uniform_int_distribution<unsigned long> distb{
-      std::uniform_int_distribution<unsigned long>(0, p - 1)};
+      std::uniform_int_distribution<unsigned long>(0, MAX_PRIME - 1)};
 
   unsigned long tsize{MIN_TSIZE};
 
-  // ?? boh
   static const Hashable<Data> constexpr hash{};
 
   HashTable();
@@ -85,6 +90,10 @@ protected:
   // Auxiliary member functions
 
   virtual inline unsigned long HashKey(const Data &d) const noexcept;
+  virtual inline unsigned long HashKey(unsigned long) const noexcept;
+
+  virtual unsigned long PrimeSucc(unsigned long) const noexcept;
+  virtual unsigned long PrimePred(unsigned long) const noexcept;
 };
 
 /* ************************************************************************** */

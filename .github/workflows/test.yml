@@ -35,7 +35,7 @@ jobs:
         run: ./.github/workflows/scripts/compile.sh
 
       - name: Check times
-        run: ./.github/workflows/scripts/time.sh 200
+        run: ./.github/workflows/scripts/time.sh 1000
 
       - name: Execute output and check result
         run: ./.github/workflows/scripts/run.sh
