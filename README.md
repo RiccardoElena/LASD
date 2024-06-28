@@ -41,7 +41,7 @@ La parte teorica, obbligatoria per entrambe le modalità di svolgimento dell'esa
 consiste in un colloquio orale su **argomenti trattati durante il corso e discussione**
 **del codice consegnato con gli esercizi**.
 
-Per le dettagli ulteriori, come **testi consigliati**, **orari di ricevimento** e **deadline precise**, si rimanda al [sito web del corso](https://www.docenti.unina.it/webdocenti-be/allegati/materiale-didattico/34825497).
+Per dettagli ulteriori, come **testi consigliati**, **orari di ricevimento** e **deadline precise**, si rimanda al [sito web del corso](https://www.docenti.unina.it/webdocenti-be/allegati/materiale-didattico/34825497).
 
 ## Appunti Lezioni
 
@@ -144,11 +144,13 @@ Le flag opzionali, come l'MWE, sono le stesse di [`compile.sh`](#flag-opzionali-
 
 ## Esercizi
 
-Nella cartella esercizi sono presenti gli esercizi assegnati dal docente, con relativi file sorgenti. <!-- e file di test. -->
+Nella cartella esercizi sono presenti gli esercizi assegnati dal docente, con relativi file sorgenti e file di test.
 
 Ogni esercizio contiene anche tutti i file reltativi ai sorgenti precedenti, in modo da poter consultare il codice già scritto e non dover ricopiare le parti necessarie allo svolgimento del nuovo.
 
 Gli esercizi sono già stati risolti, per cui è possibile consultare le soluzioni.
  Inoltre, sono presenti i file di test per verificare la correttezza delle soluzioni.
+
+Nelle cartelle degli esercizi, in particolare nelle cartelle `zmytest`, sono presenti le istruzioni per l'utilizzo, aggiunta ed esecuzione dei test.
 
 Per reperire gli esercizi assegnati dal docente, si rimanda al [sito web del corso](https://www.docenti.unina.it/#!/professor/464142494f4d4f47415645524f4d475646424138334533314837303341/materiale_didattico), (è necessario essere autenticati e iscritti al corso per accedere ai materiali didattici).
