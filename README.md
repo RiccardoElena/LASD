@@ -154,3 +154,9 @@ Gli esercizi sono già stati risolti, per cui è possibile consultare le soluzio
 Nelle cartelle degli esercizi, in particolare nelle cartelle `zmytest`, sono presenti le istruzioni per l'utilizzo, aggiunta ed esecuzione dei test.
 
 Per reperire gli esercizi assegnati dal docente, si rimanda al [sito web del corso](https://www.docenti.unina.it/#!/professor/464142494f4d4f47415645524f4d475646424138334533314837303341/materiale_didattico), (è necessario essere autenticati e iscritti al corso per accedere ai materiali didattici).
+
+> ***Nota***: *Le soluzioni fornite **NON** possono essere utilizzate per essere consegnate senza una preventiva comprensione del codice e senza averlo personalizzato.*
+>
+> *Per via del sistema di testing messo in atto da questa repository infatti alcune funzioni non relative alle strutture dati (come ad esempio la funzione zlasdtest) potrebbero entrare in contrasto con quelle usate dal docente portando ad errori di compilazione in fase di valutazione.*
+>
+> *In oltre gli esercizi cambiano di anno in anno, dunque queste soluzioni potrebbero non essere più valide per l'anno accademico corrente.*
