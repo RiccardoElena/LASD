@@ -28,6 +28,13 @@ protected:
   using HashTable<Data>::size;
   using HashTable<Data>::tsize;
 
+  using HashTable<Data>::dista;
+  using HashTable<Data>::distb;
+  using HashTable<Data>::gen;
+
+  unsigned long a2{1};
+  unsigned long b2{0};
+
   enum class Status { EMPTY = 0, VALID, DELETED };
   struct Loc {
     Data d{};

@@ -48,7 +48,7 @@ BinaryTree<Data>::operator!=(const BinaryTree<Data> &other) const noexcept {
 
 template <typename Data>
 inline void BinaryTree<Data>::Traverse(TraverseFun func) const {
-  return BreadthTraverse(func);
+  return PreOrderTraverse(func);
 }
 
 template <typename Data>
@@ -140,7 +140,7 @@ void BinaryTree<Data>::BreadthTraverse(TraverseFun func) const {
 // Binary Tree Methods
 
 template <typename Data> inline void MutableBinaryTree<Data>::Map(MapFun func) {
-  return BreadthMap(func);
+  return PreOrderMap(func);
 }
 
 template <typename Data>

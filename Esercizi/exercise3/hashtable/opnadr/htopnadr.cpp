@@ -12,6 +12,9 @@ template <typename Data>
 HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long s) {
   tsize = (s > MIN_TSIZE) ? PrimeSucc(s) : MIN_TSIZE;
 
+  a2 = dista(gen);
+  b2 = distb(gen);
+
   table.Resize(tsize);
 }
 
@@ -51,12 +54,17 @@ HashTableOpnAdr<Data>::HashTableOpnAdr(unsigned long s,
 
 template <typename Data>
 HashTableOpnAdr<Data>::HashTableOpnAdr(const HashTableOpnAdr<Data> &ht)
-    : HashTable<Data>::HashTable(ht), table(ht.table) {}
+    : HashTable<Data>::HashTable(ht), table(ht.table) {
+  a2 = ht.a2;
+  b2 = ht.b2;
+}
 
 template <typename Data>
 HashTableOpnAdr<Data>::HashTableOpnAdr(HashTableOpnAdr<Data> &&ht) noexcept
     : HashTable<Data>::HashTable(std::move(ht)) {
   std::swap(table, ht.table);
+  std::swap(a2, ht.a2);
+  std::swap(b2, ht.b2);
 }
 
 // Operators
@@ -77,6 +85,8 @@ HashTableOpnAdr<Data> &
 HashTableOpnAdr<Data>::operator=(HashTableOpnAdr<Data> &&ht) noexcept {
   HashTable<Data>::operator=(std::move(ht));
   std::swap(table, ht.table);
+  std::swap(a2, ht.a2);
+  std::swap(b2, ht.b2);
   return *this;
 }
 
@@ -191,17 +201,16 @@ HashTableOpnAdr<Data>::HashKey(const Data &d, unsigned long i) const noexcept {
 template <typename Data>
 inline unsigned long
 HashTableOpnAdr<Data>::Hash2(const Data &d) const noexcept {
-  return 1 + (hash(d) % (tsize - 1));
+  return 1 + (((a2 * hash(d) + b2) % MAX_PRIME) % (tsize - 1));
 }
 
 template <typename Data>
 inline unsigned long
 HashTableOpnAdr<Data>::Find(const Data &d, unsigned long i) const noexcept {
-  for (unsigned long j{HashKey(d, i)}; i < tsize; ++i, j = HashKey(d, i)) {
 
+  for (unsigned long j{HashKey(d, i)}; i < tsize; ++i, j = HashKey(d, i))
     if (DataFound(d, j) || table[j].s == Status::EMPTY)
       return i;
-  }
 
   return tsize;
 }

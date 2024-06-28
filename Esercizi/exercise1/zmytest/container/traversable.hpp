@@ -7,6 +7,13 @@
 #include <algorithm>
 #include <cctype>
 
+/*
+ * Nota: Questo file contiene funzioni di utility per testare le funzioni di
+ *       ordine superiore della libreria, come Traverse, Fold e Map.
+ *       Per utilizzarle è sufficiente includere il file e passare le funzioni
+ *       come parametri.
+ */
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 // Traverse Functions

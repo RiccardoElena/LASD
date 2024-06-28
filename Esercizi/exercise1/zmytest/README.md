@@ -1,8 +1,8 @@
 # LASD Custom Test Suite 23/24
 
-Questa repo è ad uso esclusivo dei partecipanti per la condivisione di test in maniera più pratica.
+Si presenta una breve guida per l'utilizzo del template modulare per l'integrazione di test per la libreria.
 
-In quanto privata non mi dilungherò oltre nel README.
+Scopo di questo template è modularizzare i test in modo da poterli eseguire in modo indipendente e separato dal codice principale e rendere scalabile l'aggiunta di nuovi test.
 
 ## Template standard per funzione singolo test
 
@@ -30,7 +30,7 @@ void my_random_name_dont_care_really(unsigned int &testnum, unsigned int &tester
 
 ## Template funzione esposta
 
-Per ***funzione esposta*** si intende l'unica e sola funzoine accedibbile dall'esterno mediante include del file .cpp.
+Per ***funzione esposta*** si intende l'unica e sola funzoine accedibbile dall'esterno mediante include del file `.hpp`.
 
 Idealmente questa funzione dovrebbe fare da *wrapper* per tutte le eventuali funzioni e test interni.
 
@@ -99,6 +99,8 @@ objects = main.o test.o mytest.o container.o exc1as.o exc1af.o exc1bs.o exc1bf.o
 1. Aggiungere al fondo la regola per compilarlo
 
 ```make
-mydatastructure.o: $(libexc1b) zmytest/datastructure/datastructure.hpp zmytest/datastructure/datastructure.cpp
+mydatastructure.o: $(libexcNUM) zmytest/datastructure/datastructure.hpp zmytest/datastructure/datastructure.cpp
   $(cc) $(cflags) -c zmytest/datastructure/datastructure.cpp -o mydatastructure.o
 ```
+
+> *Nota*: Sostituire `NUM` con il numero dell'esercizio *(ex. : 1a, 1b, 3 etc.)* e `datastructure` con il nome della struttura dati che si sta utilizzando. Se si è usata la convenzione di nomi presentatra in questo template, il nome della struttura dati dovrebbe essere `mydatastructure`.

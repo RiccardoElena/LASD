@@ -79,6 +79,7 @@ bool HashTableClsAdr<Data>::operator==(
     return false;
 
   bool f{true};
+  //  [1,2,0,3] [1,2,0,0,0,0,0,0,0,0,0,3]
   for (unsigned long i{0}; i < tsize; ++i) {
     table[i].Traverse([&f, &ht](const Data &currD) { f &= ht.Exists(currD); });
     if (!f)
@@ -119,8 +120,8 @@ template <typename Data> void HashTableClsAdr<Data>::Resize(unsigned long s) {
     Clear();
     return;
   }
-
-  HashTableClsAdr<Data> temp{PrimeSucc(s)};
+  // TODO REVIEW CHANGE
+  HashTableClsAdr<Data> temp{s};
 
   for (unsigned long i{0}; i < tsize; ++i)
     temp.InsertAll(table[i]);

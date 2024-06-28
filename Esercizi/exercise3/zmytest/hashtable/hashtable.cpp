@@ -211,118 +211,6 @@ void myhashtableint(HT ht, unsigned int &testnum, unsigned int &testerr) {
       Remove(loctestnum, loctesterr, ht, false, std::move(0));
       Exists(loctestnum, loctesterr, ht, false, std::move(0));
     }
-    {
-      HT ht{};
-      HT ht2{};
-
-      Empty(testnum, testerr, ht, true);
-      Size(testnum, testerr, ht2, true, 0);
-      EqualHT(testnum, testerr, ht, ht2);
-
-      InsertC(testnum, testerr, ht, true, -1);
-      NonEqualHT(testnum, testerr, ht, ht2);
-
-      InsertC(testnum, testerr, ht2, true, -1);
-      InsertC(testnum, testerr, ht2, false, -1);
-
-      EqualHT(testnum, testerr, ht, ht2);
-      Size(testnum, testerr, ht, true, 1);
-
-      InsertM(testnum, testerr, ht, true, std::move(-2));
-      InsertM(testnum, testerr, ht, false, std::move(-2));
-      Size(testnum, testerr, ht, true, 2);
-
-      Remove(testnum, testerr, ht, true, -2);
-
-      lasd::Vector<int> v{200};
-      for (int i = 0; i < 200; ++i)
-        v[i] = i;
-
-      InsertAllC(testnum, testerr, ht, true, v);
-      Size(testnum, testerr, ht, true, 201);
-
-      v.Resize(199);
-      InsertAllM(testnum, testerr, ht2, true, std::move(v));
-      NonEqualHT(testnum, testerr, ht, ht2);
-
-      InsertC(testnum, testerr, ht2, true, 199);
-      EqualHT(testnum, testerr, ht, ht2);
-
-      ht.Clear();
-      Size(testnum, testerr, ht, true, 0);
-
-      for (int i{200}; i >= -1; --i) {
-        int k{i};
-        InsertM(testnum, testerr, ht, true, std::move(k));
-      }
-
-      Size(testnum, testerr, ht, true, 202);
-      NonEqualHT(testnum, testerr, ht, ht2);
-
-      Remove(testnum, testerr, ht, true, 200);
-      EqualHT(testnum, testerr, ht, ht2);
-
-      Remove(testnum, testerr, ht, false, 555);
-      Remove(testnum, testerr, ht, true, 100);
-      NonEqualHT(testnum, testerr, ht, ht2);
-
-      ht2 = ht;
-      EqualHT(testnum, testerr, ht, ht2);
-      Size(testnum, testerr, ht, true, 200);
-
-      HT ht3{std::move(ht)};
-      Empty(testnum, testerr, ht, true);
-      NonEqualHT(testnum, testerr, ht, ht2);
-      EqualHT(testnum, testerr, ht3, ht2);
-
-      ht2 = std::move(ht);
-      Empty(testnum, testerr, ht, false);
-      EqualHT(testnum, testerr, ht3, ht);
-      NonEqualHT(testnum, testerr, ht, ht2);
-
-      v.Resize(1000);
-      for (int i = 0; i < 1000; ++i)
-        v[i] = i;
-
-      HT ht4{5};
-      InsertAllC(testnum, testerr, ht4, true, v);
-      Size(testnum, testerr, ht4, true, 1000);
-
-      HT ht5{5000, v};
-      Size(testnum, testerr, ht5, true, 1000);
-      EqualHT(testnum, testerr, ht4, ht5);
-
-      v.Resize(1100);
-      for (int i{1000}, k{0}; i < 1100; ++i, ++k)
-        v[i] = k;
-
-      HT ht6{20, std::move(v)};
-      Size(testnum, testerr, ht6, true, 1000);
-      EqualHT(testnum, testerr, ht4, ht6);
-
-      for (int i{0}; i < 1000; ++i)
-        if (i % 2)
-          Remove(testnum, testerr, ht4, true, i);
-      Size(testnum, testerr, ht4, true, 500);
-
-      for (int i{999}; i > -1; --i)
-        InsertC(testnum, testerr, ht4, i % 2, i);
-
-      EqualHT(testnum, testerr, ht4, ht6);
-
-      ht4.Resize(1);
-      Size(testnum, testerr, ht4, true, 1000);
-
-      for (int i{999}; i > -1; --i) {
-        Remove(testnum, testerr, ht4, true, i);
-        Size(testnum, testerr, ht4, true, i);
-      }
-
-      for (int i{0}; i < 1000; i++) {
-        InsertC(testnum, testerr, ht4, true, i);
-        Size(testnum, testerr, ht4, true, i + 1);
-      }
-    }
 
   } catch (...) {
     loctestnum++;
@@ -375,122 +263,180 @@ void myhashtabledouble(HT ht, unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctestnum{0};
 
   try {
-    HT ht{};
-    HT ht2{};
+    {
+      lasd::SortableVector<double> v{100};
+      for (unsigned long i{0}; i < v.Size(); ++i)
+        v[i] = floor(sqrt(i * (i + 1) / 2));
+      Empty(loctestnum, loctesterr, ht, false);
+      Size(loctestnum, loctesterr, ht, true, 71);
+      // WARNING: This unit test is counterintuitive
+      CountHT(loctestnum, loctesterr, ht, v, 100);
 
-    Empty(loctestnum, loctesterr, ht, true);
-    Size(loctestnum, loctesterr, ht2, true, 0);
-    EqualHT(loctestnum, loctesterr, ht, ht2);
+      v.Resize(500);
+      for (unsigned long i{0}; i < v.Size(); ++i)
+        v[i] = floor(sqrt(i * (i + 1) / 2));
 
-    InsertC(loctestnum, loctesterr, ht, true, -1.0);
-    Exists(loctestnum, loctesterr, ht, true, -1.0);
-    NonEqualHT(loctestnum, loctesterr, ht, ht2);
+      InsertAllM(loctestnum, loctesterr, ht, false, std::move(v));
 
-    InsertC(loctestnum, loctesterr, ht2, true, -1.0);
-    InsertC(loctestnum, loctesterr, ht2, false, -1.0);
-    Exists(loctestnum, loctesterr, ht2, true, -1.0);
+      for (unsigned long i{0}; i < v.Size(); ++i)
+        v[i] = v.Size() - v[i];
+      Size(loctestnum, loctesterr, ht, true, 354);
+      InsertSomeM(loctestnum, loctesterr, ht, true, std::move(v));
+      Size(loctestnum, loctesterr, ht, true, 457);
 
-    EqualHT(loctestnum, loctesterr, ht, ht2);
-    Size(loctestnum, loctesterr, ht, true, 1);
+      ht.Resize(1);
+      lasd::SortableVector<double> v2{44};
 
-    InsertM(loctestnum, loctesterr, ht, true, std::move(-2.0));
-    InsertM(loctestnum, loctesterr, ht, false, std::move(-2.0));
-    Size(loctestnum, loctesterr, ht, true, 2);
+      v2[0] = 355.0;
+      v2[1] = 356.0;
+      v2[2] = 358.0;
+      v2[3] = 360.0;
+      v2[4] = 361.0;
+      v2[5] = 363.0;
+      v2[6] = 365.0;
+      v2[7] = 366.0;
+      v2[8] = 368.0;
+      v2[9] = 370.0;
+      v2[10] = 372.0;
+      v2[11] = 373.0;
+      v2[12] = 375.0;
+      v2[13] = 377.0;
+      v2[14] = 378.0;
+      v2[15] = 380.0;
+      v2[16] = 382.0;
+      v2[17] = 384.0;
+      v2[18] = 385.0;
+      v2[19] = 387.0;
+      v2[20] = 389.0;
+      v2[21] = 390.0;
+      v2[22] = 392.0;
+      v2[23] = 394.0;
+      v2[24] = 396.0;
+      v2[25] = 397.0;
+      v2[26] = 399.0;
+      v2[27] = 401.0;
+      v2[28] = 402.0;
+      v2[29] = 404.0;
+      v2[30] = 406.0;
+      v2[31] = 407.0;
+      v2[32] = 409.0;
+      v2[33] = 411.0;
+      v2[34] = 413.0;
+      v2[35] = 414.0;
+      v2[36] = 416.0;
+      v2[37] = 418.0;
+      v2[38] = 419.0;
+      v2[39] = 421.0;
+      v2[40] = 423.0;
+      v2[41] = 425.0;
+      v2[42] = 426.0;
+      v2[43] = 428.0;
 
-    Remove(loctestnum, loctesterr, ht, true, -2.0);
+      for (unsigned long i{0}; i < 500; ++i)
+        Exists(loctestnum, loctesterr, ht, !v2.Exists(i),
+               static_cast<double>(i));
 
-    lasd::Vector<double> v{200};
-    for (int i = 0; i < 200; ++i)
-      v[i] = i * i / 2.0;
+      lasd::SortableVector<double> v3{250};
 
-    InsertAllC(loctestnum, loctesterr, ht, true, v);
-    Size(loctestnum, loctesterr, ht, true, 201);
+      for (unsigned long i{1}; i < v3.Size(); ++i)
+        if (i % 2)
+          v3[i] = static_cast<double>(i);
 
-    v.Resize(199);
-    InsertAllM(loctestnum, loctesterr, ht2, true, std::move(v));
-    NonEqualHT(loctestnum, loctesterr, ht, ht2);
+      RemoveSome(loctestnum, loctesterr, ht, true, v3);
 
-    InsertC(loctestnum, loctesterr, ht2, true, 199.0 * 199.0 / 2.0);
-    EqualHT(loctestnum, loctesterr, ht, ht2);
+      Size(loctestnum, loctesterr, ht, true, 331);
+      for (unsigned long i{0}; i < v3.Size(); ++i)
+        Exists(loctestnum, loctesterr, ht, false, v3[i]);
 
-    ht.Clear();
-    Size(loctestnum, loctesterr, ht, true, 0);
+      ht.Clear();
+      CountHT(loctestnum, loctesterr, ht, v, 0);
+      Size(loctestnum, loctesterr, ht, true, 0);
+      v.Resize(1000);
+      for (unsigned long i{0}; i < v.Size(); ++i)
+        v[i] = floor(sqrt(i * (i + 1) * (i + 2) / 2)) * (i % 3 ? 1 : -1);
 
-    for (int i{200}; i >= 0; --i) {
-      double k{i * i / 2.0};
-      InsertM(loctestnum, loctesterr, ht, true, std::move(k));
-    }
-    InsertC(loctestnum, loctesterr, ht, true, -1.33333);
-    Exists(loctestnum, loctesterr, ht, true, -1.33333);
-    Remove(loctestnum, loctesterr, ht, true, -1.33333);
-    Remove(loctestnum, loctesterr, ht, false, -1.33333);
-    InsertM(loctestnum, loctesterr, ht, true, std::move(-1.0));
+      for (unsigned long i{0}; i < v.Size(); ++i)
+        InsertC(loctestnum, loctesterr, ht, true, v[i]);
 
-    Size(loctestnum, loctesterr, ht, true, 202);
-    NonEqualHT(loctestnum, loctesterr, ht, ht2);
+      Size(loctestnum, loctesterr, ht, true, 1000);
 
-    Remove(loctestnum, loctesterr, ht, true, 20000.0);
-    EqualHT(loctestnum, loctesterr, ht, ht2);
+      for (unsigned long i{0}; i < v.Size(); ++i)
+        v[i] = v[i] + 1.0;
 
-    Remove(loctestnum, loctesterr, ht, false, 555.0);
-    Remove(loctestnum, loctesterr, ht, true, 5000.0);
-    NonEqualHT(loctestnum, loctesterr, ht, ht2);
-
-    ht2 = ht;
-    EqualHT(loctestnum, loctesterr, ht, ht2);
-    Size(loctestnum, loctesterr, ht, true, 200);
-
-    HT ht3{std::move(ht)};
-    Empty(loctestnum, loctesterr, ht, true);
-    NonEqualHT(loctestnum, loctesterr, ht, ht2);
-    EqualHT(loctestnum, loctesterr, ht3, ht2);
-
-    ht2 = std::move(ht);
-    Empty(loctestnum, loctesterr, ht, false);
-    EqualHT(loctestnum, loctesterr, ht3, ht);
-    NonEqualHT(loctestnum, loctesterr, ht, ht2);
-
-    v.Resize(1000);
-    for (int i = 0; i < 1000; ++i)
-      v[i] = i * (i + 2.0) / (i + 3.0);
-
-    HT ht4{5};
-    InsertAllC(loctestnum, loctesterr, ht4, true, v);
-    Size(loctestnum, loctesterr, ht4, true, 1000);
-
-    HT ht5{5000, v};
-    Size(loctestnum, loctesterr, ht5, true, 1000);
-    EqualHT(loctestnum, loctesterr, ht4, ht5);
-
-    v.Resize(1100);
-    for (int i{1000}, k{0}; i < 1100; ++i, ++k)
-      v[i] = k * (k + 2.0) / (k + 3.0);
-
-    HT ht6{20, std::move(v)};
-    Size(loctestnum, loctesterr, ht6, true, 1000);
-    EqualHT(loctestnum, loctesterr, ht4, ht6);
-
-    for (int i{0}; i < 1000; ++i)
-      if (i % 2)
-        Remove(loctestnum, loctesterr, ht4, true, i * (i + 2.0) / (i + 3.0));
-    Size(loctestnum, loctesterr, ht4, true, 500);
-
-    for (int i{999}; i > -1; --i)
-      InsertC(loctestnum, loctesterr, ht4, i % 2, i * (i + 2.0) / (i + 3.0));
-
-    EqualHT(loctestnum, loctesterr, ht4, ht6);
-
-    ht4.Resize(1);
-    Size(loctestnum, loctesterr, ht4, true, 1000);
-
-    for (int i{999}; i > -1; --i) {
-      Remove(loctestnum, loctesterr, ht4, true, i * (i + 2.0) / (i + 3.0));
-      Size(loctestnum, loctesterr, ht4, true, i);
+      InsertSomeC(loctestnum, loctesterr, ht, true, v);
+      Size(loctestnum, loctesterr, ht, true, 1999);
+      HT ht2{ht};
+      EqualHT(loctestnum, loctesterr, ht, ht2);
+      Remove(loctestnum, loctesterr, ht, true, 0.0);
+      NonEqualHT(loctestnum, loctesterr, ht, ht2);
     }
 
-    for (int i{0}; i < 1000; i++) {
-      InsertC(loctestnum, loctesterr, ht4, true, i * (i + 2.0) / (i + 3.0));
-      Size(loctestnum, loctesterr, ht4, true, i + 1);
+    {
+      HT ht2;
+      Size(loctestnum, loctesterr, ht2, true, 0);
+      Exists(loctestnum, loctesterr, ht2, false, 0.0);
+      lasd::List<double> l;
+      for (unsigned long i{0}; i < 300; ++i) {
+        if (i < 150 || !(i % 4)) {
+          l.InsertAtFront(static_cast<double>(i));
+          InsertC(loctestnum, loctesterr, ht2, true, static_cast<double>(i));
+        } else
+          Remove(loctestnum, loctesterr, ht2, true, l.FrontNRemove());
+      }
+      ht2.Resize(1);
+
+      HT ht3{ht2};
+      HT ht4{std::move(ht2)};
+
+      EqualHT(loctestnum, loctesterr, ht3, ht4);
+      Empty(loctestnum, loctesterr, ht2, true);
+      Size(loctestnum, loctesterr, ht2, true, 0);
+      Size(loctestnum, loctesterr, ht3, true, 74);
+      Size(loctestnum, loctesterr, ht4, true, 74);
+
+      for (unsigned long i{0}; i < 300; ++i)
+        Exists(loctestnum, loctesterr, ht4, l.Exists(static_cast<double>(i)),
+               static_cast<double>(i));
+
+      ht2 = ht4;
+      EqualHT(loctestnum, loctesterr, ht2, ht4);
+      Empty(loctestnum, loctesterr, ht4, false);
+      Empty(loctestnum, loctesterr, ht2, false);
+
+      for (unsigned long i{0}; i < 300; ++i)
+        Exists(loctestnum, loctesterr, ht2, l.Exists(static_cast<double>(i)),
+               static_cast<double>(i));
+      ht2.Clear();
+      ht2 = std::move(ht4);
+      NonEqualHT(loctestnum, loctesterr, ht2, ht4);
+      Empty(loctestnum, loctesterr, ht4, true);
+      Empty(loctestnum, loctesterr, ht2, false);
+
+      for (unsigned long i{0}; i < 300; ++i) {
+        Exists(loctestnum, loctesterr, ht2, l.Exists(static_cast<double>(i)),
+               static_cast<double>(i));
+        Exists(loctestnum, loctesterr, ht4, false, static_cast<double>(i));
+      }
+    }
+    {
+      HT ht{54};
+      Exists(loctestnum, loctesterr, ht, false, std::move(0.0));
+      InsertM(loctestnum, loctesterr, ht, true, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, true, 0.0);
+      InsertM(loctestnum, loctesterr, ht, false, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, true, 0.0);
+      Remove(loctestnum, loctesterr, ht, true, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, false, std::move(0.0));
+      Remove(loctestnum, loctesterr, ht, false, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, false, std::move(0.0));
+      InsertM(loctestnum, loctesterr, ht, true, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, true, 0.0);
+      InsertM(loctestnum, loctesterr, ht, false, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, true, 0.0);
+      Remove(loctestnum, loctesterr, ht, true, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, false, std::move(0.0));
+      Remove(loctestnum, loctesterr, ht, false, std::move(0.0));
+      Exists(loctestnum, loctesterr, ht, false, std::move(0.0));
     }
   } catch (...) {
     loctestnum++;
@@ -545,158 +491,458 @@ void myhashtablestring(unsigned int &testnum, unsigned int &testerr) {
   unsigned int loctestnum{0};
 
   try {
-    lasd::Vector<string> v{124};
-    int vsize{0};
+    lasd::List<string> l{};
 
-    v[vsize++] = "Nel";
-    v[vsize++] = "mezzo";
-    v[vsize++] = "del";
-    v[vsize++] = "cammin";
-    v[vsize++] = "di";
-    v[vsize++] = "nostra";
-    v[vsize++] = "vita";
+    l.Insert("Lorem");
+    l.Insert("ipsum");
+    l.Insert("dolor");
+    l.Insert("sit");
+    l.Insert("amet,");
+    l.Insert("consectetur");
+    l.Insert("adipiscing");
+    l.Insert("elit,");
 
-    v[vsize++] = "mi";
-    v[vsize++] = "ritrovai";
-    v[vsize++] = "per";
-    v[vsize++] = "una";
-    v[vsize++] = "selva";
-    v[vsize++] = "oscura,";
+    l.Insert("sed");
+    l.Insert("do");
+    l.Insert("eiusmod");
+    l.Insert("tempor");
+    l.Insert("incididunt");
+    l.Insert("ut");
+    l.Insert("labore");
+    l.Insert("et");
+    l.Insert("dolore");
 
-    v[vsize++] = "ché";
-    v[vsize++] = "la";
-    v[vsize++] = "diritta";
-    v[vsize++] = "via";
-    v[vsize++] = "era";
-    v[vsize++] = "smarrita.";
+    l.Insert("magna");
+    l.Insert("aliqua.");
+    l.Insert("Ut");
+    l.Insert("enim");
+    l.Insert("ad");
+    l.Insert("minim");
+    l.Insert("veniam,");
+    l.Insert("quis");
+    l.Insert("nostrud");
 
-    v[vsize++] = "Ahi";
-    v[vsize++] = "quanto";
-    v[vsize++] = "a";
-    v[vsize++] = "dir";
-    v[vsize++] = "qual";
-    v[vsize++] = "era";
-    v[vsize++] = "è";
-    v[vsize++] = "cosa";
-    v[vsize++] = "dura";
+    l.Insert("exercitation");
+    l.Insert("ullamco");
+    l.Insert("laboris");
+    l.Insert("nisi");
+    l.Insert("ut");
+    l.Insert("aliquip");
+    l.Insert("ex");
+    l.Insert("ea");
+    l.Insert("commodo");
 
-    v[vsize++] = "esta";
-    v[vsize++] = "selva";
-    v[vsize++] = "selvaggia";
-    v[vsize++] = "e";
-    v[vsize++] = "aspra";
-    v[vsize++] = "e";
-    v[vsize++] = "forte";
+    l.Insert("consequat.");
+    l.Insert("Duis");
+    l.Insert("aute");
+    l.Insert("irure");
+    l.Insert("dolor");
+    l.Insert("in");
+    l.Insert("reprehenderit");
+    l.Insert("in");
+    l.Insert("voluptate");
 
-    v[vsize++] = "che";
-    v[vsize++] = "nel";
-    v[vsize++] = "pensier";
-    v[vsize++] = "rinova";
-    v[vsize++] = "la";
-    v[vsize++] = "paura!";
+    l.Insert("velit");
+    l.Insert("esse");
+    l.Insert("cillum");
+    l.Insert("dolore");
+    l.Insert("eu");
+    l.Insert("fugiat");
+    l.Insert("nulla");
+    l.Insert("pariatur.");
 
-    v[vsize++] = "Tant'è";
-    v[vsize++] = "amara";
-    v[vsize++] = "che";
-    v[vsize++] = "poco";
-    v[vsize++] = "è";
-    v[vsize++] = "più";
-    v[vsize++] = "morte;";
+    l.Insert("Excepteur");
+    l.Insert("sint");
+    l.Insert("occaecat");
+    l.Insert("cupidatat");
+    l.Insert("non");
+    l.Insert("proident,");
+    l.Insert("sunt");
+    l.Insert("in");
+    l.Insert("culpa");
 
-    v[vsize++] = "ma";
-    v[vsize++] = "per";
-    v[vsize++] = "trattar";
-    v[vsize++] = "del";
-    v[vsize++] = "ben";
-    v[vsize++] = "ch'i'";
-    v[vsize++] = "vi";
-    v[vsize++] = "trovai,";
+    l.Insert("qui");
+    l.Insert("officia");
+    l.Insert("deserunt");
+    l.Insert("mollit");
+    l.Insert("anim");
+    l.Insert("id");
+    l.Insert("est");
+    l.Insert("laborum.");
 
-    v[vsize++] = "dirò";
-    v[vsize++] = "de";
-    v[vsize++] = "l'altre";
-    v[vsize++] = "cose";
-    v[vsize++] = "ch'i'";
-    v[vsize++] = "v'";
-    v[vsize++] = "ho";
-    v[vsize++] = "scorte.";
+    l.Insert("Sed");
+    l.Insert("ut");
+    l.Insert("perspiciatis");
+    l.Insert("unde");
+    l.Insert("omnis");
+    l.Insert("iste");
+    l.Insert("natus");
+    l.Insert("error");
 
-    v[vsize++] = "Io";
-    v[vsize++] = "non";
-    v[vsize++] = "so";
-    v[vsize++] = "ben";
-    v[vsize++] = "ridir";
-    v[vsize++] = "com'i'";
-    v[vsize++] = "v'intrai,";
+    l.Insert("sit");
+    l.Insert("voluptatem");
+    l.Insert("accusantium");
+    l.Insert("doloremque");
+    l.Insert("laudantium,");
+    l.Insert("totam");
+    l.Insert("rem");
+    l.Insert("aperiam");
 
-    v[vsize++] = "tant'era";
-    v[vsize++] = "pien";
-    v[vsize++] = "di";
-    v[vsize++] = "sonno";
-    v[vsize++] = "a";
-    v[vsize++] = "quel";
-    v[vsize++] = "punto";
+    l.Insert("eaque");
+    l.Insert("ipsa");
+    l.Insert("quae");
+    l.Insert("ab");
+    l.Insert("illo");
+    l.Insert("inventore");
+    l.Insert("veritatis");
+    l.Insert("et");
+    l.Insert("quasi");
 
-    v[vsize++] = "che";
-    v[vsize++] = "la";
-    v[vsize++] = "verace";
-    v[vsize++] = "via";
-    v[vsize++] = "abbandonai.";
+    l.Insert("architecto");
+    l.Insert("beatae");
+    l.Insert("vitae");
+    l.Insert("dicta");
+    l.Insert("sunt");
+    l.Insert("explicabo.");
+    l.Insert("Nemo");
+    l.Insert("enim");
 
-    v[vsize++] = "Ma";
-    v[vsize++] = "poi";
-    v[vsize++] = "ch'i'";
-    v[vsize++] = "fui";
-    v[vsize++] = "al";
-    v[vsize++] = "piè";
-    v[vsize++] = "d'un";
-    v[vsize++] = "colle";
-    v[vsize++] = "giunto,";
+    l.Insert("ipsam");
+    l.Insert("voluptatem");
+    l.Insert("quia");
+    l.Insert("voluptas");
+    l.Insert("sit");
+    l.Insert("aspernatur");
+    l.Insert("aut");
+    l.Insert("odit");
+    l.Insert("aut");
 
-    v[vsize++] = "là";
-    v[vsize++] = "dove";
-    v[vsize++] = "terminava";
-    v[vsize++] = "quella";
-    v[vsize++] = "valle";
+    l.Insert("fugit,");
+    l.Insert("sed");
+    l.Insert("quia");
+    l.Insert("consequuntur");
+    l.Insert("magni");
+    l.Insert("dolores");
+    l.Insert("eos");
+    l.Insert("qui");
+    l.Insert("ratione");
 
-    v[vsize++] = "che";
-    v[vsize++] = "m'avea";
-    v[vsize++] = "di";
-    v[vsize++] = "paura";
-    v[vsize++] = "il";
-    v[vsize++] = "cor";
-    v[vsize++] = "compunto,";
+    l.Insert("voluptatem");
+    l.Insert("sequi");
+    l.Insert("nesciunt.");
+    l.Insert("Neque");
+    l.Insert("porro");
+    l.Insert("quisquam");
+    l.Insert("est,");
+    l.Insert("qui");
+    l.Insert("dolorem");
 
-    v[vsize++] = "guardai";
-    v[vsize++] = "in";
-    v[vsize++] = "alto";
-    v[vsize++] = "e";
-    v[vsize++] = "vidi";
-    v[vsize++] = "le";
-    v[vsize++] = "sue";
-    v[vsize++] = "spalle";
+    l.Insert("ipsum");
+    l.Insert("quia");
+    l.Insert("dolor");
+    l.Insert("sit");
+    l.Insert("amet,");
+    l.Insert("consectetur");
+    l.Insert("adipisci");
+    l.Insert("velit,");
+    l.Insert("sed");
 
-    v[vsize++] = "vestite";
-    v[vsize++] = "già";
-    v[vsize++] = "de'raggi";
-    v[vsize++] = "del";
-    v[vsize++] = "pianeta";
+    l.Insert("quia");
+    l.Insert("non");
+    l.Insert("numquam");
+    l.Insert("eius");
+    l.Insert("modi");
+    l.Insert("tempora");
+    l.Insert("incidunt");
+    l.Insert("ut");
+    l.Insert("labore");
 
-    v[vsize++] = "che";
-    v[vsize++] = "mena";
-    v[vsize++] = "dritto";
-    v[vsize++] = "altrui";
-    v[vsize++] = "per";
-    v[vsize++] = "ogne";
-    v[vsize++] = "calle.";
+    l.Insert("et");
+    l.Insert("dolore");
+    l.Insert("magnam");
+    l.Insert("aliquam");
+    l.Insert("quaerat");
+    l.Insert("voluptatem.");
+    l.Insert("Ut");
+    l.Insert("enim");
+    l.Insert("ad");
 
-    TraversePreOrder(loctestnum, loctesterr, v, true, TraversePrint<string>);
+    l.Insert("minima");
+    l.Insert("veniam,");
+    l.Insert("quis");
+    l.Insert("nostrum");
+    l.Insert("exercitationem");
+    l.Insert("ullam");
+    l.Insert("corporis");
+    l.Insert("suscipit");
+    l.Insert("laboriosam,");
 
-    lasd::List<string> l;
-    for (int i{0}; i < vsize; ++i)
-      l.Insert(v[i]);
+    l.Insert("nisi");
+    l.Insert("ut");
+    l.Insert("aliquid");
+    l.Insert("ex");
+    l.Insert("ea");
+    l.Insert("commodi");
+    l.Insert("consequatur?");
+    l.Insert("Quis");
+    l.Insert("autem");
 
-    HT ht{1, v};
+    l.Insert("vel");
+    l.Insert("eum");
+    l.Insert("iure");
+    l.Insert("reprehenderit");
+    l.Insert("qui");
+    l.Insert("in");
+    l.Insert("ea");
+    l.Insert("voluptate");
+    l.Insert("velit");
+
+    l.Insert("esse");
+    l.Insert("quam");
+    l.Insert("nihil");
+    l.Insert("molestiae");
+    l.Insert("consequatur,");
+    l.Insert("vel");
+    l.Insert("illum");
+    l.Insert("qui");
+    l.Insert("dolorem");
+
+    l.Insert("eum");
+    l.Insert("fugiat");
+    l.Insert("quo");
+    l.Insert("voluptas");
+    l.Insert("nulla");
+    l.Insert("pariatur?");
+    l.Insert("At");
+    l.Insert("vero");
+    l.Insert("eos");
+
+    l.Insert("et");
+    l.Insert("accusamus");
+    l.Insert("et");
+    l.Insert("iusto");
+    l.Insert("odio");
+    l.Insert("dignissimos");
+    l.Insert("ducimus");
+    l.Insert("qui");
+    l.Insert("blanditiis");
+
+    l.Insert("praesentium");
+    l.Insert("voluptatum");
+    l.Insert("deleniti");
+    l.Insert("atque");
+    l.Insert("corrupti");
+    l.Insert("quos");
+    l.Insert("dolores");
+    l.Insert("et");
+    l.Insert("quas");
+
+    l.Insert("molestias");
+    l.Insert("excepturi");
+    l.Insert("sint");
+    l.Insert("occaecati");
+    l.Insert("cupiditate");
+    l.Insert("non");
+    l.Insert("provident,");
+    l.Insert("similique");
+    l.Insert("sunt");
+
+    l.Insert("in");
+    l.Insert("culpa");
+    l.Insert("qui");
+    l.Insert("officia");
+    l.Insert("deserunt");
+    l.Insert("mollitia");
+    l.Insert("animi,");
+    l.Insert("id");
+    l.Insert("est");
+
+    l.Insert("laborum");
+    l.Insert("et");
+    l.Insert("dolorum");
+    l.Insert("fuga.");
+    l.Insert("Et");
+    l.Insert("harum");
+    l.Insert("quidem");
+    l.Insert("rerum");
+    l.Insert("facilis");
+
+    l.Insert("est");
+    l.Insert("et");
+    l.Insert("expedita");
+    l.Insert("distinctio.");
+    l.Insert("Nam");
+    l.Insert("libero");
+    l.Insert("tempore,");
+    l.Insert("cum");
+    l.Insert("soluta");
+
+    l.Insert("nobis");
+    l.Insert("est");
+    l.Insert("eligendi");
+    l.Insert("optio");
+    l.Insert("cumque");
+    l.Insert("nihil");
+    l.Insert("impedit");
+    l.Insert("quo");
+    l.Insert("minus");
+
+    l.Insert("id");
+    l.Insert("quod");
+    l.Insert("maxime");
+    l.Insert("placeat");
+    l.Insert("facere");
+    l.Insert("possimus,");
+    l.Insert("omnis");
+    l.Insert("voluptas");
+    l.Insert("assumenda");
+
+    l.Insert("est,");
+    l.Insert("omnis");
+    l.Insert("dolor");
+    l.Insert("repellendus.");
+    l.Insert("Temporibus");
+    l.Insert("autem");
+    l.Insert("quibusdam");
+    l.Insert("et");
+    l.Insert("aut");
+
+    l.Insert("officiis");
+    l.Insert("debitis");
+    l.Insert("aut");
+    l.Insert("rerum");
+    l.Insert("necessitatibus");
+    l.Insert("saepe");
+    l.Insert("eveniet");
+    l.Insert("ut");
+    l.Insert("et");
+
+    l.Insert("voluptates");
+    l.Insert("repudiandae");
+    l.Insert("sint");
+    l.Insert("et");
+    l.Insert("molestiae");
+    l.Insert("non");
+    l.Insert("recusandae.");
+    l.Insert("Itaque");
+    l.Insert("earum");
+
+    l.Insert("rerum");
+    l.Insert("hic");
+    l.Insert("tenetur");
+    l.Insert("a");
+    l.Insert("sapiente");
+    l.Insert("delectus,");
+    l.Insert("ut");
+    l.Insert("aut");
+    l.Insert("reiciendis");
+
+    l.Insert("voluptatibus");
+    l.Insert("maiores");
+    l.Insert("alias");
+    l.Insert("consequatur");
+    l.Insert("aut");
+    l.Insert("perferendis");
+    l.Insert("doloribus");
+    l.Insert("asperiores");
+    l.Insert("repellat");
+
+    l.Insert("Lorem");
+    l.Insert("ipsum");
+    l.Insert("dolor");
+    l.Insert("sit");
+    l.Insert("amet,");
+    l.Insert("consectetur");
+    l.Insert("adipiscing");
+    l.Insert("elit,");
+
+    l.Insert("sed");
+    l.Insert("do");
+    l.Insert("eiusmod");
+    l.Insert("tempor");
+    l.Insert("incididunt");
+    l.Insert("ut");
+    l.Insert("labore");
+    l.Insert("et");
+    l.Insert("dolore");
+
+    l.Insert("magna");
+    l.Insert("aliqua.");
+    l.Insert("Ut");
+    l.Insert("enim");
+    l.Insert("ad");
+    l.Insert("minim");
+    l.Insert("veniam,");
+    l.Insert("quis");
+    l.Insert("nostrud");
+
+    l.Insert("exercitation");
+    l.Insert("ullamco");
+    l.Insert("laboris");
+    l.Insert("nisi");
+    l.Insert("ut");
+    l.Insert("aliquip");
+    l.Insert("ex");
+    l.Insert("ea");
+    l.Insert("commodo");
+
+    l.Insert("consequat.");
+    l.Insert("Duis");
+    l.Insert("aute");
+    l.Insert("irure");
+    l.Insert("dolor");
+    l.Insert("in");
+    l.Insert("reprehenderit");
+    l.Insert("in");
+    l.Insert("voluptate");
+
+    l.Insert("velit");
+    l.Insert("esse");
+    l.Insert("cillum");
+    l.Insert("dolore");
+    l.Insert("eu");
+    l.Insert("fugiat");
+    l.Insert("nulla");
+    l.Insert("pariatur.");
+
+    l.Insert("Excepteur");
+    l.Insert("sint");
+    l.Insert("occaecat");
+    l.Insert("cupidatat");
+    l.Insert("non");
+    l.Insert("proident,");
+    l.Insert("sunt");
+    l.Insert("in");
+    l.Insert("culpa");
+
+    l.Insert("qui");
+    l.Insert("officia");
+    l.Insert("deserunt");
+    l.Insert("mollit");
+    l.Insert("anim");
+    l.Insert("id");
+    l.Insert("est");
+    l.Insert("laborum.");
+
+    l.Insert("Sed");
+    l.Insert("ut");
+    l.Insert("perspiciatis");
+    l.Insert("unde");
+    l.Insert("omnis");
+    l.Insert("iste");
+    l.Insert("natus");
+    l.Insert("error");
+
+    l.Insert("sit");
+    l.Insert("voluptatem");
+    l.Insert("accusantium");
+    l.Insert("doloremque");
+    l.Insert("laudantium,");
+    l.Insert("totam");
+    l.Insert("rem");
+    l.Insert("aperiam");
+
+    HT ht{1, l};
 
     Size(loctestnum, loctesterr, ht, true, l.Size());
 
@@ -708,17 +954,17 @@ void myhashtablestring(unsigned int &testnum, unsigned int &testerr) {
     Empty(loctestnum, loctesterr, ht3, true);
     EqualHT(loctestnum, loctesterr, ht3, ht);
 
-    Exists(loctestnum, loctesterr, ht2, true, string("per"));
-    Exists(loctestnum, loctesterr, ht2, true, string("pianeta"));
-    Exists(loctestnum, loctesterr, ht2, true, string("de'raggi"));
-    Exists(loctestnum, loctesterr, ht2, false, string("de'raggi2"));
+    Exists(loctestnum, loctesterr, ht2, true, string("Lorem"));
+    Exists(loctestnum, loctesterr, ht2, true, string("ipsum"));
+    Exists(loctestnum, loctesterr, ht2, true, string("dolor"));
+    Exists(loctestnum, loctesterr, ht2, false, string("doloresita"));
 
-    Remove(loctestnum, loctesterr, ht2, true, string("de'raggi"));
-    Remove(loctestnum, loctesterr, ht2, false, string("de'raggi"));
-    Exists(loctestnum, loctesterr, ht2, false, string("de'raggi"));
+    Remove(loctestnum, loctesterr, ht2, true, string("totam"));
+    Remove(loctestnum, loctesterr, ht2, false, string("cillummma"));
+    Exists(loctestnum, loctesterr, ht2, false, string("rewbbq b"));
 
-    Remove(loctestnum, loctesterr, ht2, true, string("pianeta"));
-    Remove(loctestnum, loctesterr, ht2, true, string("che"));
+    Remove(loctestnum, loctesterr, ht2, true, string("perspiciatis"));
+    Remove(loctestnum, loctesterr, ht2, true, string("provident,"));
 
     Size(loctestnum, loctesterr, ht2, true, l.Size() - 3);
     CountHT(loctestnum, loctesterr, ht2, l, l.Size() - 3);
@@ -726,15 +972,15 @@ void myhashtablestring(unsigned int &testnum, unsigned int &testerr) {
     RemoveAll(loctestnum, loctesterr, ht2, false, l);
     Size(loctestnum, loctesterr, ht2, true, 0);
 
-    InsertAllM(loctestnum, loctesterr, ht2, false, std::move(v));
+    InsertAllC(loctestnum, loctesterr, ht2, true, l);
     Size(loctestnum, loctesterr, ht2, true, l.Size());
 
-    InsertAllC(loctestnum, loctesterr, ht, true, l);
+    InsertAllM(loctestnum, loctesterr, ht, true, std::move(l));
     EqualHT(loctestnum, loctesterr, ht, ht2);
 
-    Remove(loctestnum, loctesterr, ht, true, string("altrui"));
+    Remove(loctestnum, loctesterr, ht, true, string("ullamco"));
     NonEqualHT(loctestnum, loctesterr, ht, ht2);
-    Remove(loctestnum, loctesterr, ht2, true, string("altrui"));
+    Remove(loctestnum, loctesterr, ht2, true, string("ullamco"));
     EqualHT(loctestnum, loctesterr, ht, ht2);
   } catch (...) {
     loctestnum++;

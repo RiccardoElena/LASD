@@ -15,7 +15,7 @@ template <> class Hashable<double> {
 public:
   unsigned long operator()(const double &d) const noexcept {
     long i{static_cast<long>(std::floor(d))};
-    long f{static_cast<long>(pow(2, 24) * (d - i))};
+    long f{static_cast<long>(pow(2, 24) * (d - i)) + 1};
     return i * f;
   }
 };
